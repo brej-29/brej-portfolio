@@ -45,8 +45,10 @@ export function HeroSection() {
             <div className="flex flex-col gap-2 text-2xl md:text-3xl lg:text-4xl font-semibold">
               <RotatingText
                 words={rotatingWords}
-                className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
-                duration={0.4}
+                wrapperClassName="px-3 py-1 md:px-4 md:py-2 bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] rounded-xl shadow-[0_10px_30px_rgba(0,0,0,0.35)] border border-white/10"
+                textClassName="text-slate-900 dark:text-white"
+                className="inline-flex"
+                interval={2200}
               />
             </div>
           </div>
