@@ -39,7 +39,7 @@ export function VariableProximityText({ text, className, maxDistance = 150 }: Va
     Array.from(containerRef.current.children).forEach((child) => {
       const letterElement = child as HTMLElement
       letterElement.style.transform = "scale(1)"
-      letterElement.style.color = "currentColor"
+      letterElement.style.removeProperty("color")
       letterElement.style.opacity = "1"
     })
     // Clear cursor position to stop proximity calculations
@@ -66,14 +66,13 @@ export function VariableProximityText({ text, className, maxDistance = 150 }: Va
           const proximity = 1 - distance / maxDistance
           const scale = 1 + proximity * 0.06
           letterElement.style.transform = `scale(${scale})`
-          letterElement.style.color = `oklch(${0.7 + proximity * 0.1} ${0.28 - proximity * 0.1} ${290 - proximity * 20})`
         } else {
           letterElement.style.transform = "scale(1)"
-          letterElement.style.color = "currentColor"
+          letterElement.style.removeProperty("color")
         }
       } else {
         letterElement.style.transform = "scale(1)"
-        letterElement.style.color = "currentColor"
+        letterElement.style.removeProperty("color")
       }
     })
   }, [cursorPos, maxDistance])
@@ -86,7 +85,7 @@ export function VariableProximityText({ text, className, maxDistance = 150 }: Va
       onPointerMove={handlePointerMove}
       onPointerLeave={handlePointerLeave}
       className={cn("inline-flex", className)}
-      style={{ opacity: 1 }}
+      style={{ opacity: 1, backgroundSize: "100% 100%" }}
     >
       {letters.map((letter, index) =>
         letter === " " ? (
@@ -97,7 +96,18 @@ export function VariableProximityText({ text, className, maxDistance = 150 }: Va
           <span
             key={index}
             className="inline-block transition-all duration-200 ease-out"
-            style={{ transformOrigin: "center", opacity: 1 }}
+            style={{
+              transformOrigin: "center",
+              opacity: 1,
+              backgroundImage: "inherit",
+              backgroundSize: "inherit",
+              backgroundPosition: "inherit",
+              backgroundRepeat: "inherit",
+              WebkitBackgroundClip: "text",
+              backgroundClip: "text",
+              color: "transparent",
+              WebkitTextFillColor: "transparent",
+            }}
           >
             {letter}
           </span>

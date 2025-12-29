@@ -11,7 +11,7 @@ interface SectionProps {
 
 export function Section({ children, id, className, heading, subheading }: SectionProps) {
   return (
-    <section id={id} className={cn("container mx-auto px-4 lg:px-8 py-20 lg:py-32", className)}>
+    <section id={id} className={cn("container mx-auto px-4 lg:px-8 py-12 lg:py-20", className)}>
       {heading && (
         <div className="mb-12 text-center">
           <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-balance">{heading}</h2>

@@ -50,7 +50,7 @@ export function SpotlightCard({
       whileHover={prefersReducedMotion ? {} : { scale: 1.02, y: -5 }}
       transition={{ duration: 0.3 }}
       className={cn(
-        "relative overflow-hidden rounded-xl bg-card/40 backdrop-blur-sm border border-border/50",
+        "relative overflow-hidden rounded-xl bg-card/40 backdrop-blur-sm border border-border/100",
         "transition-all duration-300",
         className,
       )}
