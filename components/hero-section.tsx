@@ -107,8 +107,9 @@ export function HeroSection() {
             status="Available for work"
             contactText="Contact"
             showUserInfo={true}
+            showDetails={false}
             enableTilt={true}
-            enableMobileTilt={false}
+            enableMobileTilt={true}
             behindGlowEnabled={true}
             behindGlowColor="rgba(168, 85, 247, 0.67)"
             behindGlowSize="50%"

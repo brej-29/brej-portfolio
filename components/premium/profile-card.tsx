@@ -22,10 +22,12 @@ interface ProfileCardProps {
   status?: string
   contactText?: string
   showUserInfo?: boolean
+  showDetails?: boolean
   onContactClick?: () => void
 }
 
-const DEFAULT_INNER_GRADIENT = "linear-gradient(145deg,#60496e8c 0%,#71C4FF44 100%)"
+const DEFAULT_INNER_GRADIENT =
+  "linear-gradient(160deg, rgba(84, 60, 120, 0.92) 0%, rgba(46, 98, 168, 0.88) 45%, rgba(10, 21, 48, 0.95) 100%)"
 
 const ANIMATION_CONFIG = {
   INITIAL_DURATION: 1200,
@@ -50,15 +52,16 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   behindGlowSize,
   className = "",
   enableTilt = true,
-  enableMobileTilt = false,
+  enableMobileTilt = true,
   mobileTiltSensitivity = 5,
   miniAvatarUrl,
   name = "Javi A. Torres",
   title = "Software Engineer",
   handle = "javicodes",
   status = "Online",
-  contactText = "Contact",
+  contactText = "Contact Me",
   showUserInfo = true,
+  showDetails = false,
   onContactClick,
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null)
@@ -381,12 +384,12 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 </div>
               )}
             </div>
-            <div className="pc-content">
-              <div className="pc-details">
-                <h3>{name}</h3>
-                <p>{title}</p>
+            {showDetails && (
+              <div className="pc-content">
+                <div className="pc-details">
+                </div>
               </div>
-            </div>
+            )}
           </div>
         </section>
       </div>
