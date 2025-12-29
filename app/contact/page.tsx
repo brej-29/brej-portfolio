@@ -6,9 +6,11 @@ import { useState } from "react"
 import { Section } from "@/components/site/section"
 import { GlassCard } from "@/components/site/glass-card"
 import { ContactForm } from "@/components/contact/ContactForm"
+import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { Button } from "@/components/ui/button"
 import { contact } from "@/content/siteData"
-import { Mail, MapPin, Briefcase, Github, Linkedin, Twitter, Copy, Check, Download, ExternalLink } from "lucide-react"
+import { Mail, MapPin, Briefcase, Github, Linkedin, Twitter, Copy, Check } from "lucide-react"
+import { ClipPathLinks } from "@/components/ui/clip-path-links"
 
 const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
   github: Github,
@@ -32,13 +34,20 @@ export default function ContactPage() {
         <div className="max-w-5xl mx-auto space-y-12">
           {/* Header */}
           <div className="space-y-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent">
-              {"Let's Connect"}
+            <h1 className="text-4xl md:text-5xl font-bold">
+              <VariableProximityText
+                text="Let's Connect"
+                className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
+              />
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               Interested in working together? Have a question or opportunity? {"I'd"} love to hear from you. Drop me a
               message and {"I'll"} get back to you as soon as possible.
             </p>
+          </div>
+
+          <div className="max-w-4xl mx-auto">
+            <ClipPathLinks />
           </div>
 
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
@@ -83,41 +92,6 @@ export default function ContactPage() {
                   {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
                   {copied ? "Email Copied!" : "Copy Email"}
                 </Button>
-              </GlassCard>
-
-              {/* Social Links */}
-              <GlassCard className="p-6 space-y-4">
-                <h3 className="font-semibold text-lg mb-4">Connect</h3>
-                <div className="flex flex-col gap-2">
-                  {contact.socials.map((social) => {
-                    const Icon = iconMap[social.icon] || ExternalLink
-                    return (
-                      <Button key={social.name} variant="ghost" className="justify-start" asChild>
-                        <a href={social.url} target="_blank" rel="noopener noreferrer">
-                          <Icon className="mr-2 h-4 w-4" />
-                          {social.name}
-                        </a>
-                      </Button>
-                    )
-                  })}
-                </div>
-              </GlassCard>
-
-              {/* Quick Links */}
-              <GlassCard className="p-6 space-y-4">
-                <h3 className="font-semibold text-lg mb-4">Quick Links</h3>
-                <div className="flex flex-col gap-2">
-                  <Button
-                    variant="outline"
-                    className="justify-start bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] hover:opacity-90"
-                    asChild
-                  >
-                    <a href="/resume.pdf" download>
-                      <Download className="mr-2 h-4 w-4" />
-                      Download Resume
-                    </a>
-                  </Button>
-                </div>
               </GlassCard>
             </div>
           </div>

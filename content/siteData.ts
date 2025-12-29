@@ -66,8 +66,8 @@ export interface Contact {
 }
 
 export const profile: Profile = {
-  name: "Your Name",
-  headline: "Full Stack → Data Science",
+  name: "Javi A. Torres",
+  headline: "Software Engineer",
   summaryBullets: [
     "Built scalable cloud applications serving 100K+ users",
     "Specialized in ML/AI solutions and data-driven insights",

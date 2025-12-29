@@ -5,6 +5,7 @@ import { Section } from "@/components/site/section"
 import { ProjectFilters } from "@/components/projects/ProjectFilters"
 import { ProjectQuickView } from "@/components/projects/ProjectQuickView"
 import { SpotlightCard } from "@/components/premium/spotlight-card"
+import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { ScrollVelocityText } from "@/components/premium/scroll-velocity-text"
 import { projects } from "@/content/siteData"
 import { filterProjects, getAllTags } from "@/lib/filtering"
@@ -41,8 +42,11 @@ export default function ProjectsPage() {
 
           {/* Header */}
           <div className="space-y-4 text-center -mt-20">
-            <h1 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent">
-              Projects
+            <h1 className="text-4xl md:text-5xl font-bold">
+              <VariableProximityText
+                text="Projects"
+                className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
+              />
             </h1>
             <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
               A showcase of my work spanning full-stack development, machine learning, and enterprise solutions. Each

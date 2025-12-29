@@ -42,7 +42,10 @@ export function Timeline({ experiences }: TimelineProps) {
               </div>
 
               <div className="md:ml-16">
-                <GlassCard hover className="overflow-hidden">
+                <GlassCard
+                  hover
+                  className="overflow-hidden border-2 border-border/60 hover:border-[var(--neon-purple)]/35 transition-colors duration-300"
+                >
                   <button onClick={() => toggleExpanded(index)} className="w-full p-6 text-left transition-colors">
                     <div className="flex items-start justify-between gap-4">
                       <div className="flex-1 min-w-0">
@@ -80,7 +83,7 @@ export function Timeline({ experiences }: TimelineProps) {
                         transition={{ duration: 0.3 }}
                         className="overflow-hidden"
                       >
-                        <div className="px-6 pb-6 space-y-4 border-t border-border/50 pt-4">
+                        <div className="px-6 pb-6 space-y-4 border-t border-border/60 pt-4">
                           {/* Responsibilities */}
                           <ul className="space-y-2">
                             {exp.bullets.map((bullet, idx) => (

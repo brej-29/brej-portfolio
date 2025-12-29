@@ -1,7 +1,7 @@
 "use client"
 
+import type React from "react"
 import { useRef, useState, useEffect } from "react"
-import { motion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface VariableProximityTextProps {
@@ -12,74 +12,97 @@ interface VariableProximityTextProps {
 
 export function VariableProximityText({ text, className, maxDistance = 150 }: VariableProximityTextProps) {
   const containerRef = useRef<HTMLDivElement>(null)
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
-  const [isHovered, setIsHovered] = useState(false)
+  const [reducedMotion, setReducedMotion] = useState(false)
+  const [cursorPos, setCursorPos] = useState<{ x: number; y: number } | null>(null)
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
-    if (prefersReducedMotion) return
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    setReducedMotion(mediaQuery.matches)
 
-    const handleMouseMove = (e: MouseEvent) => {
-      if (!containerRef.current || !isHovered) return
+    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
+    mediaQuery.addEventListener("change", handler)
+    return () => mediaQuery.removeEventListener("change", handler)
+  }, [])
 
-      const rect = containerRef.current.getBoundingClientRect()
-      setMousePosition({
-        x: e.clientX - rect.left,
-        y: e.clientY - rect.top,
-      })
-    }
+  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
+    if (!containerRef.current || reducedMotion) return
 
-    window.addEventListener("mousemove", handleMouseMove)
-    return () => window.removeEventListener("mousemove", handleMouseMove)
-  }, [isHovered])
+    const rect = containerRef.current.getBoundingClientRect()
+    const x = e.clientX - rect.left
+    const y = e.clientY - rect.top
+    setCursorPos({ x, y })
+  }
 
-  const prefersReducedMotion =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+  const handlePointerLeave = () => {
+    if (!containerRef.current) return
+    // Reset all letters to normal state but keep them visible
+    Array.from(containerRef.current.children).forEach((child) => {
+      const letterElement = child as HTMLElement
+      letterElement.style.transform = "scale(1)"
+      letterElement.style.color = "currentColor"
+      letterElement.style.opacity = "1"
+    })
+    // Clear cursor position to stop proximity calculations
+    setCursorPos(null)
+  }
+
+  useEffect(() => {
+    if (!containerRef.current) return
+
+    const rect = containerRef.current.getBoundingClientRect()
+
+    Array.from(containerRef.current.children).forEach((child) => {
+      const letterElement = child as HTMLElement
+      const letterRect = letterElement.getBoundingClientRect()
+      const letterX = letterRect.left + letterRect.width / 2 - rect.left
+      const letterY = letterRect.top + letterRect.height / 2 - rect.top
+
+      letterElement.style.opacity = "1"
+
+      if (cursorPos) {
+        const distance = Math.sqrt(Math.pow(cursorPos.x - letterX, 2) + Math.pow(cursorPos.y - letterY, 2))
+
+        if (distance < maxDistance) {
+          const proximity = 1 - distance / maxDistance
+          const scale = 1 + proximity * 0.06
+          letterElement.style.transform = `scale(${scale})`
+          letterElement.style.color = `oklch(${0.7 + proximity * 0.1} ${0.28 - proximity * 0.1} ${290 - proximity * 20})`
+        } else {
+          letterElement.style.transform = "scale(1)"
+          letterElement.style.color = "currentColor"
+        }
+      } else {
+        letterElement.style.transform = "scale(1)"
+        letterElement.style.color = "currentColor"
+      }
+    })
+  }, [cursorPos, maxDistance])
 
   const letters = text.split("")
 
   return (
     <div
       ref={containerRef}
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      onPointerMove={handlePointerMove}
+      onPointerLeave={handlePointerLeave}
       className={cn("inline-flex", className)}
+      style={{ opacity: 1 }}
     >
-      {letters.map((letter, index) => {
-        if (letter === " ") return <span key={index}>&nbsp;</span>
-
-        let scale = 1
-        let color = "currentColor"
-
-        if (isHovered && !prefersReducedMotion && containerRef.current) {
-          const letterElement = containerRef.current.children[index] as HTMLElement
-          if (letterElement) {
-            const rect = letterElement.getBoundingClientRect()
-            const containerRect = containerRef.current.getBoundingClientRect()
-            const letterX = rect.left + rect.width / 2 - containerRect.left
-            const letterY = rect.top + rect.height / 2 - containerRect.top
-
-            const distance = Math.sqrt(Math.pow(mousePosition.x - letterX, 2) + Math.pow(mousePosition.y - letterY, 2))
-
-            if (distance < maxDistance) {
-              const proximity = 1 - distance / maxDistance
-              scale = 1 + proximity * 0.5
-              color = `hsl(${270 + proximity * 30}, 80%, ${50 + proximity * 20}%)`
-            }
-          }
-        }
-
-        return (
-          <motion.span
+      {letters.map((letter, index) =>
+        letter === " " ? (
+          <span key={index} style={{ opacity: 1 }}>
+            &nbsp;
+          </span>
+        ) : (
+          <span
             key={index}
-            animate={prefersReducedMotion ? {} : { scale, color }}
-            transition={{ type: "spring", stiffness: 300, damping: 20 }}
-            className="inline-block"
+            className="inline-block transition-all duration-200 ease-out"
+            style={{ transformOrigin: "center", opacity: 1 }}
           >
             {letter}
-          </motion.span>
-        )
-      })}
+          </span>
+        ),
+      )}
     </div>
   )
 }

@@ -14,9 +14,10 @@ export function GlassCard({ children, className, hover = false, spotlight = fals
       className={cn(
         "relative rounded-xl overflow-hidden",
         "bg-card/40 backdrop-blur-md",
-        "border border-border/50",
+        "border border-border/60",
         "transition-all duration-300",
-        hover && "hover:bg-card/60 hover:border-border hover:shadow-lg hover:shadow-primary/10",
+        hover &&
+          "hover:bg-card/60 hover:border-[var(--neon-purple)]/40 dark:hover:border-[var(--neon-purple)]/35 hover:shadow-lg hover:shadow-primary/10 hover:-translate-y-1",
         spotlight && "group",
         className,
       )}
