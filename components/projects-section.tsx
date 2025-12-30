@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { GlassCard } from "@/components/site/glass-card"
-import { SpotlightCard } from "@/components/ui/spotlight-card"
+import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Section } from "@/components/site/section"
 import { featuredProjects } from "@/content/siteData"
 import { Button } from "@/components/ui/button"
@@ -32,7 +32,7 @@ export function ProjectsSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.3, delay: idx * 0.05 }}
           >
-            <SpotlightCard>
+            <SpotlightCard className="group border-none bg-transparent shadow-none">
               <GlassCard
                 className="p-6 h-full flex flex-col hover:border-[var(--neon-purple)]/35 group border-2 border-border/60 transition-colors duration-300"
                 hover

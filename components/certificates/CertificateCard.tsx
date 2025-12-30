@@ -1,7 +1,7 @@
 "use client"
 
 import { GlassCard } from "@/components/site/glass-card"
-import { SpotlightCard } from "@/components/ui/spotlight-card"
+import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Calendar, Award } from "lucide-react"
@@ -21,7 +21,10 @@ export function CertificateCard({ certificate }: CertificateCardProps) {
       transition={{ duration: 0.3 }}
       whileHover={{ y: -2 }}
     >
-      <SpotlightCard spotlightColor="rgba(34, 211, 238, 0.15)">
+      <SpotlightCard
+        spotlightColor="rgba(34, 211, 238, 0.15)"
+        className="group border-none bg-transparent shadow-none"
+      >
         <GlassCard
           hover
           className="h-full p-6 flex flex-col border-2 border-border/60 hover:border-[var(--neon-cyan)]/35 transition-colors duration-300"

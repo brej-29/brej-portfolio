@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { GlassCard } from "@/components/site/glass-card"
-import { SpotlightCard } from "@/components/ui/spotlight-card"
+import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Section } from "@/components/site/section"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { experienceStats } from "@/content/siteData"
@@ -38,7 +38,10 @@ export function ExperienceSection() {
             viewport={{ once: true }}
             transition={{ duration: 0.3, delay: idx * 0.05 }}
           >
-            <SpotlightCard spotlightColor="rgba(34, 211, 238, 0.15)">
+            <SpotlightCard
+              spotlightColor="rgba(34, 211, 238, 0.15)"
+              className="group border-none bg-transparent shadow-none"
+            >
               <GlassCard
                 className="p-8 text-center h-full border-2 border-border/60 hover:border-[var(--neon-cyan)]/35 transition-colors duration-300"
                 hover

@@ -1,7 +1,7 @@
 "use client"
 
 import { GlassCard } from "@/components/site/glass-card"
-import { SpotlightCard } from "@/components/ui/spotlight-card"
+import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Github, ExternalLink, Eye } from "lucide-react"
@@ -22,7 +22,7 @@ export function ProjectCard({ project, onQuickView }: ProjectCardProps) {
       transition={{ duration: 0.3 }}
       whileHover={{ y: -2 }}
     >
-      <SpotlightCard>
+      <SpotlightCard className="group border-none bg-transparent shadow-none">
         <GlassCard
           hover
           className="h-full p-6 flex flex-col border-2 border-border/60 hover:border-[var(--neon-purple)]/35 transition-colors duration-300"
