@@ -20,7 +20,7 @@ export function BackgroundLayer() {
       {/* Gradient background with theme support */}
       <div className="absolute inset-0 bg-gradient-radial from-background via-background to-muted/20" />
 
-      <div className="absolute inset-0 opacity-[0.42] dark:opacity-[0.52]">
+      <div className="absolute inset-0 opacity-100 dark:opacity-100">
         <FallingPattern />
       </div>
 

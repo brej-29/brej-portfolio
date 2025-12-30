@@ -1,8 +1,6 @@
 "use client"
 
 import { useState, useEffect } from "react"
-import Link from "next/link"
-import { usePathname } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Moon, Sun, Menu, X, Download } from "lucide-react"
 import { useTheme } from "next-themes"
@@ -22,8 +20,6 @@ export function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const { theme, setTheme } = useTheme()
   const [mounted, setMounted] = useState(false)
-  const pathname = usePathname()
-
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
@@ -43,19 +39,39 @@ export function Navbar() {
       )}
     >
       <div className="container mx-auto px-4 lg:px-8">
-        <div className="flex items-center justify-between h-16">
-          {/* Logo/Name */}
-          <Link
-            href="/"
-            className="text-xl font-bold bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent hover:opacity-80 transition-opacity"
+        {/* Mobile Bar */}
+        <div className="flex items-center justify-between h-16 md:hidden">
+          <div className="flex items-center gap-2">
+            <Button
+              variant="ghost"
+              size="icon"
+              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+              className="rounded-full"
+              aria-label="Toggle theme"
+            >
+              {theme === "dark" ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+            </Button>
+          </div>
+
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            aria-label="Toggle menu"
           >
-            Your Name
-          </Link>
+            {mobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+          </Button>
+        </div>
 
-          <div className="hidden md:flex items-center gap-6">
-            <GooeyNav items={navLinks} />
+        {/* Desktop Bar */}
+        <div className="hidden md:grid grid-cols-[1fr_auto_1fr] items-center h-16">
+          <div aria-hidden="true" />
 
-            {/* Theme Toggle */}
+          <div className="flex justify-center">
+            <GooeyNav items={navLinks} className="shadow-[0_10px_40px_rgba(0,0,0,0.18)]" />
+          </div>
+
+          <div className="flex items-center justify-end gap-6">
             <Button
               variant="ghost"
               size="icon"

@@ -16,7 +16,7 @@ export function FallingPattern({
   color = "#A855F7",
   backgroundColor = "var(--background)",
   duration = 150,
-  blurIntensity = "1em",
+  blurIntensity = "0.8em",
   density = 1,
   className,
 }: FallingPatternProps) {
@@ -109,7 +109,7 @@ export function FallingPattern({
           backdropFilter: `blur(${blurIntensity})`,
           backgroundImage: `radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, ${backgroundColor} 2px)`,
           backgroundSize: `${8 * density}px ${8 * density}px`,
-        }}
+                  }}
       />
     </div>
   )

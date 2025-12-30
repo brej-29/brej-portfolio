@@ -32,7 +32,7 @@ export function GooeyNav({ items, className }: GooeyNavProps) {
   return (
     <nav
       className={cn(
-        "flex items-center gap-1 p-1 rounded-full bg-card/40 backdrop-blur-md border border-border/50",
+        "flex items-center gap-1.5 p-1.5 rounded-full bg-card/40 backdrop-blur-md border border-border/50 text-base",
         className,
       )}
     >
@@ -43,7 +43,7 @@ export function GooeyNav({ items, className }: GooeyNavProps) {
           onMouseEnter={() => !prefersReducedMotion && setHoveredIndex(index)}
           onMouseLeave={() => !prefersReducedMotion && setHoveredIndex(null)}
           className={cn(
-            "relative z-10 px-4 py-2 text-sm font-medium rounded-full transition-colors",
+            "relative z-10 px-5 py-2.5 font-medium rounded-full transition-colors",
             pathname === item.href ? "text-foreground" : "text-muted-foreground hover:text-foreground",
           )}
         >
