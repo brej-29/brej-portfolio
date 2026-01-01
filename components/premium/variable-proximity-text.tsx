@@ -64,15 +64,17 @@ export function VariableProximityText({
 
   return (
     <span
+      ref={containerRef}
       className={cn("inline-flex", className)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       aria-label={text}
     >
       {characters.map((char, index) => {
+        // For reduced motion, render static text with no per-letter transforms.
         if (prefersReducedMotion) {
           return (
-            <span key={index} className="inline-block">
+            <span key={index} className={cn("inline-block", className)}>
               {char}
             </span>
           )
@@ -83,9 +85,15 @@ export function VariableProximityText({
           transition: "transform 0.18s ease-out, color 0.18s ease-out",
         }
 
-        if (activeIndex !== null) {
-          const distance = Math.abs(index - activeIndex)
-          const influence = Math.max(0, 1 - distance / falloff)
+        if (pointerX != null && containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect()
+          const width = rect.width || 1
+          const segmentWidth = width / characters.length
+          const charCenterX = segmentWidth * index + segmentWidth / 2
+
+          const distance = Math.abs(charCenterX - pointerX)
+          const influence = Math.max(0, 1 - distance / maxDistance)
+
           const unclampedScale = 1 + influence * (maxScale - 1)
           const clampedScale = Math.min(Math.max(unclampedScale, 1), maxScale)
 
@@ -96,7 +104,7 @@ export function VariableProximityText({
         }
 
         return (
-          <span key={index} className="inline-block" style={style}>
+          <span key={index} className={cn("inline-block", className)} style={style}>
             {char}
           </span>
         )
