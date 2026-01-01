@@ -8,6 +8,7 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 import { GooeyNav } from "@/components/premium/gooey-nav"
+import { withBasePath } from "@/lib/basePath"
 
 const navLinks = [
   { label: "Home", href: "/" },
@@ -23,6 +24,7 @@ export function Navbar() {
   const { theme, setTheme } = useTheme()
   const pathname = usePathname()
   const [mounted, setMounted] = useState(false)
+  const resumeHref = withBasePath("/resume.pdf")
   useEffect(() => {
     setMounted(true)
     const handleScroll = () => {
@@ -90,7 +92,7 @@ export function Navbar() {
               className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] hover:opacity-90 transition-opacity"
               asChild
             >
-              <a href="/resume.pdf" download>
+              <a href={resumeHref} download>
                 <Download className="mr-2 h-4 w-4" />
                 Resume
               </a>
@@ -142,7 +144,7 @@ export function Navbar() {
                 className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] hover:opacity-90 transition-opacity w-full"
                 asChild
               >
-                <a href="/resume.pdf" download>
+                <a href={resumeHref} download>
                   <Download className="mr-2 h-4 w-4" />
                   Resume
                 </a>

@@ -4,6 +4,7 @@ import Image from "next/image"
 import { motion } from "framer-motion"
 import { GlassCard } from "@/components/site/glass-card"
 import { cn } from "@/lib/utils"
+import { withBasePath } from "@/lib/basePath"
 
 interface PremiumProfileCardProps {
   name: string
@@ -15,7 +16,9 @@ interface PremiumProfileCardProps {
 
 export function PremiumProfileCard({ name, role, location, imageUrl, className }: PremiumProfileCardProps) {
   const prefersReducedMotion =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    typeof window !== "undefined" && window.matchMedia("prefers-reduced-motion: reduce").matches
+
+  const resolvedImageUrl = withBasePath(imageUrl || "/placeholder.svg")
 
   return (
     <GlassCard hover className={cn("p-8", className)}>
@@ -30,7 +33,7 @@ export function PremiumProfileCard({ name, role, location, imageUrl, className }
           <div className="relative w-32 h-32 md:w-40 md:h-40">
             <div className="absolute inset-0 bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-cyan)] rounded-full animate-pulse" />
             <Image
-              src={imageUrl || "/placeholder.svg"}
+              src={resolvedImageUrl}
               alt={name}
               width={160}
               height={160}

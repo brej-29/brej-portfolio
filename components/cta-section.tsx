@@ -5,8 +5,12 @@ import { GlassCard } from "@/components/site/glass-card"
 import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Mail, Download } from "lucide-react"
 import { ClipPathLinks } from "@/components/ui/clip-path-links"
+import { withBasePath } from "@/lib/basePath"
 
 export function CTASection() {
+  const contactHref = withBasePath("/contact")
+  const resumeHref = withBasePath("/resume.pdf")
+
   return (
     <section id="contact" className="container mx-auto px-4 lg:px-8 py-16 lg:py-24">
       <SpotlightCard className="group border-none bg-transparent shadow-none">
@@ -28,7 +32,7 @@ export function CTASection() {
               className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] hover:opacity-90 transition-opacity"
               asChild
             >
-              <a href="/contact">
+              <a href={contactHref}>
                 <Mail className="mr-2 h-5 w-5" />
                 Get in Touch
               </a>
@@ -39,7 +43,7 @@ export function CTASection() {
               className="border-[var(--neon-cyan)]/50 hover:bg-[var(--neon-cyan)]/10 bg-transparent"
               asChild
             >
-              <a href="/resume.pdf" download>
+              <a href={resumeHref} download>
                 <Download className="mr-2 h-5 w-5" />
                 Download Resume
               </a>

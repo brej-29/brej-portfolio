@@ -8,11 +8,16 @@ import { VariableProximityText } from "@/components/premium/variable-proximity-t
 import ProfileCard from "@/components/premium/profile-card"
 import { profile } from "@/content/siteData"
 import { ArrowRight, Mail } from "lucide-react"
+import { withBasePath } from "@/lib/basePath"
 
 const rotatingWords = ["Full-Stack Developer", "Aspiring Data Scientist", "ML Project Builder", "Open to Data Roles"]
 
 export function HeroSection() {
   const [reducedMotion, setReducedMotion] = useState(false)
+
+  const projectsHref = withBasePath("/projects")
+  const contactHref = withBasePath("/contact")
+  const avatarSrc = withBasePath("/images/image.png")
 
   useEffect(() => {
     const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
@@ -74,7 +79,7 @@ export function HeroSection() {
               className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] hover:opacity-90 transition-opacity"
               asChild
             >
-              <a href="/projects">
+              <a href={projectsHref}>
                 View My Work
                 <ArrowRight className="ml-2 h-5 w-5" />
               </a>
@@ -85,7 +90,7 @@ export function HeroSection() {
               className="border-[var(--neon-purple)]/50 hover:bg-[var(--neon-purple)]/10 bg-transparent"
               asChild
             >
-              <a href="/contact">
+              <a href={contactHref}>
                 <Mail className="mr-2 h-5 w-5" />
                 Get in Touch
               </a>
@@ -101,8 +106,8 @@ export function HeroSection() {
           className="hidden lg:flex justify-center"
         >
           <ProfileCard
-            avatarUrl="/images/image.png"
-            miniAvatarUrl="/images/image.png"
+            avatarUrl={avatarSrc}
+            miniAvatarUrl={avatarSrc}
             name={profile.name}
             title={profile.headline}
             handle="javicodes"
@@ -116,7 +121,7 @@ export function HeroSection() {
             behindGlowColor="rgba(168, 85, 247, 0.67)"
             behindGlowSize="50%"
             onContactClick={() => {
-              window.location.href = "/contact"
+              window.location.href = contactHref
             }}
           />
         </motion.div>

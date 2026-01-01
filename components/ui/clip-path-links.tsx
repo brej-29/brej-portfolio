@@ -6,6 +6,7 @@ import { SiGoogle } from "react-icons/si"
 import { FaDiscord } from "react-icons/fa"
 import { Github, Twitter, Instagram, Facebook, Linkedin } from "lucide-react"
 import { useAnimate } from "framer-motion"
+import { withBasePath } from "@/lib/basePath"
 
 export const ClipPathLinks = () => {
   return (
@@ -66,6 +67,7 @@ interface LinkBoxProps {
 
 const LinkBox = ({ Icon, href, imgSrc, className }: LinkBoxProps) => {
   const [scope, animate] = useAnimate()
+  const placeholderSrc = withBasePath("/placeholder.svg")
 
   const getNearestSide = (e: React.MouseEvent) => {
     const box = e.currentTarget.getBoundingClientRect()
@@ -119,7 +121,7 @@ const LinkBox = ({ Icon, href, imgSrc, className }: LinkBoxProps) => {
     >
       {imgSrc ? (
         <img
-          src={imgSrc || "/placeholder.svg"}
+          src={imgSrc || placeholderSrc}
           alt="custom icon"
           className={className ?? "max-h-10 sm:max-h-16 md:max-h-20 object-contain"}
         />
@@ -134,7 +136,7 @@ const LinkBox = ({ Icon, href, imgSrc, className }: LinkBoxProps) => {
       >
         {imgSrc ? (
           <img
-            src={imgSrc || "/placeholder.svg"}
+            src={imgSrc || placeholderSrc}
             alt="custom icon hover"
             className={className ?? "max-h-10 sm:max-h-16 md:max-h-20 object-contain"}
           />

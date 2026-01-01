@@ -9,12 +9,14 @@ import { experienceStats } from "@/content/siteData"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
+import { withBasePath } from "@/lib/basePath"
 
 export function ExperienceSection() {
   const [reducedMotion, setReducedMotion] = useState(false)
+  const timelineHref = withBasePath("/experience")
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mediaQuery = window.matchMedia("prefers-reduced-motion: reduce")
     setReducedMotion(mediaQuery.matches)
   }, [])
 
@@ -64,7 +66,7 @@ export function ExperienceSection() {
           className="bg-transparent border-[var(--neon-purple)]/50 hover:bg-[var(--neon-purple)]/10 hover:border-[var(--neon-purple)]/70"
           asChild
         >
-          <a href="/experience">
+          <a href={timelineHref}>
             View Full Timeline
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>

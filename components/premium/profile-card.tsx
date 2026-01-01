@@ -2,6 +2,7 @@
 
 import React, { useRef, useMemo, useCallback, useEffect } from "react"
 import "./ProfileCard.css"
+import { withBasePath } from "@/lib/basePath"
 
 interface ProfileCardProps {
   avatarUrl: string
@@ -66,6 +67,16 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 }) => {
   const wrapRef = useRef<HTMLDivElement>(null)
   const shellRef = useRef<HTMLDivElement>(null)
+
+  const resolvedAvatarUrl = useMemo(
+    () => withBasePath(avatarUrl || "/placeholder.svg"),
+    [avatarUrl],
+  )
+
+  const resolvedMiniAvatarUrl = useMemo(
+    () => withBasePath(miniAvatarUrl || avatarUrl || "/placeholder.svg"),
+    [miniAvatarUrl, avatarUrl],
+  )
 
   const enterTimerRef = useRef<number | null>(null)
   const leaveRafRef = useRef<number | null>(null)
@@ -320,8 +331,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   const cardStyle = useMemo(
     () =>
       ({
-        "--icon": iconUrl ? `url(${iconUrl})` : "none",
-        "--grain": grainUrl ? `url(${grainUrl})` : "none",
+        "--icon": iconUrl ? `url(${withBasePath(iconUrl)})` : "none",
+        "--grain": grainUrl ? `url(${withBasePath(grainUrl)})` : "none",
         "--inner-gradient": innerGradient ?? DEFAULT_INNER_GRADIENT,
         "--behind-glow-color": behindGlowColor ?? "rgba(125, 190, 255, 0.67)",
         "--behind-glow-size": behindGlowSize ?? "50%",
@@ -344,7 +355,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
             <div className="pc-content pc-avatar-content">
               <img
                 className="avatar"
-                src={avatarUrl || "/placeholder.svg"}
+                src={resolvedAvatarUrl}
                 alt={`${name || "User"} avatar`}
                 loading="lazy"
                 onError={(e) => {
@@ -357,13 +368,13 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                   <div className="pc-user-details">
                     <div className="pc-mini-avatar">
                       <img
-                        src={miniAvatarUrl || avatarUrl}
+                        src={resolvedMiniAvatarUrl}
                         alt={`${name || "User"} mini avatar`}
                         loading="lazy"
                         onError={(e) => {
                           const t = e.target as HTMLImageElement
                           t.style.opacity = "0.5"
-                          t.src = avatarUrl
+                          t.src = resolvedAvatarUrl
                         }}
                       />
                     </div>
