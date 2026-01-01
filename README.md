@@ -107,3 +107,97 @@ npx serve out
 ```
 
 Then open the printed URL in your browser to preview the exported site.
+
+## Content and Excel workflow
+
+This project keeps all portfolio content in an Excel file and generates JSON + SEO files from it.
+
+- Source spreadsheet: `content/content.xlsx`
+- Generated JSON: `content/generated/content.json`
+- Generated SEO files:
+  - `public/sitemap.xml`
+  - `public/robots.txt`
+
+The script `scripts/generate-content.mjs`:
+
+- Reads `content/content.xlsx`
+- Validates sheets and columns using Zod
+- Writes `content/generated/content.json`
+- Regenerates `public/sitemap.xml` and `public/robots.txt`
+
+It runs automatically via:
+
+- `npm run dev` → `predev` → `npm run generate:content`
+- `npm run build` → `prebuild` → `npm run generate:content`
+
+### Safely updating `content.xlsx`
+
+1. Open and edit `content/content.xlsx`.
+2. Run the generator locally:
+
+   ```bash
+   npm run generate:content
+   ```
+
+   - If there are validation errors, the script will print detailed messages pointing to the sheet, field, and row.
+3. When it succeeds, commit:
+
+   - `content/content.xlsx`
+   - `content/generated/content.json`
+   - `public/sitemap.xml`
+   - `public/robots.txt` (if changed)
+
+4. Run `npm run verify` before pushing (see below).
+
+## Local verification before merging
+
+Use the `verify` script to run the same checks CI runs before deployment:
+
+```bash
+npm run verify
+```
+
+This runs:
+
+- `npm run lint`
+- `npm run build`
+
+If this passes locally, the GitHub Actions CI workflow should also pass on your PR.
+
+## Troubleshooting `npm ci` failures in GitHub Actions
+
+If a GitHub Actions job fails at the `npm ci` step with an error like:
+
+> npm ci can only install packages when your package.json and package-lock.json are in sync
+
+do the following **on your local machine**:
+
+1. Ensure you are on Node 20 LTS (same as CI). Using a different major version can produce a different lockfile.
+2. From the project root, run:
+
+   ```bash
+   npm install
+   ```
+
+   This regenerates `package-lock.json` to match `package.json`.
+
+3. Commit the updated lockfile:
+
+   ```bash
+   git add package-lock.json
+   git commit -m "Regenerate package-lock.json"
+   ```
+
+4. (Optional but recommended) Verify it locally:
+
+   ```bash
+   npm ci
+   npm run verify
+   ```
+
+5. Push your changes and re-run the GitHub Actions workflows.
+
+If the error persists, double-check that:
+
+- You only changed `package.json` using `npm install` / `npm uninstall` (not by hand), and
+- `package-lock.json` is committed in the same PR/branch.

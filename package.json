@@ -9,6 +9,7 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
+    "verify": "npm run lint && npm run build",
     "start": "next start",
     "postbuild": "node scripts/add-nojekyll.mjs"
   },
