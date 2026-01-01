@@ -1,7 +1,6 @@
 "use client"
 
-import { useEffect, useState } from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { Button } from "@/components/ui/button"
 import { RotatingText } from "@/components/premium/rotating-text"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
@@ -13,20 +12,11 @@ import { withBasePath } from "@/lib/basePath"
 const rotatingWords = ["Full-Stack Developer", "Aspiring Data Scientist", "ML Project Builder", "Open to Data Roles"]
 
 export function HeroSection() {
-  const [reducedMotion, setReducedMotion] = useState(false)
+  const reducedMotion = useReducedMotion()
 
   const projectsHref = withBasePath("/projects")
   const contactHref = withBasePath("/contact")
   const avatarSrc = withBasePath("/images/image.png")
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReducedMotion(mediaQuery.matches)
-
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
-    mediaQuery.addEventListener("change", handler)
-    return () => mediaQuery.removeEventListener("change", handler)
-  }, [])
 
   return (
     <section id="home" className="relative container mx-auto px-4 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-32">

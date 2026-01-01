@@ -1,5 +1,6 @@
 "use client"
 
+/*
 usage
 import GooeyNav from "./GooeyNav"
 
@@ -9,6 +10,7 @@ const items = [
   { label: "About", href: "#" },
   { label: "Contact", href: "#" },
 ]
+
 ;<div style={{ height: "600px", position: "relative" }}>
   <GooeyNav
     items={items}
@@ -22,6 +24,7 @@ const items = [
   />
 </div>
 code
+*/
 
 import type React from "react"
 import { useRef, useEffect, useState } from "react"

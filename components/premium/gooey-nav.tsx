@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { motion } from "framer-motion"
@@ -19,12 +19,6 @@ interface GooeyNavProps {
 export function GooeyNav({ items, className }: GooeyNavProps) {
   const pathname = usePathname()
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
-  const [activeIndex, setActiveIndex] = useState(0)
-
-  useEffect(() => {
-    const index = items.findIndex((item) => item.href === pathname)
-    setActiveIndex(index !== -1 ? index : 0)
-  }, [pathname, items])
 
   const prefersReducedMotion =
     typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches

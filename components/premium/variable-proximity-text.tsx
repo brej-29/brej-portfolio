@@ -1,7 +1,7 @@
 "use client"
 
 import type React from "react"
-import { useState, useRef, useCallback } from "react"
+import { useState, useCallback } from "react"
 import { useReducedMotion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
@@ -9,12 +9,13 @@ interface VariableProximityTextProps {
   text: string
   className?: string
   /**
-   * Maximum visual influence distance (in pixels) from the pointer.
-   * Characters farther than this distance will not scale.
+   * Maximum visual influence distance in character units.
+   * Characters farther than this distance from the active character
+   * will not scale.
    */
   maxDistance?: number
   /**
-   * Maximum scale factor applied to characters closest to the pointer.
+   * Maximum scale factor applied to characters closest to the active index.
    * Clamped to avoid excessive zoom (defaults to 1.08).
    */
   maxScale?: number
@@ -24,48 +25,51 @@ interface VariableProximityTextProps {
  * VariableProximityText
  *
  * Renders text where individual characters subtly scale based on how close
- * the pointer is to them. The text always remains mounted and uses simple
- * CSS transitions for smooth animations.
+ * they are (by index) to the character under the pointer.
+ * The text always remains mounted and uses simple CSS transitions.
  *
  * Respects prefers-reduced-motion: when enabled, the text is static.
  */
 export function VariableProximityText({
   text,
   className,
-  maxDistance = 120,
+  maxDistance = 3,
   maxScale = 1.08,
 }: VariableProximityTextProps) {
   const prefersReducedMotion = useReducedMotion()
-  const containerRef = useRef<HTMLSpanElement | null>(null)
-  const [pointerX, setPointerX] = useState<number | null>(null)
+  const [activeIndex, setActiveIndex] = useState<number | null>(null)
+
+  const characters = Array.from(text)
+  const charCount = characters.length
+  const falloff = Math.max(maxDistance, 1)
 
   const handleMouseMove = useCallback(
     (event: React.MouseEvent<HTMLSpanElement>) => {
-      if (prefersReducedMotion) return
+      if (prefersReducedMotion || charCount === 0) return
       const rect = event.currentTarget.getBoundingClientRect()
-      const x = event.clientX - rect.left
-      setPointerX(x)
+      if (rect.width === 0) return
+
+      const relativeX = (event.clientX - rect.left) / rect.width
+      const index = Math.floor(relativeX * charCount)
+      const boundedIndex = Math.min(Math.max(index, 0), charCount - 1)
+      setActiveIndex(boundedIndex)
     },
-    [prefersReducedMotion],
+    [prefersReducedMotion, charCount],
   )
 
   const handleMouseLeave = useCallback(() => {
     if (prefersReducedMotion) return
-    setPointerX(null)
+    setActiveIndex(null)
   }, [prefersReducedMotion])
-
-  const characters = Array.from(text)
 
   return (
     <span
-      ref={containerRef}
       className={cn("inline-flex", className)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
       aria-label={text}
     >
       {characters.map((char, index) => {
-        // For reduced motion, render static text with no per-letter transforms.
         if (prefersReducedMotion) {
           return (
             <span key={index} className="inline-block">
@@ -79,15 +83,9 @@ export function VariableProximityText({
           transition: "transform 0.18s ease-out, color 0.18s ease-out",
         }
 
-        if (pointerX != null && containerRef.current) {
-          const rect = containerRef.current.getBoundingClientRect()
-          const width = rect.width || 1
-          const segmentWidth = width / characters.length
-          const charCenterX = segmentWidth * index + segmentWidth / 2
-
-          const distance = Math.abs(charCenterX - pointerX)
-          const influence = Math.max(0, 1 - distance / maxDistance)
-
+        if (activeIndex !== null) {
+          const distance = Math.abs(index - activeIndex)
+          const influence = Math.max(0, 1 - distance / falloff)
           const unclampedScale = 1 + influence * (maxScale - 1)
           const clampedScale = Math.min(Math.max(unclampedScale, 1), maxScale)
 

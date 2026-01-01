@@ -11,10 +11,22 @@ import { profile, socialLinks } from "@/content/siteData"
 import generatedContent from "@/content/generated/content.json"
 import { buildSiteUrl } from "@/lib/site-url"
 
-const _geist = Geist({ subsets: ["latin"] })
-const _geistMono = Geist_Mono({ subsets: ["latin"] })
+const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
+const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
 
-const seo = (generatedContent as any)?.seo ?? {}
+interface GeneratedSeo {
+  siteTitle?: string
+  siteDescription?: string
+  keywords?: string[]
+  twitterHandle?: string
+  ogImage?: string
+}
+
+interface GeneratedContent {
+  seo?: GeneratedSeo
+}
+
+const seo: GeneratedSeo = (generatedContent as GeneratedContent).seo ?? {}
 
 const siteTitle: string =
   typeof seo.siteTitle === "string" && seo.siteTitle.length > 0
@@ -117,7 +129,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en" suppressHydrationWarning>
-      <body className={`font-sans antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} font-sans antialiased`}>
         <a href="#main-content" className="skip-link">
           Skip to content
         </a>

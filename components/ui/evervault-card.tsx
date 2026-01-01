@@ -2,21 +2,15 @@
 
 import type React from "react"
 
-import { useMotionValue } from "framer-motion"
-import { useState, useEffect } from "react"
-import { useMotionTemplate, motion } from "framer-motion"
+import { motion, useMotionTemplate, useMotionValue, type MotionValue } from "framer-motion"
+import { useState } from "react"
 import { cn } from "@/lib/utils"
 
 export const EvervaultCard = ({ text, className }: { text?: string; className?: string }) => {
   const mouseX = useMotionValue(0)
   const mouseY = useMotionValue(0)
 
-  const [randomString, setRandomString] = useState("")
-
-  useEffect(() => {
-    const str = generateRandomString(1500)
-    setRandomString(str)
-  }, [])
+  const [randomString, setRandomString] = useState(() => generateRandomString(1500))
 
   function onMouseMove({ currentTarget, clientX, clientY }: React.MouseEvent) {
     const { left, top } = currentTarget.getBoundingClientRect()
@@ -55,8 +49,8 @@ export function CardPattern({
   mouseY,
   randomString,
 }: {
-  mouseX: any
-  mouseY: any
+  mouseX: MotionValue<number>
+  mouseY: MotionValue<number>
   randomString: string
 }) {
   const maskImage = useMotionTemplate`radial-gradient(250px at ${mouseX}px ${mouseY}px, white, transparent)`

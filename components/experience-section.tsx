@@ -1,24 +1,18 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { GlassCard } from "@/components/site/glass-card"
 import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Section } from "@/components/site/section"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { experienceStats } from "@/content/siteData"
-import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { ArrowRight } from "lucide-react"
 import { withBasePath } from "@/lib/basePath"
 
 export function ExperienceSection() {
-  const [reducedMotion, setReducedMotion] = useState(false)
+  const reducedMotion = useReducedMotion()
   const timelineHref = withBasePath("/experience")
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("prefers-reduced-motion: reduce")
-    setReducedMotion(mediaQuery.matches)
-  }, [])
 
   return (
     <Section id="experience" className="py-16 lg:py-24">
