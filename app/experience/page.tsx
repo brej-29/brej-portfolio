@@ -1,5 +1,6 @@
 import { Section } from "@/components/site/section"
 import { GlassCard } from "@/components/site/glass-card"
+import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Timeline } from "@/components/experience/Timeline"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { experience } from "@/content/siteData"
@@ -24,21 +25,23 @@ export default function ExperiencePage() {
           </div>
 
           {/* Current Focus Callout */}
-          <GlassCard hover className="p-6 border-[var(--neon-cyan)]/30">
-            <div className="flex items-start gap-4">
-              <div className="p-2 rounded-lg bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-cyan)] shadow-lg shadow-primary/30">
-                <Sparkles className="h-5 w-5 text-white" />
+          <SpotlightCard className="group border-none bg-transparent shadow-none">
+            <GlassCard hover className="p-6 border-[var(--neon-cyan)]/30">
+              <div className="flex items-start gap-4">
+                <div className="p-2 rounded-lg bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-cyan)] shadow-lg shadow-primary/30">
+                  <Sparkles className="h-5 w-5 text-white" />
+                </div>
+                <div>
+                  <h3 className="text-lg font-semibold mb-2">Current Focus</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed">
+                    Currently driving enterprise-scale solutions at Accenture while exploring cutting-edge technologies
+                    in AI/ML and cloud architecture. Open to opportunities in senior engineering and technical leadership
+                    roles.
+                  </p>
+                </div>
               </div>
-              <div>
-                <h3 className="text-lg font-semibold mb-2">Current Focus</h3>
-                <p className="text-sm text-muted-foreground leading-relaxed">
-                  Currently driving enterprise-scale solutions at Accenture while exploring cutting-edge technologies in
-                  AI/ML and cloud architecture. Open to opportunities in senior engineering and technical leadership
-                  roles.
-                </p>
-              </div>
-            </div>
-          </GlassCard>
+            </GlassCard>
+          </SpotlightCard>
 
           {/* Timeline */}
           <Timeline experiences={experience} />

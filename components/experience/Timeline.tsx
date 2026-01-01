@@ -2,6 +2,7 @@
 
 import { useState } from "react"
 import { GlassCard } from "@/components/site/glass-card"
+import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Badge } from "@/components/ui/badge"
 import { ChevronDown, ChevronUp, MapPin, Calendar } from "lucide-react"
 import type { Experience } from "@/content/siteData"
@@ -42,74 +43,76 @@ export function Timeline({ experiences }: TimelineProps) {
               </div>
 
               <div className="md:ml-16">
-                <GlassCard
-                  hover
-                  className="overflow-hidden border-2 border-border/60 hover:border-[var(--neon-purple)]/35 transition-colors duration-300"
-                >
-                  <button onClick={() => toggleExpanded(index)} className="w-full p-6 text-left transition-colors">
-                    <div className="flex items-start justify-between gap-4">
-                      <div className="flex-1 min-w-0">
-                        <h3 className="text-xl font-semibold mb-1 bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent">
-                          {exp.role}
-                        </h3>
-                        <p className="text-lg text-foreground/90 mb-2">{exp.company}</p>
-                        <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
-                          <span className="flex items-center gap-1">
-                            <Calendar className="h-4 w-4" />
-                            {exp.dates}
-                          </span>
-                          <span className="flex items-center gap-1">
-                            <MapPin className="h-4 w-4" />
-                            {exp.location}
-                          </span>
-                        </div>
-                      </div>
-                      <div className="flex-shrink-0">
-                        {isExpanded ? (
-                          <ChevronUp className="h-5 w-5 text-muted-foreground" />
-                        ) : (
-                          <ChevronDown className="h-5 w-5 text-muted-foreground" />
-                        )}
-                      </div>
-                    </div>
-                  </button>
-
-                  <AnimatePresence>
-                    {isExpanded && (
-                      <motion.div
-                        initial={{ height: 0, opacity: 0 }}
-                        animate={{ height: "auto", opacity: 1 }}
-                        exit={{ height: 0, opacity: 0 }}
-                        transition={{ duration: 0.3 }}
-                        className="overflow-hidden"
-                      >
-                        <div className="px-6 pb-6 space-y-4 border-t border-border/60 pt-4">
-                          {/* Responsibilities */}
-                          <ul className="space-y-2">
-                            {exp.bullets.map((bullet, idx) => (
-                              <li key={idx} className="flex items-start gap-2 text-sm">
-                                <span className="text-[var(--neon-cyan)] mt-1.5">•</span>
-                                <span className="flex-1">{bullet}</span>
-                              </li>
-                            ))}
-                          </ul>
-
-                          {/* Tech Stack */}
-                          <div>
-                            <p className="text-xs font-semibold text-muted-foreground mb-2">TECH STACK</p>
-                            <div className="flex flex-wrap gap-2">
-                              {exp.techStack.map((tech) => (
-                                <Badge key={tech} variant="secondary" className="text-xs">
-                                  {tech}
-                                </Badge>
-                              ))}
-                            </div>
+                <SpotlightCard className="group border-none bg-transparent shadow-none">
+                  <GlassCard
+                    hover
+                    className="overflow-hidden border-2 border-border/60 hover:border-[var(--neon-purple)]/35 transition-colors duration-300"
+                  >
+                    <button onClick={() => toggleExpanded(index)} className="w-full p-6 text-left transition-colors">
+                      <div className="flex items-start justify-between gap-4">
+                        <div className="flex-1 min-w-0">
+                          <h3 className="text-xl font-semibold mb-1 bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent">
+                            {exp.role}
+                          </h3>
+                          <p className="text-lg text-foreground/90 mb-2">{exp.company}</p>
+                          <div className="flex flex-wrap gap-3 text-sm text-muted-foreground">
+                            <span className="flex items-center gap-1">
+                              <Calendar className="h-4 w-4" />
+                              {exp.dates}
+                            </span>
+                            <span className="flex items-center gap-1">
+                              <MapPin className="h-4 w-4" />
+                              {exp.location}
+                            </span>
                           </div>
                         </div>
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                </GlassCard>
+                        <div className="flex-shrink-0">
+                          {isExpanded ? (
+                            <ChevronUp className="h-5 w-5 text-muted-foreground" />
+                          ) : (
+                            <ChevronDown className="h-5 w-5 text-muted-foreground" />
+                          )}
+                        </div>
+                      </div>
+                    </button>
+
+                    <AnimatePresence>
+                      {isExpanded && (
+                        <motion.div
+                          initial={{ height: 0, opacity: 0 }}
+                          animate={{ height: "auto", opacity: 1 }}
+                          exit={{ height: 0, opacity: 0 }}
+                          transition={{ duration: 0.3 }}
+                          className="overflow-hidden"
+                        >
+                          <div className="px-6 pb-6 space-y-4 border-t border-border/60 pt-4">
+                            {/* Responsibilities */}
+                            <ul className="space-y-2">
+                              {exp.bullets.map((bullet, idx) => (
+                                <li key={idx} className="flex items-start gap-2 text-sm">
+                                  <span className="text-[var(--neon-cyan)] mt-1.5">•</span>
+                                  <span className="flex-1">{bullet}</span>
+                                </li>
+                              ))}
+                            </ul>
+
+                            {/* Tech Stack */}
+                            <div>
+                              <p className="text-xs font-semibold text-muted-foreground mb-2">TECH STACK</p>
+                              <div className="flex flex-wrap gap-2">
+                                {exp.techStack.map((tech) => (
+                                  <Badge key={tech} variant="secondary" className="text-xs">
+                                    {tech}
+                                  </Badge>
+                                ))}
+                              </div>
+                            </div>
+                          </div>
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                  </GlassCard>
+                </SpotlightCard>
               </div>
             </motion.div>
           )

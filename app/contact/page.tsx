@@ -5,6 +5,7 @@ import type React from "react"
 import { useState } from "react"
 import { Section } from "@/components/site/section"
 import { GlassCard } from "@/components/site/glass-card"
+import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { ContactForm } from "@/components/contact/ContactForm"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { Button } from "@/components/ui/button"
@@ -59,40 +60,42 @@ export default function ContactPage() {
             {/* Sidebar */}
             <div className="space-y-6">
               {/* Contact Info */}
-              <GlassCard className="p-6 space-y-4">
-                <h3 className="font-semibold text-lg mb-4">Contact Info</h3>
+              <SpotlightCard className="group border-none bg-transparent shadow-none">
+                <GlassCard className="p-6 space-y-4">
+                  <h3 className="font-semibold text-lg mb-4">Contact Info</h3>
 
-                <div className="space-y-3">
-                  <div className="flex items-start gap-3">
-                    <Mail className="h-5 w-5 text-[var(--neon-cyan)] mt-0.5" />
-                    <div className="flex-1 min-w-0">
-                      <p className="text-sm text-muted-foreground">Email</p>
-                      <p className="text-sm font-medium truncate">{contact.email}</p>
+                  <div className="space-y-3">
+                    <div className="flex items-start gap-3">
+                      <Mail className="h-5 w-5 text-[var(--neon-cyan)] mt-0.5" />
+                      <div className="flex-1 min-w-0">
+                        <p className="text-sm text-muted-foreground">Email</p>
+                        <p className="text-sm font-medium truncate">{contact.email}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <MapPin className="h-5 w-5 text-[var(--neon-cyan)] mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Location</p>
+                        <p className="text-sm font-medium">{contact.location}</p>
+                      </div>
+                    </div>
+
+                    <div className="flex items-start gap-3">
+                      <Briefcase className="h-5 w-5 text-[var(--neon-cyan)] mt-0.5" />
+                      <div>
+                        <p className="text-sm text-muted-foreground">Status</p>
+                        <p className="text-sm font-medium">{contact.availability}</p>
+                      </div>
                     </div>
                   </div>
 
-                  <div className="flex items-start gap-3">
-                    <MapPin className="h-5 w-5 text-[var(--neon-cyan)] mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Location</p>
-                      <p className="text-sm font-medium">{contact.location}</p>
-                    </div>
-                  </div>
-
-                  <div className="flex items-start gap-3">
-                    <Briefcase className="h-5 w-5 text-[var(--neon-cyan)] mt-0.5" />
-                    <div>
-                      <p className="text-sm text-muted-foreground">Status</p>
-                      <p className="text-sm font-medium">{contact.availability}</p>
-                    </div>
-                  </div>
-                </div>
-
-                <Button onClick={copyEmail} variant="outline" className="w-full mt-4 bg-transparent">
-                  {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
-                  {copied ? "Email Copied!" : "Copy Email"}
-                </Button>
-              </GlassCard>
+                  <Button onClick={copyEmail} variant="outline" className="w-full mt-4 bg-transparent">
+                    {copied ? <Check className="mr-2 h-4 w-4" /> : <Copy className="mr-2 h-4 w-4" />}
+                    {copied ? "Email Copied!" : "Copy Email"}
+                  </Button>
+                </GlassCard>
+              </SpotlightCard>
             </div>
           </div>
         </div>
