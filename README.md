@@ -201,3 +201,95 @@ If the error persists, double-check that:
 
 - You only changed `package.json` using `npm install` / `npm uninstall` (not by hand), and
 - `package-lock.json` is committed in the same PR/branch.
+
+## Contact form (static-friendly)
+
+This portfolio is deployed as a fully static site (Next.js `output: "export"`), so the contact flow is implemented without any backend routes.
+
+### Default behavior – mailto
+
+Out of the box, the contact form:
+
+- Validates **name**, **email**, and **message** on the client:
+  - All fields required
+  - Email must be a valid address
+  - Message must be at least 20 characters
+- Uses a **honeypot** field to silently drop simple bot submissions.
+- When the form is valid and no network endpoint is configured:
+  - Opens the user’s email client using a `mailto:` link.
+  - Prefills the subject and body with the form data.
+  - Shows an inline status message (“Opening your email client…”).
+
+This keeps the form production-usable on any static host (including GitHub Pages) with **no server code**.
+
+### Optional Formspree integration
+
+If you want network-based form submissions, you can plug in Formspree (or a similar service) via a public environment variable:
+
+1. Create a Formspree form and copy its endpoint URL, e.g.:
+
+   ```text
+   https://formspree.io/f/your-id
+   ```
+
+2. In your local `.env.local` file (and CI environment), set:
+
+   ```bash
+   NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-id
+   ```
+
+3. Rebuild the site:
+
+   ```bash
+   npm run build
+   ```
+
+When `NEXT_PUBLIC_FORMSPREE_ENDPOINT` is present:
+
+- The contact form POSTs JSON to that endpoint on submit.
+- On success, it shows a friendly success message.
+- On failure, it falls back to telling the user to email you directly.
+
+When the env var is **not** set:
+
+- No network POST is attempted.
+- The submit button switches to a mailto-style flow (“Open Email App”).
+- The existing email link and “Copy email” CTA on the Contact page remain available.
+
+## Static hosting limitations
+
+Because this project uses `next export` and is deployed to GitHub Pages:
+
+- There are **no** Next.js API routes (`/api/*`) or server actions.
+- All pages must be **statically renderable**.
+- Any dynamic behavior (forms, animations, theme switching) happens purely on the client.
+- Integrations that require a backend must use:
+  - Third-party form handlers (e.g., Formspree)
+  - Public APIs called directly from the browser
+  - Static files (e.g., Excel → JSON via the build-time script)
+
+Keep this in mind when adding new features: everything must remain compatible with a static export.
+
+## Pre-merge test checklist
+
+Before merging or pushing changes, especially to `main`, run these commands locally:
+
+```bash
+# 1. Regenerate content + SEO files from Excel
+npm run generate:content
+
+# 2. Install dependencies in a clean state (optional but recommended)
+npm ci
+
+# 3. Run lint + build (same as CI)
+npm run verify
+
+# 4. Ensure a static export succeeds
+npm run build
+```
+
+Also manually verify:
+
+- `npm run dev` – navigate all pages, toggle themes, and test the Contact form (mailto + optional Formspree).
+- `content/generated/content.json`, `public/sitemap.xml`, and `public/robots.txt` are updated when you change `content/content.xlsx`.
+- Metadata looks correct when you **View Source** (titles, OpenGraph, Twitter tags, canonical URLs).

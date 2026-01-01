@@ -1,8 +1,9 @@
 "use client"
 
 import type React from "react"
-import { motion } from "framer-motion"
+import { motion, useReducedMotion } from "framer-motion"
 import { cn } from "@/lib/utils"
+import { useIsMobile } from "@/hooks/use-mobile"
 
 type FallingPatternProps = React.ComponentProps<"div"> & {
   color?: string
@@ -20,6 +21,10 @@ export function FallingPattern({
   density = 1,
   className,
 }: FallingPatternProps) {
+  const prefersReducedMotion = useReducedMotion()
+  const isMobile = useIsMobile()
+  const effectiveBlur = isMobile ? "0.4em" : blurIntensity
+
   const generateBackgroundImage = () => {
     const patterns = [
       `radial-gradient(4px 100px at 0px 235px, ${color}, transparent)`,
@@ -100,16 +105,16 @@ export function FallingPattern({
             },
           }}
           initial="initial"
-          animate="animate"
+          animate={prefersReducedMotion ? "initial" : "animate"}
         />
       </motion.div>
       <div
         className="absolute inset-0 z-1"
         style={{
-          backdropFilter: `blur(${blurIntensity})`,
+          backdropFilter: `blur(${effectiveBlur})`,
           backgroundImage: `radial-gradient(circle at 50% 50%, transparent 0, transparent 2px, ${backgroundColor} 5px)`,
           backgroundSize: `${8 * density}px ${8 * density}px`,
-                  }}
+        }}
       />
     </div>
   )

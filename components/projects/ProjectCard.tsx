@@ -69,7 +69,12 @@ export function ProjectCard({ project, onQuickView }: ProjectCardProps) {
                 className="border-border/60 hover:border-[var(--neon-cyan)]/50 hover:bg-[var(--neon-cyan)]/10 bg-transparent"
                 asChild
               >
-                <a href={project.links.github} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.links.github}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View project code on GitHub"
+                >
                   <Github className="h-4 w-4" />
                 </a>
               </Button>
@@ -81,7 +86,12 @@ export function ProjectCard({ project, onQuickView }: ProjectCardProps) {
                 className="border-border/60 hover:border-[var(--neon-cyan)]/50 hover:bg-[var(--neon-cyan)]/10 bg-transparent"
                 asChild
               >
-                <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
+                <a
+                  href={project.links.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="View live project demo"
+                >
                   <ExternalLink className="h-4 w-4" />
                 </a>
               </Button>
