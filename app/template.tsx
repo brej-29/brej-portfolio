@@ -1,24 +1,14 @@
 "use client"
 
 import type React from "react"
-import { motion, AnimatePresence } from "framer-motion"
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
 import { usePathname } from "next/navigation"
-import { useEffect, useState } from "react"
 
 export default function Template({ children }: { children: React.ReactNode }) {
   const pathname = usePathname()
-  const [reducedMotion, setReducedMotion] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReducedMotion(mediaQuery.matches)
-
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
-    mediaQuery.addEventListener("change", handler)
-    return () => mediaQuery.removeEventListener("change", handler)
-  }, [])
-
-  const pageTransition = reducedMotion
+  const pageTransition = prefersReducedMotion
     ? {
         initial: { opacity: 0 },
         animate: { opacity: 1 },

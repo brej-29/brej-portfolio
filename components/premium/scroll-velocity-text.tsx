@@ -1,7 +1,7 @@
 "use client"
 
 import { useRef } from "react"
-import { motion, useScroll, useTransform, useSpring } from "framer-motion"
+import { motion, useScroll, useTransform, useSpring, useReducedMotion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface ScrollVelocityTextProps {
@@ -12,6 +12,7 @@ interface ScrollVelocityTextProps {
 
 export function ScrollVelocityText({ children, className, baseVelocity = 2 }: ScrollVelocityTextProps) {
   const baseX = useRef(0)
+  const prefersReducedMotion = useReducedMotion()
   const { scrollY } = useScroll()
   const scrollVelocity = useSpring(scrollY, {
     damping: 50,
@@ -26,9 +27,6 @@ export function ScrollVelocityText({ children, className, baseVelocity = 2 }: Sc
     baseX.current += latest * baseVelocity * 0.1
     return baseX.current
   })
-
-  const prefersReducedMotion =
-    typeof window !== "undefined" && window.matchMedia("(prefers-reduced-motion: reduce)").matches
 
   if (prefersReducedMotion) {
     return <div className={cn("text-6xl font-bold opacity-10", className)}>{children}</div>

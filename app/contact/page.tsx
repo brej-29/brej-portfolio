@@ -10,15 +10,10 @@ import { ContactForm } from "@/components/contact/ContactForm"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { Button } from "@/components/ui/button"
 import { contact } from "@/content/siteData"
-import { Mail, MapPin, Briefcase, Github, Linkedin, Twitter, Copy, Check } from "lucide-react"
+import { Mail, MapPin, Briefcase, Copy, Check } from "lucide-react"
 import { ClipPathLinks } from "@/components/ui/clip-path-links"
 
-const iconMap: Record<string, React.ComponentType<{ className?: string }>> = {
-  github: Github,
-  linkedin: Linkedin,
-  twitter: Twitter,
-  mail: Mail,
-}
+
 
 export default function ContactPage() {
   const [copied, setCopied] = useState(false)

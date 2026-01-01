@@ -3,6 +3,7 @@
 import type React from "react"
 
 import { useEffect, useRef, useState } from "react"
+import { useReducedMotion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface LogoLoopProps {
@@ -14,9 +15,9 @@ interface LogoLoopProps {
 export function LogoLoop({ items, className, speed = 20 }: LogoLoopProps) {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const [isPaused, setIsPaused] = useState(false)
+  const prefersReducedMotion = useReducedMotion()
 
   useEffect(() => {
-    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches
     if (prefersReducedMotion) return
 
     const scroller = scrollerRef.current
@@ -26,11 +27,24 @@ export function LogoLoop({ items, className, speed = 20 }: LogoLoopProps) {
     if (!scrollContent) return
 
     // Clone items for seamless loop
-    const items = Array.from(scrollContent.children)
-    items.forEach((item) => {
-      const clone = item.cloneNode(true)
+    const children = Array.from(scrollContent.children)
+    children.forEach((child) => {
+      const clone = child.cloneNode(true)
       scrollContent.appendChild(clone)
     })
+  }, [prefersReducedMotion])
+
+  useEffect(() => {
+    const handleVisibilityChange = () => {
+      if (document.hidden) {
+        setIsPaused(true)
+      } else {
+        setIsPaused(false)
+      }
+    }
+
+    document.addEventListener("visibilitychange", handleVisibilityChange)
+    return () => document.removeEventListener("visibilitychange", handleVisibilityChange)
   }, [])
 
   return (
@@ -43,7 +57,7 @@ export function LogoLoop({ items, className, speed = 20 }: LogoLoopProps) {
       >
         <div
           data-scroll-content
-          className={cn("flex gap-8 animate-scroll", isPaused && "pause-animation")}
+          className={cn("flex gap-8", !prefersReducedMotion && "animate-scroll", isPaused && "pause-animation")}
           style={{
             animationDuration: `${speed}s`,
           }}

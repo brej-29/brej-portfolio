@@ -1,8 +1,10 @@
 import fs from "fs"
 import path from "path"
 import process from "process"
-import * as xlsx from "xlsx"
 import { z } from "zod"
+import { createRequire } from "module";
+const require = createRequire(import.meta.url);
+const xlsx = require("xlsx");
 
 const ROOT = process.cwd()
 const CONTENT_XLSX_PATH = path.join(ROOT, "content", "content.xlsx")

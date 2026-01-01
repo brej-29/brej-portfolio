@@ -285,9 +285,14 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
 
     const handleClick = () => {
       if (!enableMobileTilt || location.protocol !== "https:") return
-      const anyMotion = window.DeviceMotionEvent as any
-      if (anyMotion && typeof anyMotion.requestPermission === "function") {
-        anyMotion
+      const deviceMotionEvent =
+        window.DeviceMotionEvent as
+          | (typeof window.DeviceMotionEvent & {
+              requestPermission?: () => Promise<string>
+            })
+          | undefined
+      if (deviceMotionEvent && typeof deviceMotionEvent.requestPermission === "function") {
+        deviceMotionEvent
           .requestPermission()
           .then((state: string) => {
             if (state === "granted") {
@@ -353,10 +358,11 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
             <div className="pc-shine" />
             <div className="pc-glare" />
             <div className="pc-content pc-avatar-content">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className="avatar"
                 src={resolvedAvatarUrl}
-                alt={`${name || "User"} avatar`}
+                alt={`${name || "User"} – ${title || "Profile"} avatar`}
                 loading="lazy"
                 onError={(e) => {
                   const t = e.target as HTMLImageElement
@@ -367,9 +373,10 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 <div className="pc-user-info">
                   <div className="pc-user-details">
                     <div className="pc-mini-avatar">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={resolvedMiniAvatarUrl}
-                        alt={`${name || "User"} mini avatar`}
+                        alt={`${name || "User"} – ${title || "Profile"} mini avatar`}
                         loading="lazy"
                         onError={(e) => {
                           const t = e.target as HTMLImageElement
