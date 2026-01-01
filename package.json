@@ -6,7 +6,8 @@
     "build": "next build",
     "dev": "next dev",
     "lint": "eslint .",
-    "start": "next start"
+    "start": "next start",
+    "postbuild": "node scripts/add-nojekyll.mjs"
   },
   "dependencies": {
     "@emotion/is-prop-valid": "latest",

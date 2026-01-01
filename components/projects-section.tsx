@@ -8,12 +8,14 @@ import { featuredProjects } from "@/content/siteData"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Github, ArrowRight } from "lucide-react"
 import { useState, useEffect } from "react"
+import { withBasePath } from "@/lib/basePath"
 
 export function ProjectsSection() {
   const [reducedMotion, setReducedMotion] = useState(false)
+  const projectsHref = withBasePath("/projects")
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
+    const mediaQuery = window.matchMedia("prefers-reduced-motion: reduce")
     setReducedMotion(mediaQuery.matches)
   }, [])
 
@@ -102,7 +104,7 @@ export function ProjectsSection() {
           className="bg-transparent border-[var(--neon-purple)]/50 hover:bg-[var(--neon-purple)]/10 hover:border-[var(--neon-purple)]/70"
           asChild
         >
-          <a href="/projects">
+          <a href={projectsHref}>
             View All Projects
             <ArrowRight className="ml-2 h-5 w-5" />
           </a>
