@@ -57,7 +57,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
   mobileTiltSensitivity = 5,
   miniAvatarUrl,
   name = "Javi A. Torres",
-  title = "Software Engineer",
+  title: _title = "Software Engineer",
   handle = "javicodes",
   status = "Online",
   contactText = "Contact Me",
@@ -353,6 +353,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
             <div className="pc-shine" />
             <div className="pc-glare" />
             <div className="pc-content pc-avatar-content">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 className="avatar"
                 src={resolvedAvatarUrl}
@@ -367,6 +368,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 <div className="pc-user-info">
                   <div className="pc-user-details">
                     <div className="pc-mini-avatar">
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
                       <img
                         src={resolvedMiniAvatarUrl}
                         alt={`${name || "User"} mini avatar`}

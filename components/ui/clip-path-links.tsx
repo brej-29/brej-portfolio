@@ -120,6 +120,7 @@ const LinkBox = ({ Icon, href, imgSrc, className }: LinkBoxProps) => {
       className="relative grid h-20 w-full place-content-center sm:h-28 md:h-36 text-foreground bg-background"
     >
       {imgSrc ? (
+        // eslint-disable-next-line @next/next/no-img-element
         <img
           src={imgSrc || placeholderSrc}
           alt="custom icon"
@@ -135,6 +136,7 @@ const LinkBox = ({ Icon, href, imgSrc, className }: LinkBoxProps) => {
         className="absolute inset-0 grid place-content-center bg-primary text-primary-foreground transition-colors duration-300"
       >
         {imgSrc ? (
+          // eslint-disable-next-line @next/next/no-img-element
           <img
             src={imgSrc || placeholderSrc}
             alt="custom icon hover"

@@ -1,118 +1,108 @@
 "use client"
 
 import type React from "react"
-import { useRef, useState, useEffect } from "react"
+import { useState, useRef, useCallback } from "react"
+import { useReducedMotion } from "framer-motion"
 import { cn } from "@/lib/utils"
 
 interface VariableProximityTextProps {
   text: string
   className?: string
+  /**
+   * Maximum visual influence distance (in pixels) from the pointer.
+   * Characters farther than this distance will not scale.
+   */
   maxDistance?: number
+  /**
+   * Maximum scale factor applied to characters closest to the pointer.
+   * Clamped to avoid excessive zoom (defaults to 1.08).
+   */
+  maxScale?: number
 }
 
-export function VariableProximityText({ text, className, maxDistance = 150 }: VariableProximityTextProps) {
-  const containerRef = useRef<HTMLDivElement>(null)
-  const [reducedMotion, setReducedMotion] = useState(false)
-  const [cursorPos, setCursorPos] = useState<{ x: number; y: number } | null>(null)
+/**
+ * VariableProximityText
+ *
+ * Renders text where individual characters subtly scale based on how close
+ * the pointer is to them. The text always remains mounted and uses simple
+ * CSS transitions for smooth animations.
+ *
+ * Respects prefers-reduced-motion: when enabled, the text is static.
+ */
+export function VariableProximityText({
+  text,
+  className,
+  maxDistance = 120,
+  maxScale = 1.08,
+}: VariableProximityTextProps) {
+  const prefersReducedMotion = useReducedMotion()
+  const containerRef = useRef<HTMLSpanElement | null>(null)
+  const [pointerX, setPointerX] = useState<number | null>(null)
 
-  useEffect(() => {
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)")
-    setReducedMotion(mediaQuery.matches)
+  const handleMouseMove = useCallback(
+    (event: React.MouseEvent<HTMLSpanElement>) => {
+      if (prefersReducedMotion) return
+      const rect = event.currentTarget.getBoundingClientRect()
+      const x = event.clientX - rect.left
+      setPointerX(x)
+    },
+    [prefersReducedMotion],
+  )
 
-    const handler = (e: MediaQueryListEvent) => setReducedMotion(e.matches)
-    mediaQuery.addEventListener("change", handler)
-    return () => mediaQuery.removeEventListener("change", handler)
-  }, [])
+  const handleMouseLeave = useCallback(() => {
+    if (prefersReducedMotion) return
+    setPointerX(null)
+  }, [prefersReducedMotion])
 
-  const handlePointerMove = (e: React.PointerEvent<HTMLDivElement>) => {
-    if (!containerRef.current || reducedMotion) return
-
-    const rect = containerRef.current.getBoundingClientRect()
-    const x = e.clientX - rect.left
-    const y = e.clientY - rect.top
-    setCursorPos({ x, y })
-  }
-
-  const handlePointerLeave = () => {
-    if (!containerRef.current) return
-    // Reset all letters to normal state but keep them visible
-    Array.from(containerRef.current.children).forEach((child) => {
-      const letterElement = child as HTMLElement
-      letterElement.style.transform = "scale(1)"
-      letterElement.style.removeProperty("color")
-      letterElement.style.opacity = "1"
-    })
-    // Clear cursor position to stop proximity calculations
-    setCursorPos(null)
-  }
-
-  useEffect(() => {
-    if (!containerRef.current) return
-
-    const rect = containerRef.current.getBoundingClientRect()
-
-    Array.from(containerRef.current.children).forEach((child) => {
-      const letterElement = child as HTMLElement
-      const letterRect = letterElement.getBoundingClientRect()
-      const letterX = letterRect.left + letterRect.width / 2 - rect.left
-      const letterY = letterRect.top + letterRect.height / 2 - rect.top
-
-      letterElement.style.opacity = "1"
-
-      if (cursorPos) {
-        const distance = Math.sqrt(Math.pow(cursorPos.x - letterX, 2) + Math.pow(cursorPos.y - letterY, 2))
-
-        if (distance < maxDistance) {
-          const proximity = 1 - distance / maxDistance
-          const scale = 1 + proximity * 0.06
-          letterElement.style.transform = `scale(${scale})`
-        } else {
-          letterElement.style.transform = "scale(1)"
-          letterElement.style.removeProperty("color")
-        }
-      } else {
-        letterElement.style.transform = "scale(1)"
-        letterElement.style.removeProperty("color")
-      }
-    })
-  }, [cursorPos, maxDistance])
-
-  const letters = text.split("")
+  const characters = Array.from(text)
 
   return (
-    <div
+    <span
       ref={containerRef}
-      onPointerMove={handlePointerMove}
-      onPointerLeave={handlePointerLeave}
       className={cn("inline-flex", className)}
-      style={{ opacity: 1, backgroundSize: "100% 100%" }}
+      onMouseMove={handleMouseMove}
+      onMouseLeave={handleMouseLeave}
+      aria-label={text}
     >
-      {letters.map((letter, index) =>
-        letter === " " ? (
-          <span key={index} style={{ opacity: 1 }}>
-            &nbsp;
+      {characters.map((char, index) => {
+        // For reduced motion, render static text with no per-letter transforms.
+        if (prefersReducedMotion) {
+          return (
+            <span key={index} className="inline-block">
+              {char}
+            </span>
+          )
+        }
+
+        let style: React.CSSProperties = {
+          transform: "scale(1)",
+          transition: "transform 0.18s ease-out, color 0.18s ease-out",
+        }
+
+        if (pointerX != null && containerRef.current) {
+          const rect = containerRef.current.getBoundingClientRect()
+          const width = rect.width || 1
+          const segmentWidth = width / characters.length
+          const charCenterX = segmentWidth * index + segmentWidth / 2
+
+          const distance = Math.abs(charCenterX - pointerX)
+          const influence = Math.max(0, 1 - distance / maxDistance)
+
+          const unclampedScale = 1 + influence * (maxScale - 1)
+          const clampedScale = Math.min(Math.max(unclampedScale, 1), maxScale)
+
+          style = {
+            ...style,
+            transform: `scale(${clampedScale})`,
+          }
+        }
+
+        return (
+          <span key={index} className="inline-block" style={style}>
+            {char}
           </span>
-        ) : (
-          <span
-            key={index}
-            className="inline-block transition-all duration-200 ease-out"
-            style={{
-              transformOrigin: "center",
-              opacity: 1,
-              backgroundImage: "inherit",
-              backgroundSize: "inherit",
-              backgroundPosition: "inherit",
-              backgroundRepeat: "inherit",
-              WebkitBackgroundClip: "text",
-              backgroundClip: "text",
-              color: "transparent",
-              WebkitTextFillColor: "transparent",
-            }}
-          >
-            {letter}
-          </span>
-        ),
-      )}
-    </div>
+        )
+      })}
+    </span>
   )
 }
