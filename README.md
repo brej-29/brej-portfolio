@@ -118,6 +118,48 @@ This project keeps all portfolio content in an Excel file and generates JSON + S
   - `public/sitemap.xml`
   - `public/robots.txt`
 
+### Profile images & OpenGraph image
+
+Static images live under `/public/images` and a few root-level icons.
+
+**Profile photo used in the hero & structured data**
+
+By default the hero/profile card and JSON-LD person schema look for:
+
+- `/public/images/profile.png` – main profile photo
+- `/public/images/profile-mini.png` (optional) – small avatar used inside the card
+
+You can either:
+
+- Drop files with those exact names into `public/images/`, or
+- Override them from Excel in the **Profile** sheet:
+  - `avatarUrl` – path such as `/images/profile.png` or a full `https://...` URL
+  - `miniAvatarUrl` – path or URL for the mini avatar
+
+If `miniAvatarUrl` is empty, the UI falls back to `avatarUrl`. If the image fails to load, the profile card falls back to a local placeholder.
+
+**OpenGraph / Twitter card image**
+
+The default OpenGraph image is:
+
+- `/public/og.png`
+
+and the layout metadata uses the value from the **Seo** sheet:
+
+- `ogImage` – path like `/og.png` or a full URL
+
+Recommended:
+
+1. Export a 1200x630 PNG (or similar) and save it as `public/og.png`.
+2. Put `/og.png` in the `ogImage` column of the **Seo** sheet.
+
+The same value is used for:
+
+- `<meta property="og:image">`
+- `<meta name="twitter:image">`
+
+The sitemap and robots generator continue to use `NEXT_PUBLIC_SITE_URL` so all canonical and sitemap URLs are correct for GitHub Pages (for example `https://<user>.github.io/<repo>`).
+
 The script `scripts/generate-content.mjs`:
 
 - Reads `content/content.xlsx`

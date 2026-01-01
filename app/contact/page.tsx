@@ -9,7 +9,7 @@ import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { ContactForm } from "@/components/contact/ContactForm"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import { Button } from "@/components/ui/button"
-import { contact } from "@/content/siteData"
+import { contact } from "@/content"
 import { Mail, MapPin, Briefcase, Copy, Check } from "lucide-react"
 import { ClipPathLinks } from "@/components/ui/clip-path-links"
 

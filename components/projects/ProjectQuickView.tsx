@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Github, ExternalLink, Calendar, CheckCircle2 } from "lucide-react"
-import type { Project } from "@/content/siteData"
+import type { Project } from "@/content"
 
 interface ProjectQuickViewProps {
   project: Project | null

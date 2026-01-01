@@ -1,7 +1,7 @@
 import { Section } from "@/components/site/section"
 import { CertificatesClient } from "@/components/certificates/CertificatesClient"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
-import { certificates } from "@/content/siteData"
+import { certificates } from "@/content"
 
 export default function CertificatesPage() {
   return (

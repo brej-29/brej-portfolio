@@ -3,7 +3,7 @@ import { GlassCard } from "@/components/site/glass-card"
 import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Timeline } from "@/components/experience/Timeline"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
-import { experience } from "@/content/siteData"
+import { experience } from "@/content"
 import { Sparkles } from "lucide-react"
 
 export default function ExperiencePage() {

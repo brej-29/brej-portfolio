@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { RotatingText } from "@/components/premium/rotating-text"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import ProfileCard from "@/components/premium/profile-card"
-import { profile } from "@/content/siteData"
+import { profile } from "@/content"
 import { ArrowRight, Mail } from "lucide-react"
 import { withBasePath } from "@/lib/basePath"
 
@@ -16,7 +16,9 @@ export function HeroSection() {
 
   const projectsHref = withBasePath("/projects")
   const contactHref = withBasePath("/contact")
-  const avatarSrc = withBasePath("/images/image.png")
+
+  const avatarPath = profile.avatarUrl || "/images/profile.png"
+  const miniAvatarPath = profile.miniAvatarUrl || profile.avatarUrl || "/images/profile-mini.png"
 
   return (
     <section id="home" className="relative container mx-auto px-4 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-32">
@@ -96,12 +98,12 @@ export function HeroSection() {
           className="hidden lg:flex justify-center"
         >
           <ProfileCard
-            avatarUrl={avatarSrc}
-            miniAvatarUrl={avatarSrc}
+            avatarUrl={avatarPath}
+            miniAvatarUrl={miniAvatarPath}
             name={profile.name}
             title={profile.headline}
-            handle="javicodes"
-            status="Available for work"
+            handle={profile.handle || "portfolio"}
+            status={profile.statusText || "Available for work"}
             contactText="Contact"
             showUserInfo={true}
             showDetails={false}

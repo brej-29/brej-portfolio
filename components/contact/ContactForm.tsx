@@ -10,7 +10,7 @@ import { Input } from "@/components/ui/input"
 import { Textarea } from "@/components/ui/textarea"
 import { Label } from "@/components/ui/label"
 import { Mail, Send } from "lucide-react"
-import { contact } from "@/content/siteData"
+import { contact } from "@/content"
 
 type FormState = {
   name: string

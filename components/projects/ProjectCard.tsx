@@ -5,7 +5,7 @@ import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Github, ExternalLink, Eye } from "lucide-react"
-import type { Project } from "@/content/siteData"
+import type { Project } from "@/content"
 import { motion } from "framer-motion"
 
 interface ProjectCardProps {

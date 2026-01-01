@@ -7,6 +7,7 @@ import { FaDiscord } from "react-icons/fa"
 import { Github, Twitter, Instagram, Facebook, Linkedin } from "lucide-react"
 import { useAnimate } from "framer-motion"
 import { withBasePath } from "@/lib/basePath"
+import { gradients } from "@/lib/themeTokens"
 
 export const ClipPathLinks = () => {
   return (
@@ -132,8 +133,8 @@ const LinkBox = ({ Icon, href, imgSrc, className }: LinkBoxProps) => {
 
       <div
         ref={scope}
-        style={{ clipPath: BOTTOM_RIGHT_CLIP }}
-        className="absolute inset-0 grid place-content-center bg-primary text-primary-foreground transition-colors duration-300"
+        style={{ clipPath: BOTTOM_RIGHT_CLIP, backgroundImage: gradients.primary }}
+        className="absolute inset-0 grid place-content-center text-primary-foreground transition-colors duration-300"
       >
         {imgSrc ? (
           // eslint-disable-next-line @next/next/no-img-element

@@ -1,6 +1,6 @@
 import Link from "next/link"
 import { Github, Linkedin, Mail } from "lucide-react"
-import { socialLinks } from "@/content/siteData"
+import { profile, socialLinks } from "@/content"
 
 const iconMap = {
   github: Github,
@@ -17,10 +17,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent mb-2">
-              Your Name
+              {profile.name}
             </h3>
-            <p className="text-sm text-muted-foreground">Full Stack → Data Science</p>
-            <p className="text-xs text-muted-foreground mt-1">📍 India</p>
+            <p className="text-sm text-muted-foreground">{profile.headline}</p>
+            <p className="text-xs text-muted-foreground mt-1">📍 {profile.location}</p>
           </div>
 
           {/* Social Links */}
@@ -44,7 +44,7 @@ export function Footer() {
 
           {/* Copyright */}
           <p className="text-sm text-muted-foreground text-center md:text-right">
-            © {new Date().getFullYear()} Your Name. All rights reserved.
+            © {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>
         </div>
       </div>
