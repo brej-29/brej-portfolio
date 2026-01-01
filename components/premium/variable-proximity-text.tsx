@@ -64,7 +64,6 @@ export function VariableProximityText({
 
   return (
     <span
-      ref={containerRef}
       className={cn("inline-flex", className)}
       onMouseMove={handleMouseMove}
       onMouseLeave={handleMouseLeave}
@@ -85,21 +84,16 @@ export function VariableProximityText({
           transition: "transform 0.18s ease-out, color 0.18s ease-out",
         }
 
-        if (pointerX != null && containerRef.current) {
-          const rect = containerRef.current.getBoundingClientRect()
-          const width = rect.width || 1
-          const segmentWidth = width / characters.length
-          const charCenterX = segmentWidth * index + segmentWidth / 2
-
-          const distance = Math.abs(charCenterX - pointerX)
-          const influence = Math.max(0, 1 - distance / maxDistance)
-
-          const unclampedScale = 1 + influence * (maxScale - 1)
-          const clampedScale = Math.min(Math.max(unclampedScale, 1), maxScale)
-
-          style = {
-            ...style,
-            transform: `scale(${clampedScale})`,
+        if (activeIndex !== null) {
+          const distanceByIndex = Math.abs(index - activeIndex)
+          if (distanceByIndex <= falloff) {
+            const influence = 1 - distanceByIndex / (falloff + 1)
+            const unclampedScale = 1 + influence * (maxScale - 1)
+            const clampedScale = Math.min(Math.max(unclampedScale, 1), maxScale)
+            style = {
+              ...style,
+              transform: `scale(${clampedScale})`,
+            }
           }
         }
 
