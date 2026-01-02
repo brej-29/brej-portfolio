@@ -4,34 +4,64 @@ import type React from "react"
 
 import { SiGoogle } from "react-icons/si"
 import { FaDiscord } from "react-icons/fa"
-import { Github, Twitter, Instagram, Facebook, Linkedin } from "lucide-react"
+import { Github, Instagram, Linkedin } from "lucide-react"
 import { useAnimate } from "framer-motion"
+import { useTheme } from "next-themes"
 import { withBasePath } from "@/lib/basePath"
+import { gradients } from "@/lib/themeTokens"
 
 export const ClipPathLinks = () => {
+  const { resolvedTheme } = useTheme()
+  const theme = resolvedTheme ?? "dark"
+  const isDark = theme === "dark"
+
+  const huggingFaceImgSrc = isDark
+    ? "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/dark/huggingface.png"
+    : "https://registry.npmmirror.com/@lobehub/icons-static-png/latest/files/light/huggingface.png"
+
+  const streamlitImgSrc = isDark
+    ? withBasePath("/images/streamlit-mark-dark-mode.png")
+    : withBasePath("/images/streamlit-mark-light-mode.png")
+
+  const portfolioImgSrc = withBasePath("/images/avatar-mini.png")
+
   return (
     <div className="divide-y border divide-border border-border">
       <div className="grid grid-cols-2 divide-x divide-border">
-        <LinkBox Icon={SiGoogle} href="https://mail.google.com/mail/u/0/?fs=1&to=kamalkamalesh316@gmail.com&tf=cm" />
-        <LinkBox Icon={Github} href="https://github.com/kamaleshsa" />
+        <LinkBox
+          Icon={SiGoogle}
+          href="https://mail.google.com/mail/u/0/?fs=1&to=brejesh.bala@gmail.com&tf=cm"
+        />
+        <LinkBox Icon={Github} href="https://github.com/brej-29" />
       </div>
       <div className="grid grid-cols-4 divide-x divide-border">
-        <LinkBox Icon={Twitter} href="https://x.com/Kamales71036733" />
-        <LinkBox Icon={Linkedin} href="https://www.linkedin.com/in/kamaleshsa" />
-        <LinkBox Icon={Instagram} href="https://www.instagram.com/k.a.m.a_l?igsh=ZmRzbXF6NTBwOXIw" />
-        <LinkBox Icon={Facebook} href="https://www.facebook.com/share/16Zgo4MK6M/" />
-      </div>
-      <div className="grid grid-cols-3 divide-x divide-border">
-        <LinkBox Icon={FaDiscord} href="https://discord.com/users/1367756111725334599" />
         <LinkBox
-          href="https://21st.dev/kamaleshsa"
-          className="h-6 w-auto object-contain"
-          imgSrc="https://media.licdn.com/dms/image/v2/D4E0BAQH3Jqtih4t7-A/company-logo_200_200/B4EZY_fSK1HUAM-/0/1744821888382/21st_dev_logo?e=2147483647&v=beta&t=8hoDRfmpNQR3aqnKWef5U0bW9Mg2GCbgwvgeQ5MKaKU"
+          href="https://huggingface.co/BrejBala"
+          imgSrc={huggingFaceImgSrc}
+          className="max-h-4 sm:max-h-8 md:max-h-10 object-contain"
         />
         <LinkBox
-          href="https://kamaleshsaportfolio.netlify.app/"
+          Icon={Linkedin}
+          href="https://www.linkedin.com/in/brejesh-balakrishnan-7855051b9/"
+        />
+        <LinkBox Icon={Instagram} href="https://www.instagram.com/achu_brej/" />
+        <LinkBox
+          href="https://share.streamlit.io/user/brej-29"
+          imgSrc={streamlitImgSrc}
+          className="max-h-2 sm:max-h-5 md:max-h-6 object-contain"
+        />
+      </div>
+      <div className="grid grid-cols-3 divide-x divide-border">
+        <LinkBox Icon={FaDiscord} href="https://discordapp.com/users/briji_achu" />
+        <LinkBox
+          href="https://medium.com/@brejesh.bala"
+          imgSrc="https://upload.wikimedia.org/wikipedia/commons/e/ec/Medium_logo_Monogram.svg"
+          className="max-h-4 sm:max-h-6 md:max-h-8 object-contain dark:invert"
+        />
+        <LinkBox
+          href="https://brej-29.github.io/brej-portfolio/"
           className="h-8 w-auto object-contain"
-          imgSrc="https://i.ibb.co/q36kg6qT/fotor-2025052503615.png"
+          imgSrc={portfolioImgSrc}
         />
       </div>
     </div>
@@ -132,8 +162,8 @@ const LinkBox = ({ Icon, href, imgSrc, className }: LinkBoxProps) => {
 
       <div
         ref={scope}
-        style={{ clipPath: BOTTOM_RIGHT_CLIP }}
-        className="absolute inset-0 grid place-content-center bg-primary text-primary-foreground transition-colors duration-300"
+        style={{ clipPath: BOTTOM_RIGHT_CLIP, backgroundImage: gradients.primary }}
+        className="absolute inset-0 grid place-content-center text-primary-foreground transition-colors duration-300"
       >
         {imgSrc ? (
           // eslint-disable-next-line @next/next/no-img-element

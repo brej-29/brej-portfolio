@@ -5,7 +5,7 @@ import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Calendar, Award } from "lucide-react"
-import type { Certificate } from "@/content/siteData"
+import type { Certificate } from "@/content"
 import { motion } from "framer-motion"
 
 interface CertificateCardProps {

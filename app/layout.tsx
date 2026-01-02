@@ -7,40 +7,27 @@ import { ThemeProvider } from "@/components/site/theme-provider"
 import { BackgroundLayer } from "@/components/site/background-layer"
 import { Navbar } from "@/components/site/navbar"
 import { Footer } from "@/components/site/footer"
-import { profile, socialLinks } from "@/content/siteData"
-import generatedContent from "@/content/generated/content.json"
+import { profile, socialLinks, seo as generatedSeo, contentError } from "@/content"
 import { buildSiteUrl } from "@/lib/site-url"
+import { DevContentError } from "@/components/site/dev-content-error"
+import { AnalyticsScripts } from "@/components/site/analytics-script"
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
 
-interface GeneratedSeo {
-  siteTitle?: string
-  siteDescription?: string
-  keywords?: string[]
-  twitterHandle?: string
-  ogImage?: string
-}
-
-interface GeneratedContent {
-  seo?: GeneratedSeo
-}
-
-const seo: GeneratedSeo = (generatedContent as GeneratedContent).seo ?? {}
-
 const siteTitle: string =
-  typeof seo.siteTitle === "string" && seo.siteTitle.length > 0
-    ? seo.siteTitle
+  typeof generatedSeo.siteTitle === "string" && generatedSeo.siteTitle.length > 0
+    ? generatedSeo.siteTitle
     : `${profile.name} – ${profile.headline}`
 
 const siteDescription: string =
-  typeof seo.siteDescription === "string" && seo.siteDescription.length > 0
-    ? seo.siteDescription
+  typeof generatedSeo.siteDescription === "string" && generatedSeo.siteDescription.length > 0
+    ? generatedSeo.siteDescription
     : "Software engineer portfolio featuring full‑stack development, data science, and machine learning projects."
 
 const keywords: string[] =
-  Array.isArray(seo.keywords) && seo.keywords.length > 0
-    ? seo.keywords
+  Array.isArray(generatedSeo.keywords) && generatedSeo.keywords.length > 0
+    ? generatedSeo.keywords
     : [
         "software engineer portfolio",
         "full stack developer",
@@ -51,10 +38,27 @@ const keywords: string[] =
       ]
 
 const twitterHandle: string | undefined =
-  typeof seo.twitterHandle === "string" && seo.twitterHandle.length > 0 ? seo.twitterHandle : undefined
+  typeof generatedSeo.twitterHandle === "string" && generatedSeo.twitterHandle.length > 0
+    ? generatedSeo.twitterHandle
+    : undefined
 
-const ogImagePath: string = typeof seo.ogImage === "string" && seo.ogImage.length > 0 ? seo.ogImage : "/professional-portrait.png"
-const ogImageUrl = buildSiteUrl(ogImagePath)
+const ogImagePath: string =
+  typeof generatedSeo.ogImage === "string" && generatedSeo.ogImage.length > 0
+    ? generatedSeo.ogImage
+    : "/og.png"
+
+const ogImageUrl =
+  ogImagePath.startsWith("http://") || ogImagePath.startsWith("https://")
+    ? ogImagePath
+    : buildSiteUrl(ogImagePath)
+
+const profileImagePath = profile.avatarUrl || "/images/profile.png"
+const profileImageUrl =
+  profileImagePath.startsWith("http://") || profileImagePath.startsWith("https://")
+    ? profileImagePath
+    : buildSiteUrl(profileImagePath)
+
+const isDev = process.env.NODE_ENV !== "production"
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -62,7 +66,7 @@ const personJsonLd = {
   name: profile.name,
   jobTitle: profile.headline,
   url: buildSiteUrl("/"),
-  image: buildSiteUrl("/images/image.png"),
+  image: profileImageUrl,
   sameAs: socialLinks.map((link) => link.url),
   address: {
     "@type": "PostalAddress",
@@ -98,6 +102,7 @@ export const metadata: Metadata = {
     title: siteTitle,
     description: siteDescription,
     creator: twitterHandle,
+    images: [ogImageUrl],
   },
   alternates: {
     canonical: buildSiteUrl("/"),
@@ -146,12 +151,13 @@ export default function RootLayout({
           <Navbar />
 
           <div id="main-content" className="relative min-h-screen">
-            {children}
+            {isDev && contentError ? <DevContentError message={contentError} /> : children}
           </div>
 
           <Footer />
 
           <Analytics />
+          <AnalyticsScripts />
         </ThemeProvider>
       </body>
     </html>

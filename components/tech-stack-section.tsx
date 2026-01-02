@@ -4,7 +4,7 @@ import { GlassCard } from "@/components/site/glass-card"
 import { Section } from "@/components/site/section"
 import { LogoLoop } from "@/components/premium/logo-loop"
 import { SpotlightCard } from "@/components/premium/spotlight-card"
-import { techStack, skills } from "@/content/siteData"
+import { techStack, skills } from "@/content"
 import { Code2 } from "lucide-react"
 
 export function TechStackSection() {

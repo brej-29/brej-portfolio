@@ -135,6 +135,22 @@ function requireColumns(sheetName, rows, requiredColumns) {
   }
 }
 
+function validateRequiredSheets(workbook) {
+  const missing = []
+  for (const sheetName of Object.values(ROOT_TO_SHEET_MAP)) {
+    if (!workbook.Sheets[sheetName]) {
+      missing.push(sheetName)
+    }
+  }
+  if (missing.length > 0) {
+    throw new Error(
+      `[content.xlsx] Missing required sheet(s): ${missing.join(
+        ", ",
+      )}.\nAdd sheet(s) with these exact names (see README schema).`,
+    )
+  }
+}
+
 const ProfileSchema = z.object({
   name: z.string().min(1),
   headline: z.string().min(1),
@@ -192,6 +208,7 @@ const ProjectSchema = z.object({
   highlights: z.array(z.string().min(1)).min(1),
   date: z.string().min(1),
   order: z.number().optional(),
+  projectImageUrl: z.string().min(1).optional(),
 })
 
 const ExperienceSchema = z.object({
@@ -274,6 +291,8 @@ function formatZodError(error) {
 }
 
 function buildContentFromWorkbook(workbook) {
+  validateRequiredSheets(workbook)
+
   const profileSheet = getRequiredSheet(workbook, "Profile")
   const profileRows = sheetToRows(profileSheet)
   if (!profileRows.length) {
@@ -436,6 +455,7 @@ function buildContentFromWorkbook(workbook) {
       highlights: parseSemicolonArray(row.highlights),
       date: parseRequiredString(row.date, "date", `[Projects row ${index + 2}]`),
       order: parseOrder(row.order, `[Projects row ${index + 2}]`),
+      projectImageUrl: parseOptionalString(row.projectImageUrl),
     })),
   )
 

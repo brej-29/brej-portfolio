@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { RotatingText } from "@/components/premium/rotating-text"
 import { VariableProximityText } from "@/components/premium/variable-proximity-text"
 import ProfileCard from "@/components/premium/profile-card"
-import { profile } from "@/content/siteData"
+import { profile } from "@/content"
 import { ArrowRight, Mail } from "lucide-react"
 import { withBasePath } from "@/lib/basePath"
 
@@ -16,7 +16,11 @@ export function HeroSection() {
 
   const projectsHref = withBasePath("/projects")
   const contactHref = withBasePath("/contact")
-  const avatarSrc = withBasePath("/images/image.png")
+  const [firstName, ...restOfName] = profile.name.split(" ")
+  const lastName = restOfName.join(" ")
+
+  const avatarPath = profile.avatarUrl || "/images/profile.png"
+  const miniAvatarPath = profile.miniAvatarUrl || profile.avatarUrl || "/images/profile-mini.png"
 
   return (
     <section id="home" className="relative container mx-auto px-4 lg:px-8 pt-32 pb-20 lg:pt-40 lg:pb-32">
@@ -31,11 +35,20 @@ export function HeroSection() {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance">
               {"Hi, I'm "}
-              <VariableProximityText
-                text={profile.name}
-                className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent inline-block"
-                maxDistance={120}
-              />
+              <span className="mt-1 block leading-tight">
+                <VariableProximityText
+                  text={firstName || profile.name}
+                  className="whitespace-nowrap bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
+                  maxDistance={120}
+                />
+                {lastName && (
+                  <VariableProximityText
+                    text={lastName}
+                    className="whitespace-nowrap bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
+                    maxDistance={120}
+                  />
+                )}
+              </span>
             </h1>
             <div className="flex flex-col gap-2 text-2xl md:text-3xl lg:text-4xl font-semibold">
               <RotatingText
@@ -96,12 +109,12 @@ export function HeroSection() {
           className="hidden lg:flex justify-center"
         >
           <ProfileCard
-            avatarUrl={avatarSrc}
-            miniAvatarUrl={avatarSrc}
+            avatarUrl={avatarPath}
+            miniAvatarUrl={miniAvatarPath}
             name={profile.name}
             title={profile.headline}
-            handle="javicodes"
-            status="Available for work"
+            handle={profile.handle || "portfolio"}
+            status={profile.statusText || "Available for work"}
             contactText="Contact"
             showUserInfo={true}
             showDetails={false}

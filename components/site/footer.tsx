@@ -1,11 +1,28 @@
 import Link from "next/link"
 import { Github, Linkedin, Mail } from "lucide-react"
-import { socialLinks } from "@/content/siteData"
+import { cn } from "@/lib/utils"
+import { profile, socialLinks } from "@/content"
+import { withBasePath } from "@/lib/basePath"
+
+const StreamlitIcon = ({ className }: { className?: string }) => {
+  const lightSrc = withBasePath("/images/streamlit-mark-light-mode.png")
+  const darkSrc = withBasePath("/images/streamlit-mark-dark-mode.png")
+
+  return (
+    <span className={cn("relative inline-flex items-center justify-center", className)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={lightSrc} alt="Streamlit" className="h-5 w-5 object-contain dark:hidden" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={darkSrc} alt="Streamlit" className="hidden h-5 w-5 object-contain dark:inline" />
+    </span>
+  )
+}
 
 const iconMap = {
   github: Github,
   linkedin: Linkedin,
   mail: Mail,
+  external: StreamlitIcon,
 }
 
 export function Footer() {
@@ -17,10 +34,10 @@ export function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
           <div className="text-center md:text-left">
             <h3 className="text-lg font-bold bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent mb-2">
-              Your Name
+              {profile.name}
             </h3>
-            <p className="text-sm text-muted-foreground">Full Stack → Data Science</p>
-            <p className="text-xs text-muted-foreground mt-1">📍 India</p>
+            <p className="text-sm text-muted-foreground">{profile.headline}</p>
+            <p className="text-xs text-muted-foreground mt-1">📍 {profile.location}</p>
           </div>
 
           {/* Social Links */}
@@ -44,7 +61,7 @@ export function Footer() {
 
           {/* Copyright */}
           <p className="text-sm text-muted-foreground text-center md:text-right">
-            © {new Date().getFullYear()} Your Name. All rights reserved.
+            © {new Date().getFullYear()} {profile.name}. All rights reserved.
           </p>
         </div>
       </div>

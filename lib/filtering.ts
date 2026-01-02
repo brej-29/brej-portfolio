@@ -1,4 +1,4 @@
-import type { Project, Certificate } from "@/content/siteData"
+import type { Project, Certificate } from "@/content"
 
 export function filterProjects(
   projects: Project[],

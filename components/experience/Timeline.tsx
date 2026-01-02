@@ -5,7 +5,7 @@ import { GlassCard } from "@/components/site/glass-card"
 import { SpotlightCard } from "@/components/premium/spotlight-card"
 import { Badge } from "@/components/ui/badge"
 import { ChevronDown, ChevronUp, MapPin, Calendar } from "lucide-react"
-import type { Experience } from "@/content/siteData"
+import type { Experience } from "@/content"
 import { motion, AnimatePresence } from "framer-motion"
 
 interface TimelineProps {
