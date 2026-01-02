@@ -11,7 +11,7 @@ import { withBasePath } from "@/lib/basePath"
 import { buildSiteUrl } from "@/lib/site-url"
 
 interface ProjectPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 function getProjectWithSiblings(id: string) {
@@ -29,8 +29,9 @@ export function generateStaticParams() {
   return projects.map((project) => ({ id: project.id }))
 }
 
-export function generateMetadata({ params }: ProjectPageProps): Metadata {
-  const data = getProjectWithSiblings(params.id)
+export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
+  const { id } = await params
+  const data = getProjectWithSiblings(id)
   if (!data) {
     return {
       title: "Project not found",
@@ -83,14 +84,15 @@ export function generateMetadata({ params }: ProjectPageProps): Metadata {
   }
 }
 
-export default function ProjectDetailPage({ params }: ProjectPageProps) {
-  const data = getProjectWithSiblings(params.id)
+export default async function ProjectDetailPage({ params }: ProjectPageProps) {
+  const { id } = await params
+  const data = getProjectWithSiblings(id)
 
   if (!data) {
     notFound()
   }
 
-  const { project, prev, next } = data!
+  constta!
 
   const projectsHref = withBasePath("/projects")
   const projectImagePath = project.projectImageUrl
