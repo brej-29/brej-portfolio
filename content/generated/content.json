@@ -1,1 +1,285 @@
-{}
+{
+  "profile": {
+    "name": "Brejesh Balakrishnan",
+    "headline": "Full Stack Developer → Data Science | ML/DS Projects | Streamlit Apps",
+    "location": "India",
+    "summaryBullets": [
+      "Accenture Full Stack Developer on TIAA legacy refactor",
+      "Transitioning to Data Science",
+      "Building ML/DS apps and end-to-end projects"
+    ],
+    "heroTaglines": [
+      "Full-Stack Developer",
+      "Aspiring Data Scientist",
+      "ML Project Builder",
+      "Open to Data Roles"
+    ],
+    "heroPrimaryCtaLabel": "View Projects",
+    "heroPrimaryCtaHref": "/projects",
+    "heroSecondaryCtaLabel": "Download Resume",
+    "heroSecondaryCtaHref": "/resume.pdf",
+    "resumeLabel": "Resume",
+    "resumeUrl": "/resume.pdf",
+    "footerTagline": "Building clean, production-ready data products.",
+    "handle": "@brej-29",
+    "statusText": "Open to Data Science roles",
+    "avatarUrl": "/images/avatar.png",
+    "miniAvatarUrl": "/images/avatar-mini.png"
+  },
+  "socialLinks": [
+    {
+      "name": "GitHub",
+      "url": "https://github.com/brej-29",
+      "icon": "github",
+      "order": 1
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com/in/brejesh-balakrishnan-7855051b9/",
+      "icon": "linkedin",
+      "order": 2
+    },
+    {
+      "name": "Streamlit",
+      "url": "https://share.streamlit.io/user/brej-29",
+      "icon": "external",
+      "order": 3
+    },
+    {
+      "name": "Email",
+      "url": "mailto:your.email@example.com",
+      "icon": "mail",
+      "order": 4
+    }
+  ],
+  "skills": [
+    {
+      "name": "Python",
+      "category": "Programming",
+      "order": 1
+    },
+    {
+      "name": "Java",
+      "category": "Programming",
+      "order": 2
+    },
+    {
+      "name": "SQL",
+      "category": "Data",
+      "order": 3
+    },
+    {
+      "name": "Spring Boot",
+      "category": "Frameworks",
+      "order": 4
+    },
+    {
+      "name": "Streamlit",
+      "category": "Frameworks",
+      "order": 5
+    },
+    {
+      "name": "scikit-learn",
+      "category": "ML",
+      "order": 6
+    }
+  ],
+  "techStack": [
+    "Python",
+    "Java",
+    "Spring Boot",
+    "Angular",
+    "SQL",
+    "Pandas",
+    "NumPy",
+    "scikit-learn",
+    "Streamlit",
+    "Git"
+  ],
+  "featuredProjects": [
+    {
+      "title": "Essay Writer App",
+      "summary": "Streamlit app that generates structured essays with export options.",
+      "tags": [
+        "Streamlit",
+        "LLM",
+        "NLP"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "LangChain"
+      ],
+      "githubUrl": "https://github.com/brej-29",
+      "liveUrl": "https://essay-writer-app.streamlit.app/",
+      "order": 1
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-essay-writer",
+      "title": "Essay Writer App",
+      "oneLine": "Generate structured essays with export.",
+      "description": "A Streamlit app that helps users generate structured essays with consistent sections and export options.",
+      "tags": [
+        "Streamlit",
+        "LLM",
+        "NLP"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "LangChain"
+      ],
+      "links": {},
+      "highlights": [
+        "Clean UI workflow",
+        "Export options",
+        "Prompt tuning"
+      ],
+      "date": "2025-12",
+      "order": 1
+    }
+  ],
+  "experience": [
+    {
+      "company": "Accenture",
+      "role": "Advanced Application Engineering Analyst (Full Stack Developer)",
+      "dates": "Jul 2024 – Present",
+      "location": "India",
+      "bullets": [
+        "Legacy refactor for TIAA",
+        "Improved code quality and maintainability",
+        "Worked in Agile sprints and demos"
+      ],
+      "techStack": [
+        "Java",
+        "Spring Boot MVC",
+        "Gradle",
+        "Angular"
+      ],
+      "order": 1
+    },
+    {
+      "company": "Local Consulting Firm",
+      "role": "Machine Learning Intern",
+      "dates": "Jun 2023 – Aug 2023",
+      "location": "India",
+      "bullets": [
+        "Built ML models",
+        "Feature engineering",
+        "Evaluation and reporting"
+      ],
+      "techStack": [
+        "Python",
+        "Pandas",
+        "scikit-learn"
+      ],
+      "order": 2
+    }
+  ],
+  "certificates": [
+    {
+      "title": "AWS ML Engineer Nanodegree",
+      "issuer": "Udacity",
+      "date": "2025-12",
+      "skillsTags": [
+        "AWS",
+        "ML",
+        "MLOps"
+      ],
+      "order": 1
+    }
+  ],
+  "contact": {
+    "email": "brejesh.bala@gmail.com",
+    "location": "India",
+    "availability": "Open to Data Science / ML roles (2026).",
+    "socials": [
+      {
+        "name": "GitHub",
+        "url": "https://github.com/brej-29",
+        "icon": "github",
+        "order": 1
+      },
+      {
+        "name": "LinkedIn",
+        "url": "https://www.linkedin.com/in/brejesh-balakrishnan-7855051b9/",
+        "icon": "linkedin",
+        "order": 2
+      },
+      {
+        "name": "Streamlit",
+        "url": "https://share.streamlit.io/user/brej-29",
+        "icon": "external",
+        "order": 3
+      },
+      {
+        "name": "Email",
+        "url": "mailto:your.email@example.com",
+        "icon": "mail",
+        "order": 4
+      }
+    ]
+  },
+  "experienceStats": [
+    {
+      "label": "User Stories Delivered",
+      "value": "150+",
+      "description": "Delivered stories/defects across Agile sprints",
+      "order": 1
+    },
+    {
+      "label": "Test Coverage",
+      "value": "90%+",
+      "description": "Maintained high test coverage",
+      "order": 2
+    }
+  ],
+  "navItems": [
+    {
+      "label": "Home",
+      "href": "/",
+      "visible": true,
+      "order": 1
+    },
+    {
+      "label": "Experience",
+      "href": "/experience",
+      "visible": true,
+      "order": 2
+    },
+    {
+      "label": "Projects",
+      "href": "/projects",
+      "visible": true,
+      "order": 3
+    },
+    {
+      "label": "Certificates",
+      "href": "/certificates",
+      "visible": true,
+      "order": 4
+    },
+    {
+      "label": "Contact",
+      "href": "/contact",
+      "visible": true,
+      "order": 5
+    }
+  ],
+  "seo": {
+    "siteTitle": "Brejesh Balakrishnan | Portfolio",
+    "siteDescription": "Full Stack Developer transitioning to Data Science. Projects in ML, analytics, and deployed data apps.",
+    "keywords": [
+      "Data Science",
+      "Machine Learning",
+      "Python",
+      "SQL",
+      "Streamlit",
+      "Spring Boot",
+      "Portfolio"
+    ],
+    "ogImage": "/og.png"
+  }
+}

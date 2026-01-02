@@ -16,6 +16,8 @@ export function HeroSection() {
 
   const projectsHref = withBasePath("/projects")
   const contactHref = withBasePath("/contact")
+  const [firstName, ...restOfName] = profile.name.split(" ")
+  const lastName = restOfName.join(" ")
 
   const avatarPath = profile.avatarUrl || "/images/profile.png"
   const miniAvatarPath = profile.miniAvatarUrl || profile.avatarUrl || "/images/profile-mini.png"
@@ -33,11 +35,20 @@ export function HeroSection() {
           <div className="space-y-4">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance">
               {"Hi, I'm "}
-              <VariableProximityText
-                text={profile.name}
-                className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent inline-block"
-                maxDistance={120}
-              />
+              <span className="mt-1 block leading-tight">
+                <VariableProximityText
+                  text={firstName || profile.name}
+                  className="whitespace-nowrap bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
+                  maxDistance={120}
+                />
+                {lastName && (
+                  <VariableProximityText
+                    text={lastName}
+                    className="whitespace-nowrap bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
+                    maxDistance={120}
+                  />
+                )}
+              </span>
             </h1>
             <div className="flex flex-col gap-2 text-2xl md:text-3xl lg:text-4xl font-semibold">
               <RotatingText
