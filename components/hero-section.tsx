@@ -9,7 +9,7 @@ import { profile } from "@/content"
 import { ArrowRight, Mail } from "lucide-react"
 import { withBasePath } from "@/lib/basePath"
 
-const rotatingWords = ["Full-Stack Developer", "Aspiring Data Scientist", "ML Project Builder", "Open to Data Roles"]
+const rotatingWords = ["Full-Stack Developer","Data Scientist / ML Engineer","Python • SQL • Statistics","AWS SageMaker • Lambda","Open to ML/DS Roles"]
 
 export function HeroSection() {
   const reducedMotion = useReducedMotion()

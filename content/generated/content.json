@@ -1,36 +1,39 @@
 {
   "profile": {
     "name": "Brejesh Balakrishnan",
-    "headline": "Full Stack Developer → Data Science | ML/DS Projects | Streamlit Apps",
-    "location": "India",
+    "headline": "Data Scientist / ML Engineer → End-to-End ML (Train → Deploy) | Production-Ready Portfolio",
+    "location": "Bengaluru, India (Open to Hybrid/On-site/Relocate)",
     "summaryBullets": [
-      "Accenture Full Stack Developer on TIAA legacy refactor",
-      "Transitioning to Data Science",
-      "Building ML/DS apps and end-to-end projects"
+      "Full Stack Developer @ Accenture (TIAA) with strong production engineering foundation",
+      "Shipped high-impact backend improvements: >90% test coverage + API latency >5s reduced from ~80% to <20%",
+      "Building end-to-end ML/DS systems (Python, SQL, MLflow, AWS SageMaker/S3/Lambda) with deployable demos"
     ],
     "heroTaglines": [
       "Full-Stack Developer",
-      "Aspiring Data Scientist",
-      "ML Project Builder",
-      "Open to Data Roles"
+      "Data Scientist / ML Engineer",
+      "Python • SQL • Statistics",
+      "End-to-End ML (Train → Deploy)",
+      "MLflow • AWS SageMaker • Docker",
+      "NLP (BERT) • MLOps Mindset",
+      "On Notice • Open to ML/DS Roles"
     ],
     "heroPrimaryCtaLabel": "View Projects",
     "heroPrimaryCtaHref": "/projects",
     "heroSecondaryCtaLabel": "Download Resume",
     "heroSecondaryCtaHref": "/resume.pdf",
-    "resumeLabel": "Resume",
+    "resumeLabel": "Resume (Data Scientist / ML Engineer)",
     "resumeUrl": "/resume.pdf",
-    "footerTagline": "Building clean, production-ready data products.",
+    "footerTagline": "Building reliable ML systems — from data to deployment.",
     "handle": "@brej-29",
-    "statusText": "Open to Data Science roles",
+    "statusText": "Actively interviewing: Data Scientist / ML Engineer (Bengaluru) | Available Apr 2026",
     "avatarUrl": "/images/avatar.png",
     "miniAvatarUrl": "/images/avatar-mini.png"
   },
   "socialLinks": [
     {
-      "name": "GitHub",
-      "url": "https://github.com/brej-29",
-      "icon": "github",
+      "name": "Email",
+      "url": "mailto:brejesh.bala@gmail.com",
+      "icon": "mail",
       "order": 1
     },
     {
@@ -40,15 +43,15 @@
       "order": 2
     },
     {
-      "name": "Streamlit",
-      "url": "https://share.streamlit.io/user/brej-29",
-      "icon": "external",
+      "name": "GitHub",
+      "url": "https://github.com/brej-29",
+      "icon": "github",
       "order": 3
     },
     {
-      "name": "Email",
-      "url": "mailto:your.email@example.com",
-      "icon": "mail",
+      "name": "Streamlit",
+      "url": "https://share.streamlit.io/user/brej-29",
+      "icon": "external",
       "order": 4
     }
   ],
@@ -56,45 +59,386 @@
     {
       "name": "Python",
       "category": "Programming",
+      "icon": "https://cdn.simpleicons.org/python?viewbox=auto&size=48",
       "order": 1
-    },
-    {
-      "name": "Java",
-      "category": "Programming",
-      "order": 2
     },
     {
       "name": "SQL",
       "category": "Data",
+      "order": 2
+    },
+    {
+      "name": "Pandas",
+      "category": "Data",
+      "icon": "https://icon.icepanel.io/Technology/svg/Pandas.svg",
       "order": 3
     },
     {
-      "name": "Spring Boot",
-      "category": "Frameworks",
+      "name": "NumPy",
+      "category": "Data",
+      "icon": "https://cdn.simpleicons.org/numpy?viewbox=auto&size=48",
       "order": 4
-    },
-    {
-      "name": "Streamlit",
-      "category": "Frameworks",
-      "order": 5
     },
     {
       "name": "scikit-learn",
       "category": "ML",
+      "icon": "https://icon.icepanel.io/Technology/svg/scikit-learn.svg",
+      "order": 5
+    },
+    {
+      "name": "XGBoost",
+      "category": "ML",
       "order": 6
+    },
+    {
+      "name": "TensorFlow",
+      "category": "Deep Learning",
+      "icon": "https://cdn.simpleicons.org/tensorflow?viewbox=auto&size=48",
+      "order": 7
+    },
+    {
+      "name": "PyTorch",
+      "category": "Deep Learning",
+      "icon": "https://cdn.simpleicons.org/pytorch?viewbox=auto&size=48",
+      "order": 8
+    },
+    {
+      "name": "Hugging Face",
+      "category": "GenAI/NLP",
+      "icon": "https://cdn.simpleicons.org/huggingface?viewbox=auto&size=48",
+      "order": 9
+    },
+    {
+      "name": "Transformers (NLP)",
+      "category": "GenAI/NLP",
+      "order": 10
+    },
+    {
+      "name": "RAG (Retrieval Augmented GenAI)",
+      "category": "GenAI/NLP",
+      "order": 11
+    },
+    {
+      "name": "LangChain",
+      "category": "GenAI/NLP",
+      "order": 12
+    },
+    {
+      "name": "MLflow",
+      "category": "MLOps",
+      "order": 13
+    },
+    {
+      "name": "Docker",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/docker?viewbox=auto&size=48",
+      "order": 14
+    },
+    {
+      "name": "Kubernetes",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/kubernetes?viewbox=auto&size=48",
+      "order": 15
+    },
+    {
+      "name": "FastAPI",
+      "category": "Frameworks",
+      "icon": "https://cdn.simpleicons.org/fastapi?viewbox=auto&size=48",
+      "order": 16
+    },
+    {
+      "name": "Flask",
+      "category": "Frameworks",
+      "icon": "https://cdn.simpleicons.org/flask?viewbox=auto&size=48",
+      "order": 17
+    },
+    {
+      "name": "Streamlit",
+      "category": "Frameworks",
+      "icon": "https://cdn.simpleicons.org/streamlit?viewbox=auto&size=48",
+      "order": 18
+    },
+    {
+      "name": "AWS",
+      "category": "Cloud",
+      "icon": "https://cdn.simpleicons.org/amazonwebservices?viewbox=auto&size=48",
+      "order": 19
+    },
+    {
+      "name": "AWS SageMaker",
+      "category": "Cloud",
+      "icon": "https://icon.icepanel.io/AWS/svg/Machine-Learning/SageMaker.svg",
+      "order": 20
+    },
+    {
+      "name": "AWS S3",
+      "category": "Cloud",
+      "order": 21
+    },
+    {
+      "name": "AWS Lambda",
+      "category": "Cloud",
+      "order": 22
+    },
+    {
+      "name": "AWS CloudWatch",
+      "category": "Cloud",
+      "order": 23
+    },
+    {
+      "name": "Git",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/git?viewbox=auto&size=48",
+      "order": 24
+    },
+    {
+      "name": "GitHub",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/github?viewbox=auto&size=48",
+      "order": 25
+    },
+    {
+      "name": "GitHub Actions",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/githubactions?viewbox=auto&size=48",
+      "order": 26
+    },
+    {
+      "name": "Linux",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/linux?viewbox=auto&size=48",
+      "order": 27
+    },
+    {
+      "name": "Jupyter",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/jupyter?viewbox=auto&size=48",
+      "order": 28
+    },
+    {
+      "name": "VS Code",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/visualstudiocode?viewbox=auto&size=48",
+      "order": 29
+    },
+    {
+      "name": "Postman",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/postman?viewbox=auto&size=48",
+      "order": 30
+    },
+    {
+      "name": "Power BI",
+      "category": "Visualization",
+      "icon": "https://cdn.simpleicons.org/powerbi?viewbox=auto&size=48",
+      "order": 31
+    },
+    {
+      "name": "Tableau",
+      "category": "Visualization",
+      "icon": "https://cdn.simpleicons.org/tableau?viewbox=auto&size=48",
+      "order": 32
+    },
+    {
+      "name": "Matplotlib",
+      "category": "Visualization",
+      "order": 33
+    },
+    {
+      "name": "Plotly",
+      "category": "Visualization",
+      "icon": "https://cdn.simpleicons.org/plotly?viewbox=auto&size=48",
+      "order": 34
+    },
+    {
+      "name": "Seaborn",
+      "category": "Visualization",
+      "order": 35
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "Data",
+      "icon": "https://cdn.simpleicons.org/postgresql?viewbox=auto&size=48",
+      "order": 36
+    },
+    {
+      "name": "MySQL",
+      "category": "Data",
+      "icon": "https://cdn.simpleicons.org/mysql?viewbox=auto&size=48",
+      "order": 37
+    },
+    {
+      "name": "MongoDB",
+      "category": "Data",
+      "icon": "https://cdn.simpleicons.org/mongodb?viewbox=auto&size=48",
+      "order": 38
+    },
+    {
+      "name": "Redis",
+      "category": "Data",
+      "icon": "https://cdn.simpleicons.org/redis?viewbox=auto&size=48",
+      "order": 39
+    },
+    {
+      "name": "Apache Spark",
+      "category": "Data Engineering",
+      "icon": "https://cdn.simpleicons.org/apachespark?viewbox=auto&size=48",
+      "order": 40
+    },
+    {
+      "name": "PySpark",
+      "category": "Data Engineering",
+      "order": 41
+    },
+    {
+      "name": "Databricks",
+      "category": "Data Engineering",
+      "icon": "https://cdn.simpleicons.org/databricks?viewbox=auto&size=48",
+      "order": 42
+    },
+    {
+      "name": "Apache Airflow",
+      "category": "Data Engineering",
+      "icon": "https://cdn.simpleicons.org/apacheairflow?viewbox=auto&size=48",
+      "order": 43
+    },
+    {
+      "name": "Apache Kafka",
+      "category": "Data Engineering",
+      "icon": "https://cdn.simpleicons.org/apachekafka?viewbox=auto&size=48",
+      "order": 44
+    },
+    {
+      "name": "Snowflake",
+      "category": "Data Engineering",
+      "icon": "https://cdn.simpleicons.org/snowflake?viewbox=auto&size=48",
+      "order": 45
+    },
+    {
+      "name": "Elasticsearch",
+      "category": "Data Engineering",
+      "icon": "https://cdn.simpleicons.org/elasticsearch?viewbox=auto&size=48",
+      "order": 46
+    },
+    {
+      "name": "Kibana",
+      "category": "Data Engineering",
+      "icon": "https://cdn.simpleicons.org/kibana?viewbox=auto&size=48",
+      "order": 47
+    },
+    {
+      "name": "Prometheus",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/prometheus?viewbox=auto&size=48",
+      "order": 48
+    },
+    {
+      "name": "Grafana",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/grafana?viewbox=auto&size=48",
+      "order": 49
+    },
+    {
+      "name": "Jenkins",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/jenkins?viewbox=auto&size=48",
+      "order": 50
+    },
+    {
+      "name": "Terraform",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/terraform?viewbox=auto&size=48",
+      "order": 51
+    },
+    {
+      "name": "SonarQube",
+      "category": "DevOps",
+      "icon": "https://cdn.simpleicons.org/sonarqube?viewbox=auto&size=48",
+      "order": 52
+    },
+    {
+      "name": "Java",
+      "category": "Programming",
+      "icon": "https://cdn.simpleicons.org/java?viewbox=auto&size=48",
+      "order": 53
+    },
+    {
+      "name": "Spring Boot",
+      "category": "Frameworks",
+      "icon": "https://cdn.simpleicons.org/springboot?viewbox=auto&size=48",
+      "order": 54
+    },
+    {
+      "name": "JavaScript",
+      "category": "Programming",
+      "icon": "https://cdn.simpleicons.org/javascript?viewbox=auto&size=48",
+      "order": 55
+    },
+    {
+      "name": "TypeScript",
+      "category": "Programming",
+      "icon": "https://cdn.simpleicons.org/typescript?viewbox=auto&size=48",
+      "order": 56
+    },
+    {
+      "name": "React",
+      "category": "Frameworks",
+      "icon": "https://cdn.simpleicons.org/react?viewbox=auto&size=48",
+      "order": 57
+    },
+    {
+      "name": "Angular",
+      "category": "Frameworks",
+      "icon": "https://cdn.simpleicons.org/angular?viewbox=auto&size=48",
+      "order": 58
+    },
+    {
+      "name": "HTML",
+      "category": "Programming",
+      "icon": "https://cdn.simpleicons.org/html5?viewbox=auto&size=48",
+      "order": 59
+    },
+    {
+      "name": "CSS",
+      "category": "Programming",
+      "icon": "https://cdn.simpleicons.org/css3?viewbox=auto&size=48",
+      "order": 60
+    },
+    {
+      "name": "Jira",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/jira?viewbox=auto&size=48",
+      "order": 61
+    },
+    {
+      "name": "Confluence",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/confluence?viewbox=auto&size=48",
+      "order": 62
+    },
+    {
+      "name": "Slack",
+      "category": "Tools",
+      "icon": "https://cdn.simpleicons.org/slack?viewbox=auto&size=48",
+      "order": 63
     }
   ],
   "techStack": [
+    "Data Science",
+    "Machine Learning",
     "Python",
-    "Java",
-    "Spring Boot",
-    "Angular",
     "SQL",
+    "scikit-learn",
+    "XGBoost",
+    "MLflow",
+    "AWS SageMaker",
+    "Docker",
     "Pandas",
     "NumPy",
-    "scikit-learn",
+    "FastAPI",
+    "Git",
     "Streamlit",
-    "Git"
+    "Power BI"
   ],
   "featuredProjects": [
     {
@@ -218,12 +562,12 @@
   "contact": {
     "email": "brejesh.bala@gmail.com",
     "location": "India",
-    "availability": "Open to Data Science / ML roles (2026).",
+    "availability": "Open to Data Science / ML roles (2026) - Available from April 2026",
     "socials": [
       {
-        "name": "GitHub",
-        "url": "https://github.com/brej-29",
-        "icon": "github",
+        "name": "Email",
+        "url": "mailto:brejesh.bala@gmail.com",
+        "icon": "mail",
         "order": 1
       },
       {
@@ -233,15 +577,15 @@
         "order": 2
       },
       {
-        "name": "Streamlit",
-        "url": "https://share.streamlit.io/user/brej-29",
-        "icon": "external",
+        "name": "GitHub",
+        "url": "https://github.com/brej-29",
+        "icon": "github",
         "order": 3
       },
       {
-        "name": "Email",
-        "url": "mailto:your.email@example.com",
-        "icon": "mail",
+        "name": "Streamlit",
+        "url": "https://share.streamlit.io/user/brej-29",
+        "icon": "external",
         "order": 4
       }
     ]
@@ -250,14 +594,56 @@
     {
       "label": "User Stories Delivered",
       "value": "150+",
-      "description": "Delivered stories/defects across Agile sprints",
+      "description": "Delivered user stories/defects across multiple Agile sprints",
       "order": 1
+    },
+    {
+      "label": "API Performance Improvement",
+      "value": "80% → <20%",
+      "description": "Reduced high-latency API responses (>5s) through profiling & optimizations",
+      "order": 2
     },
     {
       "label": "Test Coverage",
       "value": "90%+",
-      "description": "Maintained high test coverage",
-      "order": 2
+      "description": "Maintained strong automated test coverage to prevent regressions",
+      "order": 3
+    },
+    {
+      "label": "Defects Resolved",
+      "value": "Critical & Major",
+      "description": "Owned triage, RCA, and fixes with quick turnaround",
+      "order": 4
+    },
+    {
+      "label": "Code Quality Discipline",
+      "value": "SonarLint + Reviews",
+      "description": "Enforced clean coding practices and reduced code smells",
+      "order": 5
+    },
+    {
+      "label": "Client Communication",
+      "value": "Regular Demos",
+      "description": "Demoed sprint deliverables and changes to stakeholders",
+      "order": 6
+    },
+    {
+      "label": "Team Collaboration",
+      "value": "Cross-Team Delivery",
+      "description": "Designed new endpoints and coordinated with dependent teams",
+      "order": 7
+    },
+    {
+      "label": "Mentoring",
+      "value": "Supported New Joiners",
+      "description": "Guided onboarding and helped teammates unblock tasks",
+      "order": 8
+    },
+    {
+      "label": "Agile Ownership",
+      "value": "End-to-End Participation",
+      "description": "DSU, sprint planning, retrospectives, and delivery rituals",
+      "order": 9
     }
   ],
   "navItems": [
@@ -293,16 +679,32 @@
     }
   ],
   "seo": {
-    "siteTitle": "Brejesh Balakrishnan | Portfolio",
-    "siteDescription": "Full Stack Developer transitioning to Data Science. Projects in ML, analytics, and deployed data apps.",
+    "siteTitle": "Brejesh Balakrishnan | Data Scientist / ML Engineer Portfolio",
+    "siteDescription": "Data Scientist / ML Engineer in Bengaluru with a production engineering background. End-to-end ML projects (Python, SQL, MLflow) with AWS deployment patterns (SageMaker/S3/Lambda), NLP (BERT), dashboards, and deployable data apps.",
     "keywords": [
-      "Data Science",
-      "Machine Learning",
+      "Data Scientist",
+      "Machine Learning Engineer",
+      "MLOps",
       "Python",
       "SQL",
+      "Statistics",
+      "scikit-learn",
+      "XGBoost",
+      "MLflow",
+      "AWS",
+      "SageMaker",
+      "S3",
+      "Lambda",
+      "Docker",
+      "FastAPI",
+      "NLP",
+      "BERT",
+      "Transformers",
       "Streamlit",
-      "Spring Boot",
-      "Portfolio"
+      "Power BI",
+      "Data Analytics",
+      "Portfolio",
+      "Bengaluru"
     ],
     "ogImage": "/og.png"
   }
