@@ -364,6 +364,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 src={resolvedAvatarUrl}
                 alt={`${name || "User"} – ${title || "Profile"} avatar`}
                 loading="lazy"
+                width={640}
+                height={800}
                 onError={(e) => {
                   const t = e.target as HTMLImageElement
                   t.src = withBasePath("/placeholder.svg")
@@ -378,6 +380,8 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                         src={resolvedMiniAvatarUrl}
                         alt={`${name || "User"} – ${title || "Profile"} mini avatar`}
                         loading="lazy"
+                        width={52}
+                        height={52}
                         onError={(e) => {
                           const t = e.target as HTMLImageElement
                           t.style.opacity = "0.5"
@@ -386,7 +390,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                       />
                     </div>
                     <div className="pc-user-text">
-                      <div className="pc-handle">@{handle}</div>
+                      <div className="pc-handle">{handle}</div>
                       <div className="pc-status">{status}</div>
                     </div>
                   </div>

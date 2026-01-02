@@ -10,6 +10,8 @@ import { projects, profile } from "@/content"
 import { withBasePath } from "@/lib/basePath"
 import { buildSiteUrl } from "@/lib/site-url"
 
+export const dynamicParams = false
+
 interface ProjectPageProps {
   params: Promise<{ id: string }>
 }
@@ -25,7 +27,7 @@ function getProjectWithSiblings(id: string) {
   return { project, prev, next }
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return projects.map((project) => ({ id: project.id }))
 }
 
