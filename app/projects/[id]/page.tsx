@@ -13,7 +13,7 @@ import { buildSiteUrl } from "@/lib/site-url"
 export const dynamicParams = false
 
 interface ProjectPageProps {
-  params: { id: string }
+  params: Promise<{ id: string }>
 }
 
 function getProjectWithSiblings(id: string) {
@@ -32,7 +32,7 @@ export async function generateStaticParams() {
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { id } = params
+  const { id } = await params
   const data = getProjectWithSiblings(id)
   if (!data) {
     return {
@@ -86,8 +86,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   }
 }
 
-export default function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { id } = params
+export default async function ProjectDetailPage({ params }: ProjectPageProps) {
+  const { id } = await params
   const data = getProjectWithSiblings(id)
 
   if (!data) {
