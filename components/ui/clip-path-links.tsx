@@ -38,7 +38,7 @@ export const ClipPathLinks = () => {
         <LinkBox
           href="https://huggingface.co/BrejBala"
           imgSrc={huggingFaceImgSrc}
-          className="max-h-10 sm:max-h-16 md:max-h-20 object-contain"
+          className="max-h-4 sm:max-h-8 md:max-h-10 object-contain"
         />
         <LinkBox
           Icon={Linkedin}
@@ -48,7 +48,7 @@ export const ClipPathLinks = () => {
         <LinkBox
           href="https://share.streamlit.io/user/brej-29"
           imgSrc={streamlitImgSrc}
-          className="max-h-10 sm:max-h-16 md:max-h-20 object-contain"
+          className="max-h-2 sm:max-h-5 md:max-h-6 object-contain"
         />
       </div>
       <div className="grid grid-cols-3 divide-x divide-border">

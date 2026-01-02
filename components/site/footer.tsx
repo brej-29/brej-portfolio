@@ -1,11 +1,28 @@
 import Link from "next/link"
 import { Github, Linkedin, Mail } from "lucide-react"
+import { cn } from "@/lib/utils"
 import { profile, socialLinks } from "@/content"
+import { withBasePath } from "@/lib/basePath"
+
+const StreamlitIcon = ({ className }: { className?: string }) => {
+  const lightSrc = withBasePath("/images/streamlit-mark-light-mode.png")
+  const darkSrc = withBasePath("/images/streamlit-mark-dark-mode.png")
+
+  return (
+    <span className={cn("relative inline-flex items-center justify-center", className)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={lightSrc} alt="Streamlit" className="h-5 w-5 object-contain dark:hidden" />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src={darkSrc} alt="Streamlit" className="hidden h-5 w-5 object-contain dark:inline" />
+    </span>
+  )
+}
 
 const iconMap = {
   github: Github,
   linkedin: Linkedin,
   mail: Mail,
+  external: StreamlitIcon,
 }
 
 export function Footer() {
