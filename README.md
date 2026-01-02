@@ -160,11 +160,26 @@ The same value is used for:
 
 The sitemap and robots generator continue to use `NEXT_PUBLIC_SITE_URL` so all canonical and sitemap URLs are correct for GitHub Pages (for example `https://<user>.github.io/<repo>`).
 
+### Project images
+
+For project detail pages you can optionally add a screenshot:
+
+- Put image files under `public/images/projects/` (for example `public/images/projects/essay-writer.png`).
+- In the **Projects** sheet, set `projectImageUrl` to the path starting with `/images/...`, e.g. `/images/projects/essay-writer.png`.
+
+If `projectImageUrl` is set, the project detail page will:
+
+- Show the image on `/projects/<id>/`.
+- Prefer that image for OpenGraph/Twitter previews for that project.
+
 The script `scripts/generate-content.mjs`:
 
 - Reads `content/content.xlsx`
-- Validates sheets and columns using Zod
-- Writes `content/generated/content.json`
+- Validates sheet presence using the internal `ROOT_TO_SHEET_MAP` (every required sheet must exist)
+- Validates required columns per sheet with clear messages
+- Parses arrays from semicolon‑separated cells (e.g. `tag one; tag two`) with trimming and empty‑value removal
+- Validates booleans (e.g. `TRUE` / `FALSE` / `1` / `0`) and numeric `order` values
+- Writes `content/generated/content.json` via a Zod schema
 - Regenerates `public/sitemap.xml` and `public/robots.txt`
 
 It runs automatically via:
@@ -189,7 +204,77 @@ It runs automatically via:
    - `public/sitemap.xml`
    - `public/robots.txt` (if changed)
 
-4. Run `npm run verify` before pushing (see below).
+4. Optionally run a full content check before pushing (same as CI uses):
+
+   ```bash
+   npm run content:check
+   ```
+
+5. Run `npm run verify` before pushing (see below).
+
+### Excel sheets, separators, and optional fields
+
+The Excel sheets are mapped 1:1 to the JSON structure:
+
+- **Profile** → basic profile / hero configuration
+- **SocialLinks** → footer and contact social icons
+- **Skills** / **TechStack** → skills and tech chips
+- **FeaturedProjects** / **Projects** → home page projects and full projects collection
+- **Experience**, **Certificates**, **ExperienceStats** → timeline + stats
+- **Contact** → contact page copy
+- **NavItems** → top navigation links
+- **Seo** → site title, description, keywords, and og image
+
+Multi-value fields are stored as semicolon-separated lists in a single cell. For example:
+
+- `summaryBullets`, `heroTaglines`
+- `tags`, `stack`, `highlights`
+- `techStack`, `skillsTags`
+- `keywords`
+
+The generator will:
+
+- Split on `;`
+- Trim each value
+- Drop empty entries
+
+Booleans and numeric fields:
+
+- `visible` in **NavItems** accepts `TRUE`, `FALSE`, `1`, `0`, `yes`, `no` (case-insensitive).
+- `order` columns are parsed as numbers and used to sort rows; non-numeric values cause a clear error.
+
+Most link/image fields are optional:
+
+- Project links: `github`, `demo`
+- Certificate link: `credentialUrl`
+- Profile images: `avatarUrl`, `miniAvatarUrl`
+- Project screenshot: `projectImageUrl`
+
+If you leave an optional field empty, it is simply omitted from the generated JSON and the UI falls back to a sensible default.
+
+### Adding a new project
+
+To add a new project that gets its own `/projects/<id>/` page:
+
+1. In the **Projects** sheet, add a new row.
+2. Set a stable `id` value:
+   - Lowercase letters, numbers, and hyphens only (e.g. `proj-essay-writer`).
+   - No spaces or slashes.
+   - This becomes the URL slug for the detail page: `/projects/<id>/`.
+3. Fill in:
+   - `title`, `oneLine`, `description`
+   - `tags` and `stack` as semicolon-separated lists
+   - `highlights` as a semicolon-separated list of bullets
+   - `date` as `YYYY-MM` (e.g. `2024-11`)
+   - Optional `github`, `demo`, and `projectImageUrl`
+4. (Optional) Add a matching entry in the **FeaturedProjects** sheet if you want the project to appear in the home page “Featured Projects” section.
+5. Run:
+
+   ```bash
+   npm run content:check
+   ```
+
+   Fix any reported errors, commit the updated `content.xlsx` and generated files, then run `npm run verify`.
 
 ## Local verification before merging
 
@@ -202,6 +287,7 @@ npm run verify
 This runs:
 
 - `npm run lint`
+- `npm run content:check`
 - `npm run build`
 
 If this passes locally, the GitHub Actions CI workflow should also pass on your PR.
@@ -323,7 +409,7 @@ npm run generate:content
 # 2. Install dependencies in a clean state (optional but recommended)
 npm ci
 
-# 3. Run lint + build (same as CI)
+# 3. Run lint + content checks + build (same as CI)
 npm run verify
 
 # 4. Ensure a static export succeeds

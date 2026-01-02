@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Section } from "@/components/site/section"
 import { ProjectFilters } from "@/components/projects/ProjectFilters"
 import { ProjectQuickView } from "@/components/projects/ProjectQuickView"
@@ -12,8 +13,10 @@ import { filterProjects, getAllTags } from "@/lib/filtering"
 import type { Project } from "@/content"
 import { Button } from "@/components/ui/button"
 import { Github, ExternalLink } from "lucide-react"
+import { withBasePath } from "@/lib/basePath"
 
 export default function ProjectsPage() {
+  const router = useRouter()
   const [searchQuery, setSearchQuery] = useState("")
   const [selectedTags, setSelectedTags] = useState<string[]>([])
   const [sortBy, setSortBy] = useState<"recent" | "alphabetical">("recent")
@@ -30,6 +33,11 @@ export default function ProjectsPage() {
   const handleQuickView = (project: Project) => {
     setSelectedProject(project)
     setQuickViewOpen(true)
+  }
+
+  const handleOpenProject = (project: Project) => {
+    const href = withBasePath(`/projects/${project.id}`)
+    router.push(href)
   }
 
   return (
@@ -73,49 +81,73 @@ export default function ProjectsPage() {
           {filteredProjects.length > 0 ? (
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
               {filteredProjects.map((project) => (
-                <SpotlightCard key={project.id} className="p-6 group">
-                  <div className="space-y-4">
-                    <div>
-                      <h3 className="text-xl font-semibold mb-2 group-hover:text-[var(--neon-cyan)] transition-colors">
-                        {project.title}
-                      </h3>
-                      <p className="text-sm text-muted-foreground line-clamp-3">{project.description}</p>
-                    </div>
+                <div
+                  key={project.id}
+                  className="cursor-pointer"
+                  onClick={() => handleOpenProject(project)}
+                >
+                  <SpotlightCard className="p-6 group">
+                    <div className="space-y-4">
+                      <div>
+                        <h3 className="text-xl font-semibold mb-2 group-hover:text-[var(--neon-cyan)] transition-colors">
+                          {project.title}
+                        </h3>
+                        <p className="text-sm text-muted-foreground line-clamp-3">{project.description}</p>
+                      </div>
 
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.slice(0, 4).map((tag) => (
-                        <span
-                          key={tag}
-                          className="px-2 py-1 text-xs rounded-full bg-muted/50 text-muted-foreground border border-border/50"
+                      <div className="flex flex-wrap gap-2">
+                        {project.tags.slice(0, 4).map((tag) => (
+                          <span
+                            key={tag}
+                            className="px-2 py-1 text-xs rounded-full bg-muted/50 text-muted-foreground border border-border/50"
+                          >
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+
+                      <div className="flex flex-wrap gap-2 pt-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                        {project.links.github && (
+                          <Button size="sm" variant="outline" asChild className="bg-transparent">
+                            <a
+                              href={project.links.github}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <Github className="mr-1 h-3 w-3" />
+                              Code
+                            </a>
+                          </Button>
+                        )}
+                        {project.links.demo && (
+                          <Button size="sm" variant="outline" asChild className="bg-transparent">
+                            <a
+                              href={project.links.demo}
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              onClick={(e) => e.stopPropagation()}
+                            >
+                              <ExternalLink className="mr-1 h-3 w-3" />
+                              Demo
+                            </a>
+                          </Button>
+                        )}
+                        <Button
+                          size="sm"
+                          variant="ghost"
+                          onClick={(e) => {
+                            e.stopPropagation()
+                            handleQuickView(project)
+                          }}
+                          className="ml-auto"
                         >
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-
-                    <div className="flex flex-wrap gap-2 pt-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                      {project.links.github && (
-                        <Button size="sm" variant="outline" asChild className="bg-transparent">
-                          <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                            <Github className="mr-1 h-3 w-3" />
-                            Code
-                          </a>
+                          Quick View
                         </Button>
-                      )}
-                      {project.links.demo && (
-                        <Button size="sm" variant="outline" asChild className="bg-transparent">
-                          <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="mr-1 h-3 w-3" />
-                            Demo
-                          </a>
-                        </Button>
-                      )}
-                      <Button size="sm" variant="ghost" onClick={() => handleQuickView(project)} className="ml-auto">
-                        Quick View
-                      </Button>
+                      </div>
                     </div>
-                  </div>
-                </SpotlightCard>
+                  </SpotlightCard>
+                </div>
               ))}
             </div>
           ) : (

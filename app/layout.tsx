@@ -7,8 +7,10 @@ import { ThemeProvider } from "@/components/site/theme-provider"
 import { BackgroundLayer } from "@/components/site/background-layer"
 import { Navbar } from "@/components/site/navbar"
 import { Footer } from "@/components/site/footer"
-import { profile, socialLinks, seo as generatedSeo } from "@/content"
+import { profile, socialLinks, seo as generatedSeo, contentError } from "@/content"
 import { buildSiteUrl } from "@/lib/site-url"
+import { DevContentError } from "@/components/site/dev-content-error"
+import { AnalyticsScripts } from "@/components/site/analytics-script"
 
 const geistSans = Geist({ subsets: ["latin"], variable: "--font-geist-sans" })
 const geistMono = Geist_Mono({ subsets: ["latin"], variable: "--font-geist-mono" })
@@ -55,6 +57,8 @@ const profileImageUrl =
   profileImagePath.startsWith("http://") || profileImagePath.startsWith("https://")
     ? profileImagePath
     : buildSiteUrl(profileImagePath)
+
+const isDev = process.env.NODE_ENV !== "production"
 
 const personJsonLd = {
   "@context": "https://schema.org",
@@ -147,12 +151,13 @@ export default function RootLayout({
           <Navbar />
 
           <div id="main-content" className="relative min-h-screen">
-            {children}
+            {isDev && contentError ? <DevContentError message={contentError} /> : children}
           </div>
 
           <Footer />
 
           <Analytics />
+          <AnalyticsScripts />
         </ThemeProvider>
       </body>
     </html>

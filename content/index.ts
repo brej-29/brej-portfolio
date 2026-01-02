@@ -60,6 +60,7 @@ const ProjectSchema = z.object({
   highlights: z.array(z.string().min(1)).min(1),
   date: z.string().min(1),
   order: z.number().optional(),
+  projectImageUrl: z.string().min(1).optional(),
 })
 
 const ExperienceSchema = z.object({
@@ -127,7 +128,118 @@ export const ContentSchema = z.object({
 
 export type Content = z.infer<typeof ContentSchema>
 
-const parsed = ContentSchema.parse(rawContent)
+const ROOT_TO_SHEET_MAP: Record<string, string> = {
+  profile: "Profile",
+  socialLinks: "SocialLinks",
+  skills: "Skills",
+  techStack: "TechStack",
+  featuredProjects: "FeaturedProjects",
+  projects: "Projects",
+  experience: "Experience",
+  certificates: "Certificates",
+  contact: "Contact",
+  experienceStats: "ExperienceStats",
+  navItems: "NavItems",
+  seo: "Seo",
+}
+
+function formatZodError(error: z.ZodError): string {
+  if (!error || !error.errors) return error?.message || String(error)
+  return error.errors
+    .map((issue) => {
+      const path = issue.path || []
+      const root = typeof path[0] === "string" ? path[0] : ""
+      const sheet = (root && ROOT_TO_SHEET_MAP[root]) || root || "Unknown sheet"
+      const fieldPath = path.join(".")
+      const arrayIndex = path.find((p) => typeof p === "number")
+      const rowInfo = typeof arrayIndex === "number" ? ` (row ${arrayIndex + 2} in sheet "${sheet}")` : ""
+      return `[${sheet}] ${fieldPath}${rowInfo}: ${issue.message}`
+    })
+    .join("\n")
+}
+
+function createFallbackContent(errorMessage?: string): Content {
+  const fallbackMessage =
+    errorMessage ||
+    "content/generated/content.json could not be parsed. Fix content/content.xlsx and re-run the generator."
+
+  return {
+    profile: {
+      name: "Content error",
+      headline: "Fix content.xlsx to load real portfolio content.",
+      location: "Unknown",
+      summaryBullets: [fallbackMessage],
+      heroTaglines: ["Content configuration error"],
+      heroPrimaryCtaLabel: "View Projects",
+      heroPrimaryCtaHref: "/projects",
+      heroSecondaryCtaLabel: "Contact",
+      heroSecondaryCtaHref: "/contact",
+      resumeLabel: "Resume",
+      resumeUrl: "/resume.pdf",
+      footerTagline: "Update content.xlsx to replace this placeholder content.",
+      handle: undefined,
+      statusText: "Content error – see README and terminal output.",
+      avatarUrl: "/images/profile.png",
+      miniAvatarUrl: "/images/profile-mini.png",
+    },
+    socialLinks: [],
+    skills: [],
+    techStack: [],
+    featuredProjects: [],
+    projects: [],
+    experience: [],
+    certificates: [],
+    contact: {
+      email: "your.email@example.com",
+      location: "Unknown",
+      availability: "Update content.xlsx to customize this message.",
+      socials: [],
+    },
+    experienceStats: [],
+    navItems: [
+      {
+        label: "Home",
+        href: "/",
+        visible: true,
+        order: 1,
+      },
+    ],
+    seo: {
+      siteTitle: "Portfolio content error",
+      siteDescription:
+        "The portfolio content failed to load because content.xlsx or content/generated/content.json is invalid.",
+      keywords: ["portfolio", "content error"],
+      twitterHandle: undefined,
+      ogImage: "/og.png",
+    },
+  }
+}
+
+let parsed: Content
+let contentErrorInternal: string | null = null
+
+const result = ContentSchema.safeParse(rawContent)
+
+if (!result.success) {
+  const formatted = formatZodError(result.error)
+  contentErrorInternal = formatted
+  const message =
+    "[content] Failed to parse content/generated/content.json from Excel.\n\n" +
+    formatted +
+    "\n\nFix content/content.xlsx (sheets, columns, or cell values) and run `npm run generate:content` or `npm run content:check`."
+  if (process.env.NODE_ENV === "production") {
+    throw new Error(message)
+  }
+
+  // In development, log the error and fall back to placeholder content
+  // so the app can render a themed error page instead of crashing.
+  console.error("\n" + message + "\n")
+  parsed = createFallbackContent(formatted)
+} else {
+  parsed = result.data
+}
+
+export const contentError = contentErrorInternal
 
 const profileWithDefaults: Content["profile"] = {
   ...parsed.profile,
