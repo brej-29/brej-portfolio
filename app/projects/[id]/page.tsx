@@ -10,8 +10,10 @@ import { projects, profile } from "@/content"
 import { withBasePath } from "@/lib/basePath"
 import { buildSiteUrl } from "@/lib/site-url"
 
+export const dynamicParams = false
+
 interface ProjectPageProps {
-  params: Promise<{ id: string }>
+  params: { id: string }
 }
 
 function getProjectWithSiblings(id: string) {
@@ -25,12 +27,12 @@ function getProjectWithSiblings(id: string) {
   return { project, prev, next }
 }
 
-export function generateStaticParams() {
+export async function generateStaticParams() {
   return projects.map((project) => ({ id: project.id }))
 }
 
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
-  const { id } = await params
+  const { id } = params
   const data = getProjectWithSiblings(id)
   if (!data) {
     return {
@@ -84,8 +86,8 @@ export async function generateMetadata({ params }: ProjectPageProps): Promise<Me
   }
 }
 
-export default async function ProjectDetailPage({ params }: ProjectPageProps) {
-  const { id } = await params
+export default function ProjectDetailPage({ params }: ProjectPageProps) {
+  const { id } = params
   const data = getProjectWithSiblings(id)
 
   if (!data) {

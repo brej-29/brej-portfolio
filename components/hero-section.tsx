@@ -101,12 +101,12 @@ export function HeroSection() {
           </div>
         </motion.div>
 
-        {/* Right Column: Profile Card - EXACTLY as pasted */}
+        {/* Right Column: Profile Card */}
         <motion.div
           initial={reducedMotion ? {} : { opacity: 0, scale: 0.95 }}
           animate={{ opacity: 1, scale: 1 }}
           transition={{ duration: 0.4, delay: 0.2 }}
-          className="hidden lg:flex justify-center"
+          className="mt-10 flex justify-center lg:mt-0"
         >
           <ProfileCard
             avatarUrl={avatarPath}
@@ -118,11 +118,12 @@ export function HeroSection() {
             contactText="Contact"
             showUserInfo={true}
             showDetails={false}
-            enableTilt={true}
-            enableMobileTilt={true}
-            behindGlowEnabled={true}
+            enableTilt={!reducedMotion}
+            enableMobileTilt={!reducedMotion}
+            behindGlowEnabled={!reducedMotion}
             behindGlowColor="rgba(168, 85, 247, 0.67)"
             behindGlowSize="50%"
+            className="w-full max-w-xs sm:max-w-sm md:max-w-md"
             onContactClick={() => {
               window.location.href = contactHref
             }}

@@ -47,7 +47,8 @@
     var(--behind-glow-color) 0%,
     transparent var(--behind-glow-size)
   );
-  filter: blur(50px) saturate(1.1);
+  /* Slightly softer blur by default to reduce overdraw while keeping glow feel */
+  filter: blur(40px) saturate(1.1);
   opacity: calc(0.8 * var(--card-opacity));
   transition: opacity 200ms ease;
 }
@@ -451,6 +452,11 @@
     max-height: 450px;
   }
 
+  /* Reduce glow blur on tablets / small laptops for better performance */
+  .pc-behind {
+    filter: blur(28px) saturate(1.1);
+  }
+
   .pc-content:not(.pc-avatar-content) {
     padding: 28px 24px 0;
   }
@@ -500,6 +506,11 @@
   .pc-card {
     height: 60svh;
     max-height: 380px;
+  }
+
+  /* Further soften glow on small phones */
+  .pc-behind {
+    filter: blur(22px) saturate(1.05);
   }
 
   .pc-avatar-content {
