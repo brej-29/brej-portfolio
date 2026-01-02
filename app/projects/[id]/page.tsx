@@ -92,7 +92,7 @@ export default async function ProjectDetailPage({ params }: ProjectPageProps) {
     notFound()
   }
 
-  constta!
+  const { project, prev, next } = data!
 
   const projectsHref = withBasePath("/projects")
   const projectImagePath = project.projectImageUrl
