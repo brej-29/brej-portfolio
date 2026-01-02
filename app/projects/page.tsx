@@ -36,8 +36,8 @@ export default function ProjectsPage() {
   }
 
   const handleOpenProject = (project: Project) => {
-    const href = withBasePath(`/projects/${project.id}`)
-    router.push(href)
+    // Next.js adds basePath automatically for router navigation, so avoid manual prefixing
+    router.push(`/projects/${project.id}`)
   }
 
   return (

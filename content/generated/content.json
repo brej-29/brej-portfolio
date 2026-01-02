@@ -139,6 +139,30 @@
       ],
       "date": "2025-12",
       "order": 1
+    },
+    {
+      "id": "testing-essay-writer",
+      "title": "ABC",
+      "oneLine": "Generate structured essays with export.",
+      "description": "A Streamlit app that helps users generate structured essays with consistent sections and export options.",
+      "tags": [
+        "Streamlit",
+        "LLM",
+        "NLP"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "LangChain"
+      ],
+      "links": {},
+      "highlights": [
+        "Clean UI workflow",
+        "Export options",
+        "Prompt tuning"
+      ],
+      "date": "2025-13",
+      "order": 2
     }
   ],
   "experience": [
