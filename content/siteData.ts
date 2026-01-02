@@ -1,3 +1,5 @@
+// DEPRECATED: This file is kept for reference only. Use "@/content" (content/index.ts) instead.
+
 export interface Profile {
   name: string
   headline: string

@@ -4,7 +4,7 @@ import { Dialog, DialogContent, DialogDescription, DialogHeader, DialogTitle } f
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Github, ExternalLink, Calendar, CheckCircle2 } from "lucide-react"
-import type { Project } from "@/content/siteData"
+import type { Project } from "@/content"
 
 interface ProjectQuickViewProps {
   project: Project | null
@@ -82,20 +82,20 @@ export function ProjectQuickView({ project, open, onClose }: ProjectQuickViewPro
 
           {/* Actions */}
           <div className="flex gap-3 pt-4 border-t border-border/50">
-            {project.githubUrl && (
+            {project.links.github && (
               <Button variant="outline" asChild className="flex-1 bg-transparent">
-                <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                <a href={project.links.github} target="_blank" rel="noopener noreferrer">
                   <Github className="mr-2 h-4 w-4" />
                   View Code
                 </a>
               </Button>
             )}
-            {project.liveUrl && (
+            {project.links.demo && (
               <Button
                 asChild
                 className="flex-1 bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] hover:opacity-90"
               >
-                <a href={project.liveUrl} target="_blank" rel="noopener noreferrer">
+                <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
                   <ExternalLink className="mr-2 h-4 w-4" />
                   Live Demo
                 </a>

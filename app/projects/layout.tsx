@@ -1,6 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
-import { profile, projects } from "@/content/siteData"
+import { profile, projects } from "@/content"
 import { buildSiteUrl } from "@/lib/site-url"
 
 export const metadata: Metadata = {

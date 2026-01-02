@@ -44,7 +44,7 @@ const adjust = (v: number, fMin: number, fMax: number, tMin: number, tMax: numbe
   round(tMin + ((tMax - tMin) * (v - fMin)) / (fMax - fMin))
 
 const ProfileCardComponent: React.FC<ProfileCardProps> = ({
-  avatarUrl = "/images/image.png",
+  avatarUrl = "/images/profile.png",
   iconUrl,
   grainUrl,
   innerGradient,
@@ -366,7 +366,7 @@ const ProfileCardComponent: React.FC<ProfileCardProps> = ({
                 loading="lazy"
                 onError={(e) => {
                   const t = e.target as HTMLImageElement
-                  t.style.display = "none"
+                  t.src = withBasePath("/placeholder.svg")
                 }}
               />
               {showUserInfo && (
