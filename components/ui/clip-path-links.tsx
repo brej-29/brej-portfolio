@@ -41,7 +41,7 @@ export const ClipPathLinks = () => {
         <LinkBox
           href="https://medium.com/@brejesh.bala"
           imgSrc="https://upload.wikimedia.org/wikipedia/commons/e/ec/Medium_logo_Monogram.svg"
-          className="max-h-10 sm:max-h-16 md:max-h-20 object-contain dark:invert"
+          className="max-h-4 sm:max-h-6 md:max-h-8 object-contain dark:invert"
         />
         <LinkBox
           href="https://brej-29.github.io/brej-portfolio/"
