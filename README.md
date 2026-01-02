@@ -421,3 +421,4 @@ Also manually verify:
 - `npm run dev` – navigate all pages, toggle themes, and test the Contact form (mailto + optional Formspree).
 - `content/generated/content.json`, `public/sitemap.xml`, and `public/robots.txt` are updated when you change `content/content.xlsx`.
 - Metadata looks correct when you **View Source** (titles, OpenGraph, Twitter tags, canonical URLs).
+- GA tag is hardcoded in `app/layout.tsx`; no env needed.
