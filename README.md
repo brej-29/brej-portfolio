@@ -1,6 +1,106 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+<div align="center">
+  <h1>💼 Brej Portfolio</h1>
+  <p><i>Premium dark-mode, Excel-driven Next.js portfolio for Brejesh Balakrishnan — neon glass UI, recruiter-ready pages, and static-export hosting on GitHub Pages.</i></p>
+</div>
+
+<br>
+
+<div align="center">
+  <a href="https://brej-29.github.io/brej-portfolio/">
+    <img alt="Live Site" src="https://img.shields.io/badge/Live%20Site-GitHub%20Pages-000000?logo=github&logoColor=white">
+  </a>
+  <img alt="Language" src="https://img.shields.io/badge/Language-TypeScript-3178C6?logo=typescript&logoColor=white">
+  <img alt="Framework" src="https://img.shields.io/badge/Framework-Next.js-black?logo=next.js&logoColor=white">
+  <img alt="Styling" src="https://img.shields.io/badge/Styling-Tailwind%20CSS-38B2AC?logo=tailwind-css&logoColor=white">
+  <img alt="UI" src="https://img.shields.io/badge/UI-Radix%20UI%20%7C%20shadcn-161618?logo=radix-ui&logoColor=white">
+  <img alt="Animations" src="https://img.shields.io/badge/Animations-Framer%20Motion-E04CFB?logo=framer&logoColor=white">
+  <img alt="Content Pipeline" src="https://img.shields.io/badge/Content-Excel%20%E2%86%92%20JSON-0A3D62">
+  <img alt="License" src="https://img.shields.io/badge/License-Check%20Repo-black">
+</div>
+
+<div align="center">
+  <br>
+  <b>Built with the tools and technologies:</b>
+  <br><br>
+  <code>Next.js 16 (export)</code> | <code>React 19</code> | <code>TypeScript</code> | <code>Tailwind CSS v4</code> | <code>Radix UI</code> | <code>shadcn/ui</code> | <code>Framer Motion</code> | <code>Zod</code> | <code>xlsx</code> | <code>Vercel Analytics</code>
+</div>
+
+---
+
+## Live App
+https://brej-29.github.io/brej-portfolio/
+
+---
+
+## Table of Contents
+* [Overview](#overview)
+* [Features](#features)
+* [Getting Started](#getting-started)
+    * [Project Structure](#project-structure)
+    * [Prerequisites](#prerequisites)
+    * [Installation](#installation)
+    * [Configuration](#configuration)
+    * [Usage](#usage)
+* [How It Works](#how-it-works)
+* [Deployment](#deployment)
+* [Troubleshooting](#troubleshooting)
+* [License](#license)
+* [Contact](#contact)
+
+---
+
+## Overview
+
+Brej Portfolio is a statically exported Next.js 16 site showcasing Brejesh Balakrishnan (Data Scientist / ML Engineer / Full-Stack Developer). It ships with a premium dark, glassmorphism-inspired UI (gooey nav, spotlight cards, animated hero text) that respects reduced-motion preferences and stays fully static for GitHub Pages. Content lives in `content/content.xlsx` and is transformed into typed JSON, sitemap, and robots files at build time. Bootstrapped with `create-next-app`, it uses `next/font` to load the Geist family, provides structured data (Person JSON-LD), and includes Google Analytics + Vercel Analytics out of the box.
+
+---
+
+## Features
+
+- Premium presentation: neon accents, glass cards, animated hero/profile card, rotating taglines, logo marquee, scroll-aware text, and responsive layouts for home, experience, projects, certificates, and contact pages.
+- Static-export ready: `output: "export"`, trailing slashes, unoptimized images, `.nojekyll`, and basePath/assetPrefix injection for GitHub Pages; `withBasePath` helper prevents broken asset/resume links.
+- Excel-driven content: a generator reads `content/content.xlsx`, validates sheets/columns with Zod, splits semicolon lists, enforces booleans/orders, and emits `content/generated/content.json`, `public/sitemap.xml`, and `public/robots.txt`.
+- Recruiter-friendly SEO: OpenGraph/Twitter tags, configurable `ogImage`, sitemap + robots, canonical URLs built from `NEXT_PUBLIC_SITE_URL`, and Person JSON-LD derived from profile/social links.
+- Static-friendly contact flow: client validation + honeypot, mailto fallback by default, optional Formspree POST via `NEXT_PUBLIC_FORMSPREE_ENDPOINT`, copy-email CTA, and status messaging.
+- Accessibility and performance: reduced-motion support across animations, keyboard/focus states, semantic structure, GPU-friendly transforms, limited blur usage, and lazy-loaded assets.
+
+---
 
 ## Getting Started
+
+### Project Structure
+
+```
+app/
+  layout.tsx           # Global layout with nav, footer, analytics, metadata
+  page.tsx             # Home (hero, tech stack, projects, experience, CTA)
+  experience/page.tsx
+  projects/page.tsx
+  certificates/page.tsx
+  contact/page.tsx
+components/
+  hero-section.tsx, .../premium/* (gooey nav, spotlight cards, rotating text, profile card)
+  site/* (navbar, footer, background layer, theme provider, section helpers)
+content/
+  content.xlsx         # Single source of truth
+  generated/content.json
+lib/
+  basePath.ts          # Prefix assets for GitHub Pages
+  site-url.ts          # Uses NEXT_PUBLIC_SITE_URL for canonical URLs
+public/
+  images/, og.png, resume.pdf, icons
+scripts/
+  generate-content.mjs # Excel -> JSON + sitemap + robots
+  add-nojekyll.mjs     # Writes .nojekyll after export
+```
+
+### Prerequisites
+
+- Node 20 LTS (matches CI) and npm (or pnpm/yarn/bun if you prefer).
+- Excel editor for `content/content.xlsx`.
+- Optional: Formspree endpoint if you want network-based contact submissions.
+
+### Installation
 
 First, run the development server:
 
@@ -14,58 +114,104 @@ pnpm dev
 bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) to view the site. Edit `app/page.tsx` (or any page/component) and the app hot-updates. Fonts are provided via `next/font` (Geist sans/mono).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Configuration
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- Base path / asset prefix: computed automatically in `next.config.mjs` based on `GITHUB_ACTIONS`, `GITHUB_REPOSITORY`, or `NEXT_PUBLIC_BASE_PATH`. Client code reads `NEXT_PUBLIC_BASE_PATH`.
+- Site URL: set `NEXT_PUBLIC_SITE_URL` to the production origin (e.g., `https://<user>.github.io/<repo>`) for correct sitemap/canonical tags.
+- Contact: set `NEXT_PUBLIC_FORMSPREE_ENDPOINT` only if you want API POST submissions; otherwise mailto fallback is used.
+- Assets:
+  - Profile: `public/images/profile.png` and optional `public/images/profile-mini.png`, or override via `avatarUrl`/`miniAvatarUrl` in the **Profile** sheet.
+  - OpenGraph: recommended 1200x630 PNG at `public/og.png`, referenced in the **Seo** sheet `ogImage` column.
+  - Resume: place `public/resume.pdf` (label/href controlled in **Profile**).
 
-## Learn More
+### Usage
 
-To learn more about Next.js, take a look at the following resources:
+- Content regeneration: runs automatically via `predev`/`prebuild` hooks. Run manually after Excel edits:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+  ```bash
+  npm run generate:content
+  ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+- Local static preview:
 
-## Deploy to GitHub Pages
+  ```bash
+  npm run build   # outputs to ./out
+  npx serve out   # preview the exported site
+  ```
 
-This project is configured to build a fully static site and deploy it to GitHub Pages using GitHub Actions.
+- Learn more: [Next.js docs](https://nextjs.org/docs), [Next.js tutorial](https://nextjs.org/learn), and the [Next.js repo](https://github.com/vercel/next.js).
 
-### How it works
+---
 
-- `next.config.mjs` is set up with:
+## How It Works
 
-  - `output: "export"` to generate a static site into the `out/` directory.
-  - `trailingSlash: true` for `/path/` style URLs.
-  - `images.unoptimized: true` for static export compatibility.
-  - `basePath` and `assetPrefix` automatically derived when running in GitHub Actions:
-    - If `GITHUB_ACTIONS === "true"` and `GITHUB_REPOSITORY` is `user/repo`, the base path becomes `/repo`.
-  - `NEXT_PUBLIC_BASE_PATH` is injected so client code can build correct asset URLs.
+### Static export + base path
 
-- A helper `lib/basePath.ts` is used in UI components to prefix paths for:
-  - Static assets (icons, images, resume PDF).
-  - Direct `<a href="/...">` links that are not using `next/link`.
+- `next.config.mjs`: `output: "export"`, `trailingSlash: true`, `images.unoptimized: true`, basePath/assetPrefix derived from GitHub Actions repo name or `NEXT_PUBLIC_BASE_PATH`, and `env.NEXT_PUBLIC_BASE_PATH` for client helpers.
+- `scripts/add-nojekyll.mjs`: writes `.nojekyll` into `out/` post-build so GitHub Pages serves assets without Jekyll interference.
+- `lib/basePath.ts`: `withBasePath` prefixes asset and resume paths; used anywhere static links might break behind a base path.
 
-- A `.nojekyll` file is written into `out/` after every build via the `postbuild` script to prevent GitHub Pages from treating the output as a Jekyll site.
+### Content pipeline
 
-### GitHub Actions workflow
+- Source: `content/content.xlsx`.
+- Generator (`scripts/generate-content.mjs`):
+  - Validates required sheets: Profile, SocialLinks, Skills, TechStack, FeaturedProjects, Projects, Experience, Certificates, Contact, ExperienceStats, NavItems, Seo.
+  - Ensures required columns exist per sheet and parses semicolon-separated arrays (`tags`, `stack`, `summaryBullets`, `keywords`, etc.).
+  - Accepts booleans (`TRUE`, `FALSE`, `1`, `0`, `yes`, `no`) and numeric `order` fields; sorts lists by `order`.
+  - Writes `content/generated/content.json`, `public/sitemap.xml`, and `public/robots.txt` via Zod schemas.
+  - Produces readable error messages with sheet/field/row context.
+- Sheets map 1:1 to the content schema (profile, social links, skills/tech stack, featured projects, projects, experience, certificates, contact, experience stats, nav items, SEO).
+- Optional fields (links, images, booleans) can be left blank; the UI falls back gracefully.
 
-A workflow at `.github/workflows/deploy-pages.yml`:
+### Safely updating `content.xlsx`
 
-- Runs on every push to the `main` branch (and can be triggered manually).
-- Steps:
+1. Edit `content/content.xlsx`.
+2. Run `npm run generate:content` and fix any reported sheet/field/row errors.
+3. Commit: `content/content.xlsx`, `content/generated/content.json`, `public/sitemap.xml`, and `public/robots.txt` (if changed).
+4. Optionally run `npm run content:check`, then `npm run verify`.
+
+### Assets and metadata
+
+- Profile images: defaults to `/images/profile.png` and optional `/images/profile-mini.png`; override in Excel via `avatarUrl` and `miniAvatarUrl`. Fallbacks exist if an image fails to load.
+- OpenGraph/Twitter: defaults to `/og.png`; set **Seo** `ogImage` to a path or full URL (used for `<meta property="og:image">` and `<meta name="twitter:image">`).
+- Project screenshots: place under `public/images/projects/` and set `projectImageUrl` in the **Projects** sheet to the `/images/...` path; used on `/projects/<id>/` and for per-project OG cards.
+
+### Adding a new project
+
+1. Add a row to the **Projects** sheet.
+2. Choose a slug-safe `id` (lowercase letters/numbers/hyphens, no spaces/slashes) — becomes `/projects/<id>/`.
+3. Populate `title`, `oneLine`, `description`, semicolon-separated `tags`/`stack`/`highlights`, `date` as `YYYY-MM`, optional `github`, `demo`, `projectImageUrl`.
+4. (Optional) Add to **FeaturedProjects** to surface on the home page.
+5. Run `npm run content:check`, fix errors, commit generated files, then `npm run verify`.
+
+### Contact form (static-friendly)
+
+- Default (no env var): client-side validation (required name/email/message, valid email, min 20 chars), honeypot bot trap, opens the user’s email client via `mailto:` with prefilled subject/body, and shows inline status.
+- Optional Formspree: set `NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-id`, rebuild, and submissions POST JSON to that endpoint; success/failure messages are shown, and failures fall back to prompting direct email.
+- Copy-email CTA and existing email link remain available in both modes.
+
+### Static hosting limitations
+
+- No Next.js API routes or server actions.
+- All pages must be statically renderable; dynamic behavior stays on the client.
+- Backend-like features should rely on third-party handlers (e.g., Formspree) or public browser APIs.
+
+---
+
+## Deployment
+
+This repo is configured for GitHub Pages.
+
+- Workflow: `.github/workflows/deploy-pages.yml` runs on `main` pushes or manual dispatch:
   - `actions/checkout@v4`
-  - `actions/setup-node@v4` with Node 20
+  - `actions/setup-node@v4` (Node 20)
   - `npm ci`
-  - `npm run build` (produces the static site in `out/`)
+  - `npm run build` (static export to `out/`)
   - `actions/upload-pages-artifact@v3` with `path: ./out`
   - `actions/deploy-pages@v4`
-
-With this workflow:
-
-- Permissions are set appropriately:
+- Permissions:
 
   ```yaml
   permissions:
@@ -74,7 +220,7 @@ With this workflow:
     id-token: write
   ```
 
-- Concurrency is configured so only one Pages deployment runs at a time:
+- Concurrency:
 
   ```yaml
   concurrency:
@@ -82,343 +228,30 @@ With this workflow:
     cancel-in-progress: true
   ```
 
-### One-time GitHub setup
+- One-time setup: push the repo with the workflow, set GitHub Pages source to GitHub Actions, then push to `main` to deploy to `https://<user>.github.io/<repo>/`.
+- Local static preview: `npm run build` and `npx serve out` to inspect the exported site before deploying.
 
-1. Push the repository to GitHub with the workflow file in `.github/workflows/deploy-pages.yml`.
-2. In the GitHub repository settings, under **Pages**, set the source to **GitHub Actions**.
-3. Push to `main`. The `Deploy to GitHub Pages` workflow will:
-   - Build the static site.
-   - Upload the `out/` directory.
-   - Deploy it to `https://<user>.github.io/<repo>/`.
+---
 
-### Local static build & preview
+## Troubleshooting
 
-To verify the static export locally:
+- `npm ci can only install packages when your package.json and package-lock.json are in sync`:
+  1) Use Node 20; 2) run `npm install`; 3) commit the updated `package-lock.json`; 4) optionally `npm ci` and `npm run verify`; 5) push and rerun CI. Ensure lockfile changes accompany `package.json` changes.
+- Content errors: run `npm run generate:content` for detailed sheet/field/row messages; ensure required sheets/columns exist and semicolon-separated lists/booleans/orders are valid.
+- Pre-merge verification (same as CI): `npm run generate:content`, optionally `npm ci`, then `npm run verify` (lint + content check + build), and confirm `npm run build` succeeds.
+- Contact form: if Formspree is unset, mailto flow is expected; set `NEXT_PUBLIC_FORMSPREE_ENDPOINT` for network submissions.
 
-```bash
-npm run build
-# Static site is in ./out
-```
+---
 
-You can serve `out/` with any static file server, for example:
+## License
 
-```bash
-npx serve out
-```
+License information is provided in the repository (see LICENSE if present).
 
-Then open the printed URL in your browser to preview the exported site.
+---
 
-## Content and Excel workflow
+## Contact
 
-This project keeps all portfolio content in an Excel file and generates JSON + SEO files from it.
-
-- Source spreadsheet: `content/content.xlsx`
-- Generated JSON: `content/generated/content.json`
-- Generated SEO files:
-  - `public/sitemap.xml`
-  - `public/robots.txt`
-
-### Profile images & OpenGraph image
-
-Static images live under `/public/images` and a few root-level icons.
-
-**Profile photo used in the hero & structured data**
-
-By default the hero/profile card and JSON-LD person schema look for:
-
-- `/public/images/profile.png` – main profile photo
-- `/public/images/profile-mini.png` (optional) – small avatar used inside the card
-
-You can either:
-
-- Drop files with those exact names into `public/images/`, or
-- Override them from Excel in the **Profile** sheet:
-  - `avatarUrl` – path such as `/images/profile.png` or a full `https://...` URL
-  - `miniAvatarUrl` – path or URL for the mini avatar
-
-If `miniAvatarUrl` is empty, the UI falls back to `avatarUrl`. If the image fails to load, the profile card falls back to a local placeholder.
-
-**OpenGraph / Twitter card image**
-
-The default OpenGraph image is:
-
-- `/public/og.png`
-
-and the layout metadata uses the value from the **Seo** sheet:
-
-- `ogImage` – path like `/og.png` or a full URL
-
-Recommended:
-
-1. Export a 1200x630 PNG (or similar) and save it as `public/og.png`.
-2. Put `/og.png` in the `ogImage` column of the **Seo** sheet.
-
-The same value is used for:
-
-- `<meta property="og:image">`
-- `<meta name="twitter:image">`
-
-The sitemap and robots generator continue to use `NEXT_PUBLIC_SITE_URL` so all canonical and sitemap URLs are correct for GitHub Pages (for example `https://<user>.github.io/<repo>`).
-
-### Project images
-
-For project detail pages you can optionally add a screenshot:
-
-- Put image files under `public/images/projects/` (for example `public/images/projects/essay-writer.png`).
-- In the **Projects** sheet, set `projectImageUrl` to the path starting with `/images/...`, e.g. `/images/projects/essay-writer.png`.
-
-If `projectImageUrl` is set, the project detail page will:
-
-- Show the image on `/projects/<id>/`.
-- Prefer that image for OpenGraph/Twitter previews for that project.
-
-The script `scripts/generate-content.mjs`:
-
-- Reads `content/content.xlsx`
-- Validates sheet presence using the internal `ROOT_TO_SHEET_MAP` (every required sheet must exist)
-- Validates required columns per sheet with clear messages
-- Parses arrays from semicolon‑separated cells (e.g. `tag one; tag two`) with trimming and empty‑value removal
-- Validates booleans (e.g. `TRUE` / `FALSE` / `1` / `0`) and numeric `order` values
-- Writes `content/generated/content.json` via a Zod schema
-- Regenerates `public/sitemap.xml` and `public/robots.txt`
-
-It runs automatically via:
-
-- `npm run dev` → `predev` → `npm run generate:content`
-- `npm run build` → `prebuild` → `npm run generate:content`
-
-### Safely updating `content.xlsx`
-
-1. Open and edit `content/content.xlsx`.
-2. Run the generator locally:
-
-   ```bash
-   npm run generate:content
-   ```
-
-   - If there are validation errors, the script will print detailed messages pointing to the sheet, field, and row.
-3. When it succeeds, commit:
-
-   - `content/content.xlsx`
-   - `content/generated/content.json`
-   - `public/sitemap.xml`
-   - `public/robots.txt` (if changed)
-
-4. Optionally run a full content check before pushing (same as CI uses):
-
-   ```bash
-   npm run content:check
-   ```
-
-5. Run `npm run verify` before pushing (see below).
-
-### Excel sheets, separators, and optional fields
-
-The Excel sheets are mapped 1:1 to the JSON structure:
-
-- **Profile** → basic profile / hero configuration
-- **SocialLinks** → footer and contact social icons
-- **Skills** / **TechStack** → skills and tech chips
-- **FeaturedProjects** / **Projects** → home page projects and full projects collection
-- **Experience**, **Certificates**, **ExperienceStats** → timeline + stats
-- **Contact** → contact page copy
-- **NavItems** → top navigation links
-- **Seo** → site title, description, keywords, and og image
-
-Multi-value fields are stored as semicolon-separated lists in a single cell. For example:
-
-- `summaryBullets`, `heroTaglines`
-- `tags`, `stack`, `highlights`
-- `techStack`, `skillsTags`
-- `keywords`
-
-The generator will:
-
-- Split on `;`
-- Trim each value
-- Drop empty entries
-
-Booleans and numeric fields:
-
-- `visible` in **NavItems** accepts `TRUE`, `FALSE`, `1`, `0`, `yes`, `no` (case-insensitive).
-- `order` columns are parsed as numbers and used to sort rows; non-numeric values cause a clear error.
-
-Most link/image fields are optional:
-
-- Project links: `github`, `demo`
-- Certificate link: `credentialUrl`
-- Profile images: `avatarUrl`, `miniAvatarUrl`
-- Project screenshot: `projectImageUrl`
-
-If you leave an optional field empty, it is simply omitted from the generated JSON and the UI falls back to a sensible default.
-
-### Adding a new project
-
-To add a new project that gets its own `/projects/<id>/` page:
-
-1. In the **Projects** sheet, add a new row.
-2. Set a stable `id` value:
-   - Lowercase letters, numbers, and hyphens only (e.g. `proj-essay-writer`).
-   - No spaces or slashes.
-   - This becomes the URL slug for the detail page: `/projects/<id>/`.
-3. Fill in:
-   - `title`, `oneLine`, `description`
-   - `tags` and `stack` as semicolon-separated lists
-   - `highlights` as a semicolon-separated list of bullets
-   - `date` as `YYYY-MM` (e.g. `2024-11`)
-   - Optional `github`, `demo`, and `projectImageUrl`
-4. (Optional) Add a matching entry in the **FeaturedProjects** sheet if you want the project to appear in the home page “Featured Projects” section.
-5. Run:
-
-   ```bash
-   npm run content:check
-   ```
-
-   Fix any reported errors, commit the updated `content.xlsx` and generated files, then run `npm run verify`.
-
-## Local verification before merging
-
-Use the `verify` script to run the same checks CI runs before deployment:
-
-```bash
-npm run verify
-```
-
-This runs:
-
-- `npm run lint`
-- `npm run content:check`
-- `npm run build`
-
-If this passes locally, the GitHub Actions CI workflow should also pass on your PR.
-
-## Troubleshooting `npm ci` failures in GitHub Actions
-
-If a GitHub Actions job fails at the `npm ci` step with an error like:
-
-> npm ci can only install packages when your package.json and package-lock.json are in sync
-
-do the following **on your local machine**:
-
-1. Ensure you are on Node 20 LTS (same as CI). Using a different major version can produce a different lockfile.
-2. From the project root, run:
-
-   ```bash
-   npm install
-   ```
-
-   This regenerates `package-lock.json` to match `package.json`.
-
-3. Commit the updated lockfile:
-
-   ```bash
-   git add package-lock.json
-   git commit -m "Regenerate package-lock.json"
-   ```
-
-4. (Optional but recommended) Verify it locally:
-
-   ```bash
-   npm ci
-   npm run verify
-   ```
-
-5. Push your changes and re-run the GitHub Actions workflows.
-
-If the error persists, double-check that:
-
-- You only changed `package.json` using `npm install` / `npm uninstall` (not by hand), and
-- `package-lock.json` is committed in the same PR/branch.
-
-## Contact form (static-friendly)
-
-This portfolio is deployed as a fully static site (Next.js `output: "export"`), so the contact flow is implemented without any backend routes.
-
-### Default behavior – mailto
-
-Out of the box, the contact form:
-
-- Validates **name**, **email**, and **message** on the client:
-  - All fields required
-  - Email must be a valid address
-  - Message must be at least 20 characters
-- Uses a **honeypot** field to silently drop simple bot submissions.
-- When the form is valid and no network endpoint is configured:
-  - Opens the user’s email client using a `mailto:` link.
-  - Prefills the subject and body with the form data.
-  - Shows an inline status message (“Opening your email client…”).
-
-This keeps the form production-usable on any static host (including GitHub Pages) with **no server code**.
-
-### Optional Formspree integration
-
-If you want network-based form submissions, you can plug in Formspree (or a similar service) via a public environment variable:
-
-1. Create a Formspree form and copy its endpoint URL, e.g.:
-
-   ```text
-   https://formspree.io/f/your-id
-   ```
-
-2. In your local `.env.local` file (and CI environment), set:
-
-   ```bash
-   NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/your-id
-   ```
-
-3. Rebuild the site:
-
-   ```bash
-   npm run build
-   ```
-
-When `NEXT_PUBLIC_FORMSPREE_ENDPOINT` is present:
-
-- The contact form POSTs JSON to that endpoint on submit.
-- On success, it shows a friendly success message.
-- On failure, it falls back to telling the user to email you directly.
-
-When the env var is **not** set:
-
-- No network POST is attempted.
-- The submit button switches to a mailto-style flow (“Open Email App”).
-- The existing email link and “Copy email” CTA on the Contact page remain available.
-
-## Static hosting limitations
-
-Because this project uses `next export` and is deployed to GitHub Pages:
-
-- There are **no** Next.js API routes (`/api/*`) or server actions.
-- All pages must be **statically renderable**.
-- Any dynamic behavior (forms, animations, theme switching) happens purely on the client.
-- Integrations that require a backend must use:
-  - Third-party form handlers (e.g., Formspree)
-  - Public APIs called directly from the browser
-  - Static files (e.g., Excel → JSON via the build-time script)
-
-Keep this in mind when adding new features: everything must remain compatible with a static export.
-
-## Pre-merge test checklist
-
-Before merging or pushing changes, especially to `main`, run these commands locally:
-
-```bash
-# 1. Regenerate content + SEO files from Excel
-npm run generate:content
-
-# 2. Install dependencies in a clean state (optional but recommended)
-npm ci
-
-# 3. Run lint + content checks + build (same as CI)
-npm run verify
-
-# 4. Ensure a static export succeeds
-npm run build
-```
-
-Also manually verify:
-
-- `npm run dev` – navigate all pages, toggle themes, and test the Contact form (mailto + optional Formspree).
-- `content/generated/content.json`, `public/sitemap.xml`, and `public/robots.txt` are updated when you change `content/content.xlsx`.
-- Metadata looks correct when you **View Source** (titles, OpenGraph, Twitter tags, canonical URLs).
-- GA tag is hardcoded in `app/layout.tsx`; no env needed.
+- Email: brejesh.bala@gmail.com
+- LinkedIn: https://www.linkedin.com/in/brejesh-balakrishnan-7855051b9/
+- GitHub: https://github.com/brej-29
+- Live Site: https://brej-29.github.io/brej-portfolio/
