@@ -32,6 +32,16 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      - name: Compute site URL
+        run: |
+          REPO_NAME="${GITHUB_REPOSITORY#*/}"
+          OWNER="${GITHUB_REPOSITORY%%/*}"
+          if [[ "$REPO_NAME" == *.github.io ]]; then
+            echo "NEXT_PUBLIC_SITE_URL=https://${REPO_NAME}" >> "$GITHUB_ENV"
+          else
+            echo "NEXT_PUBLIC_SITE_URL=https://${OWNER}.github.io/${REPO_NAME}" >> "$GITHUB_ENV"
+          fi
+
       - name: Build static site
         run: npm run build
 

@@ -1,14 +1,11 @@
 import type { Metadata } from "next"
+import Link from "next/link"
 import { notFound } from "next/navigation"
-import { Section } from "@/components/site/section"
-import { GlassCard } from "@/components/site/glass-card"
-import { SpotlightCard } from "@/components/premium/spotlight-card"
-import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
-import { Calendar, ArrowLeft, ArrowRight, Github, ExternalLink, CheckCircle2 } from "lucide-react"
+import { ArrowLeft, ArrowRight, ArrowUpRight, Github } from "lucide-react"
 import { projects, profile } from "@/content"
 import { withBasePath } from "@/lib/basePath"
 import { buildSiteUrl } from "@/lib/site-url"
+import { Reveal } from "@/components/motion/reveal"
 
 export const dynamicParams = false
 
@@ -16,15 +13,16 @@ interface ProjectPageProps {
   params: Promise<{ id: string }>
 }
 
+const ordered = [...projects].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+
 function getProjectWithSiblings(id: string) {
-  const index = projects.findIndex((project) => project.id === id)
+  const index = ordered.findIndex((project) => project.id === id)
   if (index === -1) return null
-
-  const project = projects[index]
-  const prev = index > 0 ? projects[index - 1] : null
-  const next = index < projects.length - 1 ? projects[index + 1] : null
-
-  return { project, prev, next }
+  return {
+    project: ordered[index],
+    prev: index > 0 ? ordered[index - 1] : null,
+    next: index < ordered.length - 1 ? ordered[index + 1] : null,
+  }
 }
 
 export async function generateStaticParams() {
@@ -34,303 +32,175 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: ProjectPageProps): Promise<Metadata> {
   const { id } = await params
   const data = getProjectWithSiblings(id)
-  if (!data) {
-    return {
-      title: "Project not found",
-    }
-  }
+  if (!data) return { title: "Project not found" }
 
   const { project } = data
   const title = `${project.title} – Project`
   const description = project.oneLine || project.description.slice(0, 160)
-  const canonicalPath = `/projects/${project.id}`
-  const canonicalUrl = buildSiteUrl(canonicalPath)
+  const canonicalUrl = buildSiteUrl(`/projects/${project.id}`)
 
-  const ogImagePath =
-    typeof project.projectImageUrl === "string" && project.projectImageUrl.length > 0
-      ? project.projectImageUrl
-      : "/og.png"
-
-  const ogImageUrl =
-    ogImagePath.startsWith("http://") || ogImagePath.startsWith("https://")
-      ? ogImagePath
-      : buildSiteUrl(ogImagePath)
+  const ogImagePath = project.projectImageUrl || "/og.png"
+  const ogImageUrl = ogImagePath.startsWith("http") ? ogImagePath : buildSiteUrl(ogImagePath)
 
   return {
     title,
     description,
-    alternates: {
-      canonical: canonicalUrl,
-    },
+    alternates: { canonical: canonicalUrl },
     openGraph: {
       title,
       description,
       type: "article",
       url: canonicalUrl,
       siteName: `${profile.name} – Portfolio`,
-      images: [
-        {
-          url: ogImageUrl,
-          width: 1200,
-          height: 630,
-          alt: project.title,
-        },
-      ],
+      images: [{ url: ogImageUrl, width: 1200, height: 630, alt: project.title }],
     },
-    twitter: {
-      card: "summary_large_image",
-      title,
-      description,
-      images: [ogImageUrl],
-    },
+    twitter: { card: "summary_large_image", title, description, images: [ogImageUrl] },
   }
+}
+
+function formatDate(date: string) {
+  const parsed = new Date(`${date}-01`)
+  if (Number.isNaN(parsed.getTime())) return date
+  return parsed.toLocaleDateString("en-US", { year: "numeric", month: "long" })
 }
 
 export default async function ProjectDetailPage({ params }: ProjectPageProps) {
   const { id } = await params
   const data = getProjectWithSiblings(id)
-
-  if (!data) {
-    notFound()
-  }
+  if (!data) notFound()
 
   const { project, prev, next } = data!
-
-  const projectsHref = withBasePath("/projects")
-  const projectImagePath = project.projectImageUrl
-  const projectImageSrc =
-    projectImagePath && projectImagePath.length > 0
-      ? projectImagePath.startsWith("http://") || projectImagePath.startsWith("https://")
-        ? projectImagePath
-        : withBasePath(projectImagePath)
-      : null
-
-  const formattedDate = new Date(project.date).toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-  })
-
-  const prevHref = prev ? withBasePath(`/projects/${prev.id}`) : null
-  const nextHref = next ? withBasePath(`/projects/${next.id}`) : null
+  const imageSrc = project.projectImageUrl
+    ? project.projectImageUrl.startsWith("http")
+      ? project.projectImageUrl
+      : withBasePath(project.projectImageUrl)
+    : null
 
   return (
-    <div className="relative min-h-screen pt-24 pb-16">
-      <Section>
-        <div className="max-w-5xl mx-auto space-y-10">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <Button
-              variant="ghost"
-              size="sm"
-              asChild
-              className="px-0 text-muted-foreground hover:text-foreground"
-            >
-              <a href={projectsHref}>
-                <ArrowLeft className="mr-2 h-4 w-4" />
-                Back to Projects
+    <main className="container-page pt-32 pb-8 md:pt-40">
+      <div className="mx-auto max-w-3xl">
+        <Reveal y={12}>
+          <Link
+            href="/projects"
+            className="group inline-flex items-center gap-2 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
+          >
+            <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
+            All projects
+          </Link>
+        </Reveal>
+
+        <Reveal delay={0.05} y={16}>
+          <div className="mt-10 space-y-4">
+            <p className="mono-label">
+              {formatDate(project.date)} <span aria-hidden="true">·</span> {project.tags.join(" / ")}
+            </p>
+            <h1 className="text-4xl font-semibold tracking-tight text-balance md:text-5xl">
+              {project.title}
+              <span className="text-accent">.</span>
+            </h1>
+            <p className="text-lg leading-relaxed text-muted-foreground">{project.oneLine}</p>
+          </div>
+        </Reveal>
+
+        <Reveal delay={0.1}>
+          <div className="mt-8 flex flex-wrap gap-3">
+            {project.links.demo && (
+              <a
+                href={project.links.demo}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="btn-gradient group inline-flex items-center gap-2 rounded-full px-5 py-2.5 text-sm font-medium transition-transform duration-200 hover:-translate-y-0.5"
+              >
+                Live demo
+                <ArrowUpRight className="h-4 w-4 transition-transform duration-200 group-hover:translate-x-0.5" />
               </a>
-            </Button>
-
-            <div className="flex gap-2">
-              {prev && prevHref && (
-                <Button variant="outline" size="sm" asChild className="bg-transparent">
-                  <a href={prevHref} aria-label={`Previous project: ${prev.title}`}>
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    <span className="hidden sm:inline">Previous</span>
-                    <span className="sm:hidden">Prev</span>
-                  </a>
-                </Button>
-              )}
-              {next && nextHref && (
-                <Button
-                  variant="outline"
-                  size="sm"
-                  asChild
-                  className="bg-transparent border-[var(--neon-purple)]/40 hover:bg-[var(--neon-purple)]/10 hover:border-[var(--neon-purple)]/60"
-                >
-                  <a href={nextHref} aria-label={`Next project: ${next.title}`}>
-                    <span className="hidden sm:inline">Next</span>
-                    <span className="sm:hidden">Next</span>
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </Button>
-              )}
-            </div>
+            )}
+            {project.links.github && (
+              <a
+                href={project.links.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm font-medium transition-colors duration-200 hover:border-accent hover:text-accent"
+              >
+                <Github className="h-4 w-4" />
+                Source
+              </a>
+            )}
           </div>
+        </Reveal>
 
-          <div className="grid gap-8 lg:grid-cols-[minmax(0,2fr)_minmax(280px,1fr)] items-start">
-            <SpotlightCard className="p-6 group border-none bg-transparent shadow-none">
-              <div className="space-y-6">
-                <div className="space-y-3">
-                  <h1 className="text-3xl md:text-4xl font-bold">
-                    <span className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent">
-                      {project.title}
+        {imageSrc && (
+          <Reveal delay={0.12}>
+            <div className="mt-12 overflow-hidden rounded-lg border border-border">
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img src={imageSrc} alt={project.title} className="w-full object-cover" loading="lazy" />
+            </div>
+          </Reveal>
+        )}
+
+        <Reveal delay={0.14}>
+          <div className="hairline-t mt-12 grid gap-3 pt-8 md:grid-cols-[200px_minmax(0,1fr)]">
+            <h2 className="mono-label">Overview</h2>
+            <p className="leading-relaxed text-muted-foreground">{project.description}</p>
+          </div>
+        </Reveal>
+
+        {project.highlights.length > 0 && (
+          <Reveal>
+            <div className="hairline-t mt-8 grid gap-3 pt-8 md:grid-cols-[200px_minmax(0,1fr)]">
+              <h2 className="mono-label">Highlights</h2>
+              <ul className="space-y-2.5">
+                {project.highlights.map((highlight) => (
+                  <li key={highlight} className="flex gap-3 text-[15px] leading-relaxed text-muted-foreground">
+                    <span className="mt-px select-none font-mono text-accent" aria-hidden="true">
+                      +
                     </span>
-                  </h1>
-                  <p className="text-lg text-muted-foreground">{project.oneLine}</p>
-                </div>
-
-                {projectImageSrc && (
-                  <div className="overflow-hidden rounded-xl border border-border/60 bg-black/20">
-                    <img
-                      src={projectImageSrc}
-                      alt={project.title}
-                      className="w-full h-auto object-cover max-h-80"
-                      loading="lazy"
-                    />
-                  </div>
-                )}
-
-                <div className="space-y-4">
-                  <h2 className="text-sm font-semibold text-muted-foreground tracking-wide">
-                    OVERVIEW
-                  </h2>
-                  <p className="text-sm md:text-base leading-relaxed text-muted-foreground/90">
-                    {project.description}
-                  </p>
-                </div>
-
-                {project.highlights.length > 0 && (
-                  <div className="space-y-3">
-                    <h2 className="text-sm font-semibold text-muted-foreground tracking-wide">
-                      HIGHLIGHTS
-                    </h2>
-                    <ul className="space-y-2">
-                      {project.highlights.map((highlight, index) => (
-                        <li key={index} className="flex items-start gap-2 text-sm">
-                          <CheckCircle2 className="mt-0.5 h-4 w-4 text-[var(--neon-cyan)] flex-shrink-0" />
-                          <span>{highlight}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
-
-                {project.tags.length > 0 && (
-                  <div className="space-y-3">
-                    <h2 className="text-sm font-semibold text-muted-foreground tracking-wide">
-                      TAGS
-                    </h2>
-                    <div className="flex flex-wrap gap-2">
-                      {project.tags.map((tag) => (
-                        <Badge key={tag} variant="secondary">
-                          {tag}
-                        </Badge>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {project.stack.length > 0 && (
-                  <div className="space-y-3">
-                    <h2 className="text-sm font-semibold text-muted-foreground tracking-wide">
-                      TECH STACK
-                    </h2>
-                    <div className="flex flex-wrap gap-2">
-                      {project.stack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="text-xs px-3 py-1.5 rounded-lg bg-muted/50 border border-border/50 text-foreground"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </SpotlightCard>
-
-            <GlassCard className="p-6 lg:sticky lg:top-24 space-y-5" hover>
-              <div className="space-y-2">
-                <p className="text-xs font-semibold text-[var(--neon-cyan)] tracking-[0.2em] uppercase">
-                  Quick Facts
-                </p>
-                <h2 className="text-lg font-semibold">Project Snapshot</h2>
-              </div>
-
-              <div className="space-y-4 text-sm">
-                <div className="flex items-center gap-2 text-muted-foreground">
-                  <Calendar className="h-4 w-4" />
-                  <span>{formattedDate}</span>
-                </div>
-
-                {project.stack.length > 0 && (
-                  <div>
-                    <p className="text-xs font-semibold text-muted-foreground mb-2">Stack</p>
-                    <div className="flex flex-wrap gap-1.5">
-                      {project.stack.map((tech) => (
-                        <span
-                          key={tech}
-                          className="px-2 py-1 rounded-md bg-card/80 border border-border/60 text-xs text-muted-foreground"
-                        >
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                  </div>
-                )}
-
-                {(project.links.github || project.links.demo) && (
-                  <div className="space-y-2">
-                    <p className="text-xs font-semibold text-muted-foreground">Links</p>
-                    <div className="flex flex-wrap gap-2">
-                      {project.links.github && (
-                        <Button variant="outline" size="sm" asChild className="bg-transparent">
-                          <a href={project.links.github} target="_blank" rel="noopener noreferrer">
-                            <Github className="mr-2 h-4 w-4" />
-                            Code
-                          </a>
-                        </Button>
-                      )}
-                      {project.links.demo && (
-                        <Button
-                          size="sm"
-                          asChild
-                          className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] hover:opacity-90"
-                        >
-                          <a href={project.links.demo} target="_blank" rel="noopener noreferrer">
-                            <ExternalLink className="mr-2 h-4 w-4" />
-                            Demo
-                          </a>
-                        </Button>
-                      )}
-                    </div>
-                  </div>
-                )}
-              </div>
-            </GlassCard>
-          </div>
-
-          {(prev || next) && (
-            <div className="flex flex-wrap justify-between gap-4 pt-4 border-t border-border/40">
-              {prev && prevHref && (
-                <div className="flex flex-col">
-                  <span className="text-xs text-muted-foreground mb-1">Previous</span>
-                  <a
-                    href={prevHref}
-                    className="inline-flex items-center text-sm text-muted-foreground hover:text-foreground"
-                  >
-                    <ArrowLeft className="mr-2 h-4 w-4" />
-                    {prev.title}
-                  </a>
-                </div>
-              )}
-              {next && nextHref && (
-                <div className="flex flex-col ml-auto text-right">
-                  <span className="text-xs text-muted-foreground mb-1">Next</span>
-                  <a
-                    href={nextHref}
-                    className="inline-flex items-center justify-end text-sm text-muted-foreground hover:text-foreground"
-                  >
-                    {next.title}
-                    <ArrowRight className="ml-2 h-4 w-4" />
-                  </a>
-                </div>
-              )}
+                    {highlight}
+                  </li>
+                ))}
+              </ul>
             </div>
-          )}
-        </div>
-      </Section>
-    </div>
+          </Reveal>
+        )}
+
+        <Reveal>
+          <div className="hairline-t mt-8 grid gap-3 pt-8 md:grid-cols-[200px_minmax(0,1fr)]">
+            <h2 className="mono-label">Stack</h2>
+            <p className="font-mono text-sm leading-7 text-muted-foreground">
+              {project.stack.join(" · ")}
+            </p>
+          </div>
+        </Reveal>
+
+        {(prev || next) && (
+          <nav className="hairline-t mt-16 grid gap-6 pt-8 sm:grid-cols-2" aria-label="Adjacent projects">
+            {prev ? (
+              <Link href={`/projects/${prev.id}`} className="group space-y-1">
+                <p className="mono-label flex items-center gap-2">
+                  <ArrowLeft className="h-3 w-3 transition-transform duration-200 group-hover:-translate-x-1" />
+                  Previous
+                </p>
+                <p className="font-medium transition-colors duration-200 group-hover:text-accent">
+                  {prev.title}
+                </p>
+              </Link>
+            ) : (
+              <span />
+            )}
+            {next && (
+              <Link href={`/projects/${next.id}`} className="group space-y-1 sm:text-right">
+                <p className="mono-label flex items-center gap-2 sm:justify-end">
+                  Next
+                  <ArrowRight className="h-3 w-3 transition-transform duration-200 group-hover:translate-x-1" />
+                </p>
+                <p className="font-medium transition-colors duration-200 group-hover:text-accent">
+                  {next.title}
+                </p>
+              </Link>
+            )}
+          </nav>
+        )}
+      </div>
+    </main>
   )
 }

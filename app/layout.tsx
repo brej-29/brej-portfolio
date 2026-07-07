@@ -5,8 +5,8 @@ import { Geist, Geist_Mono } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { ThemeProvider } from "@/components/site/theme-provider"
-import { BackgroundLayer } from "@/components/site/background-layer"
-import { Navbar } from "@/components/site/navbar"
+import { Ambient } from "@/components/site/ambient"
+import { Nav } from "@/components/site/nav"
 import { Footer } from "@/components/site/footer"
 import { profile, socialLinks, seo as generatedSeo, contentError } from "@/content"
 import { buildSiteUrl } from "@/lib/site-url"
@@ -108,7 +108,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: buildSiteUrl("/"),
   },
-  generator: "v0.app",
   icons: {
     icon: [
       {
@@ -160,9 +159,8 @@ export default function RootLayout({
         />
 
         <ThemeProvider attribute="class" defaultTheme="dark" enableSystem disableTransitionOnChange>
-          <BackgroundLayer />
-
-          <Navbar />
+          <Ambient />
+          <Nav />
 
           <div id="main-content" className="relative min-h-screen">
             {isDev && contentError ? <DevContentError message={contentError} /> : children}

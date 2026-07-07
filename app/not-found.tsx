@@ -1,30 +1,25 @@
 import Link from "next/link"
 import { ArrowLeft } from "lucide-react"
-import { Section } from "@/components/site/section"
-import { GlassCard } from "@/components/site/glass-card"
 
 export default function NotFound() {
   return (
-    <Section className="flex items-center justify-center min-h-[60vh]">
-      <GlassCard className="max-w-xl mx-auto p-8 text-center border-2 border-border/60" hover>
-        <p className="text-sm font-mono tracking-widest text-[var(--neon-cyan)] mb-2">
-          404 • PAGE NOT FOUND
-        </p>
-        <h1 className="text-3xl md:text-4xl font-bold mb-4 bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent">
-          Lost in the matrix
-        </h1>
-        <p className="text-muted-foreground mb-6">
-          The page you were looking for doesn&apos;t exist or has moved. Use the navigation above or return
-          to the homepage to keep exploring the portfolio.
-        </p>
-        <Link
-          href="/"
-          className="inline-flex items-center justify-center rounded-full border border-[var(--neon-purple)]/60 px-4 py-2 text-sm font-medium bg-transparent hover:bg-[var(--neon-purple)]/10 transition-colors"
-        >
-          <ArrowLeft className="mr-2 h-4 w-4" />
-          Back to home
-        </Link>
-      </GlassCard>
-    </Section>
+    <main className="container-page flex min-h-[70vh] flex-col items-start justify-center">
+      <p className="mono-label">
+        <span className="text-accent">404</span> — Not found
+      </p>
+      <h1 className="mt-4 max-w-xl text-4xl font-semibold tracking-tight text-balance md:text-5xl">
+        This page didn&apos;t survive the redesign.
+      </h1>
+      <p className="mt-4 max-w-md text-muted-foreground">
+        The link may be stale, or the page moved. Everything worth seeing is one hop from home.
+      </p>
+      <Link
+        href="/"
+        className="group mt-8 inline-flex items-center gap-2 rounded-full border border-border px-5 py-2.5 text-sm transition-colors duration-200 hover:border-accent hover:text-accent"
+      >
+        <ArrowLeft className="h-4 w-4 transition-transform duration-200 group-hover:-translate-x-1" />
+        Back home
+      </Link>
+    </main>
   )
 }

@@ -1,67 +1,114 @@
-import Link from "next/link"
-import { Github, Linkedin, Mail } from "lucide-react"
-import { cn } from "@/lib/utils"
-import { profile, socialLinks } from "@/content"
-import { withBasePath } from "@/lib/basePath"
+"use client"
 
-const StreamlitIcon = ({ className }: { className?: string }) => {
-  const lightSrc = withBasePath("/images/streamlit-mark-light-mode.png")
-  const darkSrc = withBasePath("/images/streamlit-mark-dark-mode.png")
+import { useEffect, useState } from "react"
+import Link from "next/link"
+import { ArrowUpRight } from "lucide-react"
+import { profile, socialLinks, navItems, contact } from "@/content"
+
+const orderedSocials = [...socialLinks].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+const orderedNav = navItems
+  .filter((item) => item.visible)
+  .sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+
+/** Live clock in the site owner's timezone — a small "someone lives here" detail. */
+function LocalTime() {
+  const [time, setTime] = useState<string | null>(null)
+
+  useEffect(() => {
+    const format = () =>
+      new Intl.DateTimeFormat("en-IN", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: false,
+        timeZone: "Asia/Kolkata",
+      }).format(new Date())
+
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setTime(format())
+    const timer = setInterval(() => setTime(format()), 30_000)
+    return () => clearInterval(timer)
+  }, [])
 
   return (
-    <span className={cn("relative inline-flex items-center justify-center", className)}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={lightSrc} alt="Streamlit" className="h-5 w-5 object-contain dark:hidden" />
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={darkSrc} alt="Streamlit" className="hidden h-5 w-5 object-contain dark:inline" />
+    <span className="tabular" suppressHydrationWarning>
+      {time ?? "--:--"} IST
     </span>
   )
 }
 
-const iconMap = {
-  github: Github,
-  linkedin: Linkedin,
-  mail: Mail,
-  external: StreamlitIcon,
-}
-
 export function Footer() {
   return (
-    <footer className="relative border-t border-[var(--neon-purple)]/20 bg-card/20 backdrop-blur-sm">
-      <div className="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[var(--neon-purple)]/50 to-transparent" />
+    <footer className="hairline-t mt-28 overflow-hidden">
+      {/* Giant outlined wordmark */}
+      <div className="container-page pt-12" aria-hidden="true">
+        <p className="wordmark-outline whitespace-nowrap text-[13vw] font-bold leading-none lg:text-[10rem]">
+          {profile.name.split(" ")[0].toLowerCase()}
+          <span
+            className="wordmark-outline"
+            style={{ WebkitTextStroke: "1px color-mix(in oklch, var(--accent) 45%, transparent)" }}
+          >
+            .
+          </span>
+        </p>
+      </div>
 
-      <div className="container mx-auto px-4 lg:px-8 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 items-center">
-          <div className="text-center md:text-left">
-            <h3 className="text-lg font-bold bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent mb-2">
-              {profile.name}
-            </h3>
-            <p className="text-sm text-muted-foreground">{profile.headline}</p>
-            <p className="text-xs text-muted-foreground mt-1">📍 {profile.location}</p>
+      <div className="container-page py-16">
+        <div className="grid gap-12 md:grid-cols-[2fr_1fr_1fr]">
+          <div className="space-y-4">
+            <p className="text-2xl font-semibold tracking-tight">{profile.name}</p>
+            {profile.footerTagline && (
+              <p className="max-w-sm text-sm leading-relaxed text-muted-foreground">
+                {profile.footerTagline}
+              </p>
+            )}
+            <p className="mono-label flex items-center gap-2">
+              <span className="status-dot" aria-hidden="true" />
+              {contact.availability}
+            </p>
           </div>
 
-          {/* Social Links */}
-          <div className="flex items-center justify-center gap-4">
-            {socialLinks.map((link) => {
-              const Icon = iconMap[link.icon as keyof typeof iconMap]
-              return (
-                <Link
-                  key={link.name}
-                  href={link.url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center w-10 h-10 rounded-full bg-muted/50 hover:bg-gradient-to-r hover:from-[var(--neon-purple)]/20 hover:to-[var(--neon-cyan)]/20 transition-all duration-300 hover:scale-110 border border-border/50 hover:border-[var(--neon-purple)]/50"
-                  aria-label={link.name}
-                >
-                  {Icon && <Icon className="h-5 w-5" />}
-                </Link>
-              )
-            })}
-          </div>
+          <nav aria-label="Footer" className="space-y-3">
+            <p className="mono-label">Index</p>
+            <ul className="space-y-2">
+              {orderedNav.map((item) => (
+                <li key={item.href}>
+                  <Link
+                    href={item.href}
+                    className="link-underline text-sm text-muted-foreground hover:text-foreground"
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </nav>
 
-          {/* Copyright */}
-          <p className="text-sm text-muted-foreground text-center md:text-right">
-            © {new Date().getFullYear()} {profile.name}. All rights reserved.
+          <div className="space-y-3">
+            <p className="mono-label">Elsewhere</p>
+            <ul className="space-y-2">
+              {orderedSocials.map((social) => (
+                <li key={social.name}>
+                  <a
+                    href={social.url}
+                    target={social.url.startsWith("mailto:") ? undefined : "_blank"}
+                    rel="noopener noreferrer"
+                    className="group inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors duration-200 hover:text-foreground"
+                  >
+                    {social.name}
+                    <ArrowUpRight className="h-3 w-3 opacity-0 transition-all duration-200 group-hover:translate-x-0.5 group-hover:opacity-100" />
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+
+        <div className="hairline-t mt-14 flex flex-wrap items-center justify-between gap-3 pt-6">
+          <p className="font-mono text-xs text-faint">
+            © {new Date().getFullYear()} {profile.name}
+          </p>
+          <p className="font-mono text-xs text-faint">
+            Bengaluru, India · <LocalTime />
           </p>
         </div>
       </div>

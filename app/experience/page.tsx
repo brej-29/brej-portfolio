@@ -1,52 +1,75 @@
-import { Section } from "@/components/site/section"
-import { GlassCard } from "@/components/site/glass-card"
-import { SpotlightCard } from "@/components/premium/spotlight-card"
-import { Timeline } from "@/components/experience/Timeline"
-import { VariableProximityText } from "@/components/premium/variable-proximity-text"
-import { experience } from "@/content"
-import { Sparkles } from "lucide-react"
+import { PageHeader } from "@/components/site/page-header"
+import { Reveal, Stagger, StaggerItem } from "@/components/motion/reveal"
+import { Counter } from "@/components/motion/counter"
+import { experience, experienceStats } from "@/content"
+
+const roles = [...experience].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
+const stats = [...experienceStats].sort((a, b) => (a.order ?? 0) - (b.order ?? 0))
 
 export default function ExperiencePage() {
   return (
-    <div className="relative min-h-screen pt-24 pb-16">
-      <Section>
-        <div className="max-w-4xl mx-auto space-y-12">
-          {/* Header */}
-          <div className="space-y-4 text-center">
-            <h1 className="text-4xl md:text-5xl font-bold">
-              <VariableProximityText
-                text="Experience"
-                className="bg-gradient-to-r from-[var(--neon-purple)] to-[var(--neon-cyan)] bg-clip-text text-transparent"
+    <main className="pb-8">
+      <PageHeader
+        label="Experience"
+        title="Engineering discipline, applied to ML."
+        description="Production software first, machine learning second — in the order that makes ML systems actually hold up."
+      />
+
+      {/* Timeline */}
+      <div className="container-page mt-16">
+        <ol className="relative space-y-14 border-l border-[var(--hairline)] pl-8 md:pl-12">
+          {roles.map((role, i) => (
+            <Reveal key={`${role.company}-${role.dates}`} as="li" delay={i * 0.05} className="relative">
+              {/* Timeline marker */}
+              <span
+                className="absolute -left-8 top-2 h-2 w-2 -translate-x-1/2 rounded-full bg-accent md:-left-12"
+                aria-hidden="true"
               />
-            </h1>
-            <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-              My professional journey across enterprise software development, data science, and full-stack engineering.
-            </p>
-          </div>
+              <p className="font-mono text-xs text-faint">
+                {role.dates} <span aria-hidden="true">·</span> {role.location}
+              </p>
+              <h2 className="mt-2 text-2xl font-semibold tracking-tight">{role.company}</h2>
+              <p className="mt-1 text-muted-foreground">{role.role}</p>
 
-          {/* Current Focus Callout */}
-          <SpotlightCard className="group border-none bg-transparent shadow-none">
-            <GlassCard hover className="p-6 border-[var(--neon-cyan)]/30">
-              <div className="flex items-start gap-4">
-                <div className="p-2 rounded-lg bg-gradient-to-br from-[var(--neon-purple)] to-[var(--neon-cyan)] shadow-lg shadow-primary/30">
-                  <Sparkles className="h-5 w-5 text-white" />
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-2">Current Focus</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Currently driving enterprise-scale solutions at Accenture while exploring cutting-edge technologies
-                    in AI/ML and cloud architecture. Open to opportunities in senior engineering and technical leadership
-                    roles.
-                  </p>
-                </div>
+              <ul className="mt-5 max-w-2xl space-y-2.5">
+                {role.bullets.map((bullet) => (
+                  <li key={bullet} className="flex gap-3 text-[15px] leading-relaxed text-muted-foreground">
+                    <span className="mt-px select-none font-mono text-accent" aria-hidden="true">
+                      +
+                    </span>
+                    {bullet}
+                  </li>
+                ))}
+              </ul>
+
+              <p className="mt-5 font-mono text-xs text-faint">{role.techStack.join(" · ")}</p>
+            </Reveal>
+          ))}
+        </ol>
+      </div>
+
+      {/* Full impact grid */}
+      <div className="container-page mt-24">
+        <Reveal>
+          <p className="mono-label">
+            <span className="text-accent">Impact</span> — measured, not claimed
+          </p>
+        </Reveal>
+        <Stagger className="mt-8 grid gap-x-10 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" interval={0.05}>
+          {stats.map((stat) => (
+            <StaggerItem key={stat.label}>
+              <div className="hairline-t pt-5">
+                <Counter
+                  value={stat.value}
+                  className="tabular block font-mono text-2xl font-medium tracking-tight text-accent"
+                />
+                <p className="mt-2 text-sm font-medium">{stat.label}</p>
+                <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{stat.description}</p>
               </div>
-            </GlassCard>
-          </SpotlightCard>
-
-          {/* Timeline */}
-          <Timeline experiences={experience} />
-        </div>
-      </Section>
-    </div>
+            </StaggerItem>
+          ))}
+        </Stagger>
+      </div>
+    </main>
   )
 }

@@ -1,39 +1,23 @@
 "use client"
 
+import { motion, useReducedMotion } from "framer-motion"
 import type React from "react"
-import { motion, AnimatePresence, useReducedMotion } from "framer-motion"
-import { usePathname } from "next/navigation"
 
+/** Route transition: fade + rise with a blur settle. Fast enough to never feel like waiting. */
 export default function Template({ children }: { children: React.ReactNode }) {
-  const pathname = usePathname()
-  const prefersReducedMotion = useReducedMotion()
-
-  const pageTransition = prefersReducedMotion
-    ? {
-        initial: { opacity: 0 },
-        animate: { opacity: 1 },
-        exit: { opacity: 0 },
-        transition: { duration: 0.2, ease: [0.22, 1, 0.36, 1] },
-      }
-    : {
-        initial: { opacity: 0, y: 10, filter: "blur(8px)" },
-        animate: { opacity: 1, y: 0, filter: "blur(0px)" },
-        exit: { opacity: 0, y: -8, filter: "blur(8px)" },
-        transition: { duration: 0.28, ease: [0.22, 1, 0.36, 1] },
-      }
+  const reducedMotion = useReducedMotion()
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <motion.main
-        key={pathname}
-        initial={pageTransition.initial}
-        animate={pageTransition.animate}
-        exit={pageTransition.exit}
-        transition={pageTransition.transition}
-        style={{ minHeight: "100vh" }}
-      >
-        {children}
-      </motion.main>
-    </AnimatePresence>
+    <motion.div
+      initial={
+        reducedMotion
+          ? { opacity: 0 }
+          : { opacity: 0, y: 14, filter: "blur(6px)" }
+      }
+      animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
+      transition={{ duration: 0.45, ease: [0.16, 1, 0.3, 1] }}
+    >
+      {children}
+    </motion.div>
   )
 }

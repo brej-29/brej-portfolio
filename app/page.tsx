@@ -1,35 +1,19 @@
-import { HeroSection } from "@/components/hero-section"
-import { TechStackSection } from "@/components/tech-stack-section"
-import { ProjectsSection } from "@/components/projects-section"
-import { ExperienceSection } from "@/components/experience-section"
-import { CTASection } from "@/components/cta-section"
-import { SectionDivider } from "@/components/site/section-divider"
+import { Hero } from "@/components/home/hero"
+import { KeywordMarquee } from "@/components/home/keyword-marquee"
+import { SelectedWork } from "@/components/home/selected-work"
+import { ExperienceStrip } from "@/components/home/experience-strip"
+import { Stack } from "@/components/home/stack"
+import { ContactCta } from "@/components/home/contact-cta"
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen">
-      {/* Hero Section */}
-      <HeroSection />
-
-      <SectionDivider />
-
-      {/* Tech Stack Section */}
-      <TechStackSection />
-
-      <SectionDivider />
-
-      {/* Projects Section */}
-      <ProjectsSection />
-
-      <SectionDivider />
-
-      {/* Experience Section */}
-      <ExperienceSection />
-
-      <SectionDivider />
-
-      {/* CTA Section */}
-      <CTASection />
+    <main>
+      <Hero />
+      <KeywordMarquee />
+      <SelectedWork />
+      <ExperienceStrip />
+      <Stack />
+      <ContactCta />
     </main>
   )
 }

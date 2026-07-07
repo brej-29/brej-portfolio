@@ -1,31 +1,31 @@
 {
   "profile": {
     "name": "Brejesh Balakrishnan",
-    "headline": "Data Scientist / ML Engineer → End-to-End ML (Train → Deploy) | Production-Ready Portfolio",
+    "headline": "Machine Learning Engineer · GenAI / LLM Engineer",
     "location": "Bengaluru, India (Open to Hybrid/On-site/Relocate)",
     "summaryBullets": [
-      "Full Stack Developer @ Accenture (TIAA) with strong production engineering foundation",
-      "Shipped high-impact backend improvements: >90% test coverage + API latency >5s reduced from ~80% to <20%",
-      "Building end-to-end ML/DS systems (Python, SQL, MLflow, AWS SageMaker/S3/Lambda) with deployable demos"
+      "1.5+ years of production engineering at Accenture — AWS-hosted REST APIs, >90% automated test coverage, high-latency responses cut from ~80% to <20%",
+      "Ship LLM / RAG applications: agentic LangGraph pipelines, dense retrieval (Pinecone, FAISS), retrieval evaluation (recall@k, MRR, nDCG) and faithfulness / grounding checks",
+      "Full MLOps in production — MLflow champion/challenger registries, Evidently drift monitoring, CI model-quality gates, Docker — with systems deployed live"
     ],
     "heroTaglines": [
-      "Full-Stack Developer",
-      "Data Scientist / ML Engineer",
-      "Python • SQL • Statistics",
-      "End-to-End ML (Train → Deploy)",
-      "MLflow • AWS SageMaker • Docker",
-      "NLP (BERT) • MLOps Mindset",
-      "On Notice • Open to ML/DS Roles"
+      "Machine Learning Engineer",
+      "GenAI / LLM Engineer",
+      "RAG · LangGraph · Pinecone",
+      "MLOps: MLflow · DVC · Docker",
+      "AWS SageMaker · Lambda · S3",
+      "Python · SQL · PyTorch",
+      "Open to ML / GenAI roles"
     ],
     "heroPrimaryCtaLabel": "View Projects",
     "heroPrimaryCtaHref": "/projects",
     "heroSecondaryCtaLabel": "Download Resume",
     "heroSecondaryCtaHref": "/resume.pdf",
-    "resumeLabel": "Resume (Data Scientist / ML Engineer)",
+    "resumeLabel": "Resume (ML / GenAI Engineer)",
     "resumeUrl": "/resume.pdf",
-    "footerTagline": "Building reliable ML systems — from data to deployment.",
+    "footerTagline": "Building reliable ML & GenAI systems — from data to deployment.",
     "handle": "@brej-29",
-    "statusText": "Actively interviewing: Data Scientist / ML Engineer (Bengaluru) | Available Apr 2026",
+    "statusText": "Actively interviewing: ML / GenAI Engineer (Bengaluru · Remote) — available immediately",
     "avatarUrl": "/images/avatar.png",
     "miniAvatarUrl": "/images/avatar-mini.png"
   },
@@ -49,10 +49,16 @@
       "order": 3
     },
     {
+      "name": "Hugging Face",
+      "url": "https://huggingface.co/BrejBala",
+      "icon": "external",
+      "order": 4
+    },
+    {
       "name": "Streamlit",
       "url": "https://share.streamlit.io/user/brej-29",
       "icon": "external",
-      "order": 4
+      "order": 5
     }
   ],
   "skills": [
@@ -135,364 +141,627 @@
       "order": 14
     },
     {
-      "name": "Kubernetes",
-      "category": "DevOps",
-      "icon": "https://cdn.simpleicons.org/kubernetes?viewbox=auto&size=48",
-      "order": 15
-    },
-    {
       "name": "FastAPI",
       "category": "Frameworks",
       "icon": "https://cdn.simpleicons.org/fastapi?viewbox=auto&size=48",
-      "order": 16
+      "order": 15
     },
     {
       "name": "Flask",
       "category": "Frameworks",
       "icon": "https://cdn.simpleicons.org/flask?viewbox=auto&size=48",
-      "order": 17
+      "order": 16
     },
     {
       "name": "Streamlit",
       "category": "Frameworks",
       "icon": "https://cdn.simpleicons.org/streamlit?viewbox=auto&size=48",
-      "order": 18
+      "order": 17
     },
     {
       "name": "AWS",
       "category": "Cloud",
       "icon": "https://cdn.simpleicons.org/amazonwebservices?viewbox=auto&size=48",
-      "order": 19
+      "order": 18
     },
     {
       "name": "AWS SageMaker",
       "category": "Cloud",
       "icon": "https://icon.icepanel.io/AWS/svg/Machine-Learning/SageMaker.svg",
-      "order": 20
+      "order": 19
     },
     {
       "name": "AWS S3",
       "category": "Cloud",
-      "order": 21
+      "order": 20
     },
     {
       "name": "AWS Lambda",
       "category": "Cloud",
-      "order": 22
+      "order": 21
     },
     {
       "name": "AWS CloudWatch",
       "category": "Cloud",
-      "order": 23
+      "order": 22
     },
     {
       "name": "Git",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/git?viewbox=auto&size=48",
-      "order": 24
+      "order": 23
     },
     {
       "name": "GitHub",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/github?viewbox=auto&size=48",
-      "order": 25
+      "order": 24
     },
     {
       "name": "GitHub Actions",
       "category": "DevOps",
       "icon": "https://cdn.simpleicons.org/githubactions?viewbox=auto&size=48",
-      "order": 26
-    },
-    {
-      "name": "Linux",
-      "category": "Tools",
-      "icon": "https://cdn.simpleicons.org/linux?viewbox=auto&size=48",
-      "order": 27
+      "order": 25
     },
     {
       "name": "Jupyter",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/jupyter?viewbox=auto&size=48",
-      "order": 28
+      "order": 26
     },
     {
       "name": "VS Code",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/visualstudiocode?viewbox=auto&size=48",
-      "order": 29
+      "order": 27
     },
     {
       "name": "Postman",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/postman?viewbox=auto&size=48",
-      "order": 30
+      "order": 28
     },
     {
       "name": "Power BI",
       "category": "Visualization",
       "icon": "https://cdn.simpleicons.org/powerbi?viewbox=auto&size=48",
-      "order": 31
-    },
-    {
-      "name": "Tableau",
-      "category": "Visualization",
-      "icon": "https://cdn.simpleicons.org/tableau?viewbox=auto&size=48",
-      "order": 32
+      "order": 29
     },
     {
       "name": "Matplotlib",
       "category": "Visualization",
-      "order": 33
+      "order": 30
     },
     {
       "name": "Plotly",
       "category": "Visualization",
       "icon": "https://cdn.simpleicons.org/plotly?viewbox=auto&size=48",
-      "order": 34
+      "order": 31
     },
     {
       "name": "Seaborn",
       "category": "Visualization",
-      "order": 35
-    },
-    {
-      "name": "PostgreSQL",
-      "category": "Data",
-      "icon": "https://cdn.simpleicons.org/postgresql?viewbox=auto&size=48",
-      "order": 36
+      "order": 32
     },
     {
       "name": "MySQL",
       "category": "Data",
       "icon": "https://cdn.simpleicons.org/mysql?viewbox=auto&size=48",
-      "order": 37
+      "order": 33
     },
     {
       "name": "MongoDB",
       "category": "Data",
       "icon": "https://cdn.simpleicons.org/mongodb?viewbox=auto&size=48",
-      "order": 38
+      "order": 34
     },
     {
       "name": "Redis",
       "category": "Data",
       "icon": "https://cdn.simpleicons.org/redis?viewbox=auto&size=48",
-      "order": 39
-    },
-    {
-      "name": "Apache Spark",
-      "category": "Data Engineering",
-      "icon": "https://cdn.simpleicons.org/apachespark?viewbox=auto&size=48",
-      "order": 40
-    },
-    {
-      "name": "PySpark",
-      "category": "Data Engineering",
-      "order": 41
-    },
-    {
-      "name": "Databricks",
-      "category": "Data Engineering",
-      "icon": "https://cdn.simpleicons.org/databricks?viewbox=auto&size=48",
-      "order": 42
-    },
-    {
-      "name": "Apache Airflow",
-      "category": "Data Engineering",
-      "icon": "https://cdn.simpleicons.org/apacheairflow?viewbox=auto&size=48",
-      "order": 43
-    },
-    {
-      "name": "Apache Kafka",
-      "category": "Data Engineering",
-      "icon": "https://cdn.simpleicons.org/apachekafka?viewbox=auto&size=48",
-      "order": 44
-    },
-    {
-      "name": "Snowflake",
-      "category": "Data Engineering",
-      "icon": "https://cdn.simpleicons.org/snowflake?viewbox=auto&size=48",
-      "order": 45
-    },
-    {
-      "name": "Elasticsearch",
-      "category": "Data Engineering",
-      "icon": "https://cdn.simpleicons.org/elasticsearch?viewbox=auto&size=48",
-      "order": 46
-    },
-    {
-      "name": "Kibana",
-      "category": "Data Engineering",
-      "icon": "https://cdn.simpleicons.org/kibana?viewbox=auto&size=48",
-      "order": 47
-    },
-    {
-      "name": "Prometheus",
-      "category": "DevOps",
-      "icon": "https://cdn.simpleicons.org/prometheus?viewbox=auto&size=48",
-      "order": 48
-    },
-    {
-      "name": "Grafana",
-      "category": "DevOps",
-      "icon": "https://cdn.simpleicons.org/grafana?viewbox=auto&size=48",
-      "order": 49
+      "order": 35
     },
     {
       "name": "Jenkins",
       "category": "DevOps",
       "icon": "https://cdn.simpleicons.org/jenkins?viewbox=auto&size=48",
-      "order": 50
-    },
-    {
-      "name": "Terraform",
-      "category": "DevOps",
-      "icon": "https://cdn.simpleicons.org/terraform?viewbox=auto&size=48",
-      "order": 51
+      "order": 36
     },
     {
       "name": "SonarQube",
       "category": "DevOps",
       "icon": "https://cdn.simpleicons.org/sonarqube?viewbox=auto&size=48",
-      "order": 52
+      "order": 37
     },
     {
       "name": "Java",
       "category": "Programming",
       "icon": "https://cdn.simpleicons.org/java?viewbox=auto&size=48",
-      "order": 53
+      "order": 38
     },
     {
       "name": "Spring Boot",
       "category": "Frameworks",
       "icon": "https://cdn.simpleicons.org/springboot?viewbox=auto&size=48",
-      "order": 54
+      "order": 39
     },
     {
       "name": "JavaScript",
       "category": "Programming",
       "icon": "https://cdn.simpleicons.org/javascript?viewbox=auto&size=48",
-      "order": 55
+      "order": 40
     },
     {
       "name": "TypeScript",
       "category": "Programming",
       "icon": "https://cdn.simpleicons.org/typescript?viewbox=auto&size=48",
-      "order": 56
+      "order": 41
     },
     {
       "name": "React",
       "category": "Frameworks",
       "icon": "https://cdn.simpleicons.org/react?viewbox=auto&size=48",
-      "order": 57
+      "order": 42
     },
     {
       "name": "Angular",
       "category": "Frameworks",
       "icon": "https://cdn.simpleicons.org/angular?viewbox=auto&size=48",
-      "order": 58
+      "order": 43
     },
     {
       "name": "HTML",
       "category": "Programming",
       "icon": "https://cdn.simpleicons.org/html5?viewbox=auto&size=48",
-      "order": 59
+      "order": 44
     },
     {
       "name": "CSS",
       "category": "Programming",
       "icon": "https://cdn.simpleicons.org/css3?viewbox=auto&size=48",
-      "order": 60
+      "order": 45
     },
     {
       "name": "Jira",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/jira?viewbox=auto&size=48",
-      "order": 61
+      "order": 46
     },
     {
       "name": "Confluence",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/confluence?viewbox=auto&size=48",
-      "order": 62
+      "order": 47
     },
     {
       "name": "Slack",
       "category": "Tools",
       "icon": "https://cdn.simpleicons.org/slack?viewbox=auto&size=48",
+      "order": 48
+    },
+    {
+      "name": "LightGBM",
+      "category": "ML",
+      "order": 49
+    },
+    {
+      "name": "CatBoost",
+      "category": "ML",
+      "order": 50
+    },
+    {
+      "name": "Optuna (HPO)",
+      "category": "ML",
+      "order": 51
+    },
+    {
+      "name": "SHAP (Explainability)",
+      "category": "ML",
+      "order": 52
+    },
+    {
+      "name": "LangGraph",
+      "category": "GenAI/NLP",
+      "order": 53
+    },
+    {
+      "name": "Pinecone",
+      "category": "GenAI/NLP",
+      "order": 54
+    },
+    {
+      "name": "FAISS",
+      "category": "GenAI/NLP",
+      "order": 55
+    },
+    {
+      "name": "sentence-transformers",
+      "category": "GenAI/NLP",
+      "order": 56
+    },
+    {
+      "name": "LLM APIs (Groq · Gemini)",
+      "category": "GenAI/NLP",
+      "order": 57
+    },
+    {
+      "name": "Retrieval Evaluation (recall@k · MRR · nDCG)",
+      "category": "GenAI/NLP",
+      "order": 58
+    },
+    {
+      "name": "DVC",
+      "category": "MLOps",
+      "order": 59
+    },
+    {
+      "name": "DagsHub",
+      "category": "MLOps",
+      "order": 60
+    },
+    {
+      "name": "Pandera (Data Contracts)",
+      "category": "MLOps",
+      "order": 61
+    },
+    {
+      "name": "Evidently (Drift Monitoring)",
+      "category": "MLOps",
+      "order": 62
+    },
+    {
+      "name": "Prometheus",
+      "category": "DevOps",
       "order": 63
+    },
+    {
+      "name": "pytest",
+      "category": "Tools",
+      "order": 64
     }
   ],
   "techStack": [
-    "Data Science",
     "Machine Learning",
+    "GenAI / LLMs",
+    "RAG",
+    "LangGraph",
     "Python",
     "SQL",
-    "scikit-learn",
+    "PyTorch",
     "XGBoost",
     "MLflow",
-    "AWS SageMaker",
     "Docker",
-    "Pandas",
-    "NumPy",
+    "AWS SageMaker",
     "FastAPI",
-    "Git",
-    "Streamlit",
-    "Power BI"
+    "Pinecone",
+    "SHAP",
+    "Streamlit"
   ],
   "featuredProjects": [
     {
-      "title": "Essay Writer App",
-      "summary": "Streamlit app that generates structured essays with export options.",
+      "title": "RAG Agent Workbench",
+      "summary": "Production agentic RAG backend — 8-node LangGraph pipeline with corrective retrieval (CRAG), deterministic retrieval evaluation (recall@k, MRR, nDCG), faithfulness verification, and SSE streaming. 343 tests, deployed on Hugging Face Spaces.",
       "tags": [
-        "Streamlit",
-        "LLM",
-        "NLP"
+        "GenAI",
+        "RAG",
+        "LangGraph",
+        "Agentic AI"
       ],
       "stack": [
-        "Python",
-        "Streamlit",
-        "LangChain"
+        "FastAPI",
+        "LangGraph",
+        "Pinecone",
+        "Groq"
       ],
-      "githubUrl": "https://github.com/brej-29",
-      "liveUrl": "https://essay-writer-app.streamlit.app/",
+      "githubUrl": "https://github.com/brej-29/rag-agent-workbench",
+      "liveUrl": "https://rag-agent-workbench.streamlit.app/",
       "order": 1
+    },
+    {
+      "title": "Customer Churn Prediction — MLOps + GenAI",
+      "summary": "Optuna-tuned XGBoost (PR-AUC 0.62→0.67) with SHAP-grounded LLM explanations, Pandera data contracts, Evidently drift monitoring, MLflow champion/challenger registry, and a CI model-quality gate — deployed live with ~399 tests.",
+      "tags": [
+        "MLOps",
+        "Explainability",
+        "GenAI",
+        "XGBoost"
+      ],
+      "stack": [
+        "XGBoost",
+        "MLflow",
+        "SHAP",
+        "FastAPI"
+      ],
+      "githubUrl": "https://github.com/brej-29/customer-churn-mlops",
+      "liveUrl": "https://huggingface.co/spaces/BrejBala/churn-ui",
+      "order": 2
+    },
+    {
+      "title": "Inventory Bin Classification — CV on SageMaker",
+      "summary": "ResNet-50 transfer learning on 10,000+ warehouse images; SageMaker Bayesian HPO with distributed spot training (+22% macro-F1) and a real-time endpoint with Lambda integration.",
+      "tags": [
+        "Computer Vision",
+        "AWS SageMaker",
+        "MLOps"
+      ],
+      "stack": [
+        "PyTorch",
+        "ResNet-50",
+        "SageMaker",
+        "Lambda"
+      ],
+      "githubUrl": "https://github.com/brej-29/inventory-bin-count-classifier-aws-sagemaker",
+      "order": 3
+    },
+    {
+      "title": "Disaster Tweets — NLP Architecture Benchmarks",
+      "summary": "7 architectures benchmarked under identical splits on ~7,600 tweets; USE transfer learning wins at 81.5% accuracy / 0.81 F1 — rigorous, reproducible NLP experimentation.",
+      "tags": [
+        "NLP",
+        "Transfer Learning",
+        "Benchmarking"
+      ],
+      "stack": [
+        "TensorFlow",
+        "TF Hub",
+        "scikit-learn"
+      ],
+      "githubUrl": "https://github.com/brej-29/disaster-tweets-nlp-model-benchmarks",
+      "order": 4
     }
   ],
   "projects": [
     {
-      "id": "proj-essay-writer",
-      "title": "Essay Writer App",
-      "oneLine": "Generate structured essays with export.",
-      "description": "A Streamlit app that helps users generate structured essays with consistent sections and export options.",
+      "id": "proj-rag-workbench",
+      "title": "RAG Agent Workbench",
+      "oneLine": "Agentic RAG backend: 8-node LangGraph pipeline with corrective retrieval, faithfulness verification, and SSE streaming.",
+      "description": "A production retrieval-augmented generation backend built as an 8-node LangGraph pipeline with conditional routing: query normalization → multi-turn contextualization → dense retrieval (Pinecone, llama-text-embed-v2) → bounded corrective retrieval (CRAG) → web-fallback routing (Tavily) → grounded generation (Groq Llama 3.1) → faithfulness verification. A deterministic retrieval-evaluation harness (recall@k, MRR, nDCG@k over a hand-labeled golden set) drove real decisions — including measuring a hosted reranker net-negative (nDCG@3 −0.057, +435 ms) and disabling it on the data.",
       "tags": [
-        "Streamlit",
+        "GenAI",
+        "RAG",
+        "LangGraph",
         "LLM",
+        "Agentic AI",
         "NLP"
       ],
       "stack": [
         "Python",
-        "Streamlit",
-        "LangChain"
+        "FastAPI",
+        "LangGraph",
+        "Pinecone",
+        "Groq",
+        "Tavily",
+        "Prometheus",
+        "Docker",
+        "Hugging Face Spaces",
+        "Streamlit"
       ],
-      "links": {},
+      "links": {
+        "github": "https://github.com/brej-29/rag-agent-workbench",
+        "demo": "https://rag-agent-workbench.streamlit.app/"
+      },
       "highlights": [
-        "Clean UI workflow",
-        "Export options",
-        "Prompt tuning"
+        "8-node agentic LangGraph pipeline with conditional routing and bounded CRAG loop (provably non-runaway iteration cap)",
+        "Deterministic retrieval-eval harness (recall@k, MRR, nDCG@k) on a hand-labeled golden set — used to A/B-test and reject a hosted reranker on data",
+        "Two-threshold retrieval gate with deterministic abstention (the LLM is never asked to answer from empty context) + indirect prompt-injection hardening",
+        "Per-request token/cost accounting, Prometheus latency histograms, true SSE token streaming",
+        "343 tests, CI from a hash-pinned lockfile",
+        "deployed on Docker / Hugging Face Spaces + Streamlit Cloud"
       ],
-      "date": "2025-12",
+      "date": "2026-05",
       "order": 1
     },
     {
-      "id": "testing-essay-writer",
-      "title": "ABC",
-      "oneLine": "Generate structured essays with export.",
-      "description": "A Streamlit app that helps users generate structured essays with consistent sections and export options.",
+      "id": "proj-dogbreed-classification",
+      "title": "Dog Breed Classification",
+      "oneLine": "Deep learning pipeline for 120-breed classification with transfer learning.",
+      "description": "End-to-end deep learning solution leveraging MobileNetV2 transfer learning to classify 120 dog breeds with optimized accuracy. Demonstrates proficiency in computer vision, data preprocessing, and model architecture selection—key skills for ML production environments.",
+      "tags": [
+        "TensorFlow",
+        "Transfer Learning",
+        "CNN",
+        "Computer Vision"
+      ],
+      "stack": [
+        "Python",
+        "TensorFlow",
+        "Jupyter"
+      ],
+      "links": {},
+      "highlights": [
+        "Transfer learning optimization",
+        "120-class multi-label classification",
+        "Production-ready preprocessing pipeline"
+      ],
+      "date": "2025-11",
+      "order": 2
+    },
+    {
+      "id": "proj-heart-disease",
+      "title": "Heart Disease Risk Predictor",
+      "oneLine": "Predictive model for cardiac disease classification from medical data.",
+      "description": "Comprehensive supervised learning pipeline for predicting heart disease risk using patient medical records. Features rigorous data exploration, model selection across multiple algorithms, hyperparameter tuning, and cross-validation—demonstrating systematic ML workflow and healthcare domain understanding.",
+      "tags": [
+        "Machine Learning",
+        "Classification",
+        "Healthcare Analytics",
+        "Feature Engineering"
+      ],
+      "stack": [
+        "Python",
+        "Scikit-learn",
+        "Pandas",
+        "Numpy"
+      ],
+      "links": {},
+      "highlights": [
+        "Multi-algorithm comparison",
+        "Cross-validated evaluation",
+        "Medical data preprocessing"
+      ],
+      "date": "2025-10",
+      "order": 3
+    },
+    {
+      "id": "proj-bulldozer-price",
+      "title": "Heavy Equipment Price Prediction",
+      "oneLine": "Regression model for predicting equipment resale values.",
+      "description": "Full-stack data science project predicting bulldozer auction prices using real-world commodity data. Covers complete pipeline: feature engineering, handling temporal data, model ensembling with XGBoost, and RMSLE optimization. Demonstrates end-to-end problem-solving from raw data to production predictions.",
+      "tags": [
+        "Regression",
+        "XGBoost",
+        "Ensemble Methods",
+        "Time-Series Features"
+      ],
+      "stack": [
+        "Python",
+        "XGBoost",
+        "Scikit-learn",
+        "Pandas"
+      ],
+      "links": {},
+      "highlights": [
+        "XGBoost ensembling",
+        "Feature engineering for auction data",
+        "RMSLE optimization",
+        "Real-world dataset handling"
+      ],
+      "date": "2025-09",
+      "order": 4
+    },
+    {
+      "id": "proj-otaku-oracle",
+      "title": "Otaku Oracle",
+      "oneLine": "Intelligent anime recommendation engine powered by NLP.",
+      "description": "AI-driven recommendation system applying NLP and collaborative filtering to anime datasets. Demonstrates understanding of recommendation systems, text processing, and user preference modeling—critical for personalization in production ML systems.",
+      "tags": [
+        "NLP",
+        "Recommendation Systems",
+        "Collaborative Filtering"
+      ],
+      "stack": [
+        "Python",
+        "NLTK",
+        "Scikit-learn"
+      ],
+      "links": {},
+      "highlights": [
+        "Custom recommendation algorithm",
+        "NLP-based feature extraction",
+        "Cold-start problem handling"
+      ],
+      "date": "2025-08",
+      "order": 5
+    },
+    {
+      "id": "proj-meal-planner",
+      "title": "Daily Meal Planner",
+      "oneLine": "Personalized nutrition planning with Streamlit interface.",
+      "description": "Interactive Streamlit application generating daily meal plans based on nutritional goals and dietary constraints. Showcases full-stack ML application development: requirement gathering, algorithm design, and user-centric UI/UX implementation.",
       "tags": [
         "Streamlit",
+        "Nutrition Algorithm",
+        "API Integration"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "APIs"
+      ],
+      "links": {},
+      "highlights": [
+        "Intelligent constraint solver",
+        "Real-time API data",
+        "Production Streamlit deployment"
+      ],
+      "date": "2025-07",
+      "order": 6
+    },
+    {
+      "id": "proj-workout-planner",
+      "title": "Daily Workout Planner",
+      "oneLine": "ML-powered fitness program generator.",
+      "description": "Smart workout recommendation engine tailored to user fitness levels, goals, and equipment availability. Demonstrates machine learning application in domain-specific personalization and real-time system adaptability.",
+      "tags": [
+        "Streamlit",
+        "Fitness Algorithm",
+        "Personalization"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "Pandas"
+      ],
+      "links": {},
+      "highlights": [
+        "Progressive workout scaling",
+        "Goal-oriented recommendations",
+        "Equipment constraint handling"
+      ],
+      "date": "2025-06",
+      "order": 7
+    },
+    {
+      "id": "proj-aurora-chat",
+      "title": "Aurora Chat",
+      "oneLine": "Real-time AI chatbot with LLM integration.",
+      "description": "Production-grade conversational AI application leveraging LLMs for natural dialogue. Demonstrates prompt engineering, context management, and real-time inference optimization—essential for modern ML applications in NLP.",
+      "tags": [
         "LLM",
-        "NLP"
+        "NLP",
+        "Chatbot",
+        "Prompt Engineering"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "LangChain",
+        "OpenAI API"
+      ],
+      "links": {},
+      "highlights": [
+        "LLM prompt optimization",
+        "Token-efficient context handling",
+        "Real-time streaming responses"
+      ],
+      "date": "2025-05",
+      "order": 8
+    },
+    {
+      "id": "proj-hr-analytics",
+      "title": "HR Analytics Dashboard",
+      "oneLine": "Workforce intelligence platform with Power BI.",
+      "description": "Comprehensive business analytics dashboard analyzing HR metrics, employee performance, and organizational trends. Demonstrates data visualization expertise, business intelligence fundamentals, and ability to translate data insights into actionable business metrics.",
+      "tags": [
+        "Power BI",
+        "Business Analytics",
+        "Data Visualization",
+        "KPI Tracking"
+      ],
+      "stack": [
+        "Power BI",
+        "SQL",
+        "Excel"
+      ],
+      "links": {},
+      "highlights": [
+        "Interactive KPI dashboards",
+        "Employee retention analytics",
+        "Drill-down analytics"
+      ],
+      "date": "2025-04",
+      "order": 9
+    },
+    {
+      "id": "proj-essay-writer",
+      "title": "Essay Writer",
+      "oneLine": "Intelligent essay generation with structured outputs.",
+      "description": "LLM-powered content generation system producing well-structured essays with customizable prompts and export functionality. Demonstrates prompt tuning, output formatting, and practical application of language models for content generation.",
+      "tags": [
+        "LLM",
+        "NLP",
+        "Content Generation",
+        "Prompt Engineering"
       ],
       "stack": [
         "Python",
@@ -501,68 +770,375 @@
       ],
       "links": {},
       "highlights": [
-        "Clean UI workflow",
-        "Export options",
-        "Prompt tuning"
+        "Structured prompt templates",
+        "Multi-format export",
+        "Iterative refinement capability"
       ],
-      "date": "2025-13",
-      "order": 2
+      "date": "2025-03",
+      "order": 10
+    },
+    {
+      "id": "proj-disaster-nlp",
+      "title": "Disaster Tweets — NLP Architecture Benchmarks",
+      "oneLine": "7 architectures benchmarked on ~7,600 tweets — USE transfer learning wins at 81.5% accuracy / 0.81 F1.",
+      "description": "A controlled NLP benchmarking study across 7 architectures — TF-IDF + Naive Bayes, Dense, LSTM, GRU, BiLSTM, Conv1D, and Universal Sentence Encoder transfer learning — on ~7,600 disaster tweets with a consistent 90/10 split. USE transfer learning achieved the best results (81.5% accuracy, 0.81 F1), demonstrating that pre-trained encoders outperform from-scratch models on small datasets.",
+      "tags": [
+        "NLP",
+        "Deep Learning",
+        "Transfer Learning",
+        "Model Benchmarking",
+        "TensorFlow"
+      ],
+      "stack": [
+        "Python",
+        "TensorFlow",
+        "TensorFlow Hub",
+        "scikit-learn",
+        "Pandas"
+      ],
+      "links": {},
+      "highlights": [
+        "7 architectures under identical splits: classical ML, RNN family (LSTM/GRU/BiLSTM), Conv1D, and USE transfer learning",
+        "Best model: Universal Sentence Encoder transfer learning — 81.5% accuracy, 0.81 F1",
+        "Clear evidence that pre-trained encoders beat from-scratch models on small text datasets"
+      ],
+      "date": "2025-02",
+      "order": 11
+    },
+    {
+      "id": "proj-inventory-classifier",
+      "title": "Inventory Bin Classification — CV on SageMaker",
+      "oneLine": "ResNet-50 transfer learning on 10,000+ warehouse images with SageMaker Bayesian HPO, distributed spot training, and a live endpoint.",
+      "description": "An end-to-end computer vision pipeline classifying warehouse bin item counts from 10,000+ images using ResNet-50 transfer learning, with deterministic stratified splits stored as S3 ImageFolder channels. SageMaker Bayesian hyperparameter tuning (learning rate, weight decay, batch size, backbone-freeze) with 2-instance distributed training on managed spot instances delivered a ~22% macro-F1 gain over baseline. Served through a real-time SageMaker endpoint with a custom PyTorch inference handler and AWS Lambda integration.",
+      "tags": [
+        "Computer Vision",
+        "AWS SageMaker",
+        "MLOps",
+        "Deep Learning",
+        "Cloud Deployment"
+      ],
+      "stack": [
+        "Python",
+        "PyTorch",
+        "ResNet-50",
+        "AWS SageMaker",
+        "AWS Lambda",
+        "AWS S3",
+        "Docker"
+      ],
+      "links": {},
+      "highlights": [
+        "~22% macro-F1 gain from SageMaker Bayesian HPO with 2-instance distributed training on managed spot instances",
+        "Deterministic stratified splits as S3 ImageFolder channels for reproducible training",
+        "Real-time SageMaker endpoint with custom PyTorch inference handler + Lambda (image URL / S3 URI → JSON label, confidence, probabilities)",
+        "Full resource cleanup — no orphaned endpoints or storage"
+      ],
+      "date": "2025-01",
+      "order": 12
+    },
+    {
+      "id": "proj-aws-ml-nanodegree",
+      "title": "AWS ML Engineer Nanodegree",
+      "oneLine": "Comprehensive AWS ML engineering curriculum projects.",
+      "description": "Complete Udacity nanodegree covering AWS ML services, MLOps, and production ML pipelines. Includes projects on SageMaker, model deployment, monitoring, and hyperparameter optimization—essential competencies for ML engineering roles.",
+      "tags": [
+        "AWS",
+        "MLOps",
+        "SageMaker",
+        "ML Pipeline"
+      ],
+      "stack": [
+        "Python",
+        "AWS",
+        "Jupyter"
+      ],
+      "links": {},
+      "highlights": [
+        "Hyperparameter optimization",
+        "Model monitoring",
+        "MLOps best practices",
+        "Automated pipelines"
+      ],
+      "date": "2024-12",
+      "order": 13
+    },
+    {
+      "id": "proj-customer-churn",
+      "title": "Customer Churn Prediction — MLOps + GenAI",
+      "oneLine": "Leakage-safe churn model with Optuna-tuned XGBoost, SHAP-grounded LLM explanations, and a full MLOps loop — deployed live.",
+      "description": "End-to-end churn prediction on the IBM Telco dataset (7,043 records): six models benchmarked under 5-fold stratified CV on PR-AUC, XGBoost tuned with Optuna (PR-AUC 0.62→0.67) with isotonic calibration and a cost-based decision threshold from an explicit 5:1 FN:FP cost — test PR-AUC 0.66 / ROC-AUC 0.85 / recall 0.87. A SHAP-grounded LLM explanation layer feeds per-prediction drivers into Pydantic-validated explanations with RAG-retrieved retention tactics (sentence-transformers + FAISS); a two-tier faithfulness eval caught a real grounding bug and raised faithfulness 0.72→0.90.",
+      "tags": [
+        "MLOps",
+        "Machine Learning",
+        "GenAI",
+        "Explainability",
+        "Model Monitoring",
+        "XGBoost"
+      ],
+      "stack": [
+        "Python",
+        "XGBoost",
+        "Optuna",
+        "SHAP",
+        "MLflow",
+        "DVC",
+        "Pandera",
+        "Evidently",
+        "FastAPI",
+        "Docker",
+        "FAISS",
+        "GitHub Actions"
+      ],
+      "links": {
+        "demo": "https://huggingface.co/spaces/BrejBala/churn-ui"
+      },
+      "highlights": [
+        "PR-AUC 0.62→0.67 via Optuna HPO",
+        "isotonic calibration + cost-based threshold (5:1 FN:FP)",
+        "test ROC-AUC 0.85, recall 0.87",
+        "SHAP-grounded LLM explanations with RAG retention tactics",
+        "faithfulness eval raised 0.72→0.90 (n=50, seeded)",
+        "Single-source Pandera data contract enforced across train and serve",
+        "Evidently drift monitoring with a 30%-drift retrain rule",
+        "MLflow champion/challenger registry on DagsHub with gated promotion",
+        "CI model-quality gate blocks merges below a PR-AUC floor",
+        "Docker image cut 57% (11.4→4.9 GB)",
+        "deployed live to Hugging Face Spaces (FastAPI + Streamlit), ~399 tests"
+      ],
+      "date": "2024-11",
+      "order": 14
+    },
+    {
+      "id": "proj-stock-terminal",
+      "title": "Stock Mini Terminal",
+      "oneLine": "Real-time stock analysis with fundamentals and technical indicators.",
+      "description": "Production-grade financial analytics platform providing ticker search, price performance tracking, fundamental analysis, and news aggregation. Demonstrates proficiency in financial data processing, API integration, and building decision-support tools—valuable for data science roles in fintech and quantitative analysis.",
+      "tags": [
+        "Streamlit",
+        "Financial Analytics",
+        "API Integration",
+        "Data Visualization"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "yfinance",
+        "APIs"
+      ],
+      "links": {},
+      "highlights": [
+        "Real-time market data",
+        "Multi-source aggregation",
+        "Technical indicators dashboard"
+      ],
+      "date": "2025-12",
+      "order": 15
+    },
+    {
+      "id": "proj-data-insights-portal",
+      "title": "Collaborative Data Insights Portal",
+      "oneLine": "Multi-user analytics platform for team-based data exploration.",
+      "description": "Enterprise-level collaborative analytics application enabling teams to share datasets, generate insights, and visualize findings collectively. Showcases understanding of multi-user systems, data governance, and collaborative workflows—critical for data science teams in production environments.",
+      "tags": [
+        "Streamlit",
+        "Collaboration",
+        "Data Analytics",
+        "Dashboard"
+      ],
+      "stack": [
+        "Python",
+        "Streamlit",
+        "Pandas",
+        "Plotly"
+      ],
+      "links": {},
+      "highlights": [
+        "Multi-user architecture",
+        "Shared dataset management",
+        "Interactive visualization",
+        "Role-based workflows"
+      ],
+      "date": "2025-11",
+      "order": 16
     }
   ],
   "experience": [
     {
       "company": "Accenture",
-      "role": "Advanced Application Engineering Analyst (Full Stack Developer)",
-      "dates": "Jul 2024 – Present",
-      "location": "India",
+      "role": "Advanced Application Engineering Analyst",
+      "dates": "Jul 2024 – Mar 2026",
+      "location": "Bengaluru, India",
       "bullets": [
-        "Legacy refactor for TIAA",
-        "Improved code quality and maintainability",
-        "Worked in Agile sprints and demos"
+        "Optimized AWS-hosted REST APIs (Java / Spring Boot), cutting high-latency responses (>5s) from ~80% to <20% via profiling, SQL query tuning, and caching on a financial-services platform",
+        "Delivered 200+ story points across Agile/Scrum sprints, translating ambiguous requirements into production features with regular stakeholder demos",
+        "Maintained >90% automated test coverage (unit, contract, BDD) tracked via SonarQube",
+        "strengthened CI/CD reliability through code reviews and linting/test gates",
+        "Built and modified REST endpoints with business-rule logic",
+        "debugged DevOps pipeline issues and optimized release workflows on AWS (Jenkins CI/CD)"
       ],
       "techStack": [
         "Java",
-        "Spring Boot MVC",
-        "Gradle",
-        "Angular"
+        "Spring Boot",
+        "AWS",
+        "REST APIs",
+        "SQL",
+        "Jenkins",
+        "SonarQube",
+        "Git",
+        "Agile/Scrum"
       ],
       "order": 1
     },
     {
-      "company": "Local Consulting Firm",
-      "role": "Machine Learning Intern",
-      "dates": "Jun 2023 – Aug 2023",
-      "location": "India",
+      "company": "UnisLink",
+      "role": "Data Engineering Intern",
+      "dates": "Jul 2023 – Aug 2023",
+      "location": "Chennai, India",
       "bullets": [
-        "Built ML models",
-        "Feature engineering",
-        "Evaluation and reporting"
+        "Researched and benchmarked natural-language-to-SQL (NL-to-SQL) approaches, documenting accuracy–complexity tradeoffs to guide early product direction",
+        "Built and validated SQL Server replication/synchronization checks and a replication test plan to improve data consistency across large tables"
+      ],
+      "techStack": [
+        "SQL Server",
+        "NL-to-SQL Research",
+        "Data Replication",
+        "Documentation"
+      ],
+      "order": 2
+    },
+    {
+      "company": "Yaltech Global Consulting",
+      "role": "Machine Learning Intern",
+      "dates": "Jul 2022 – Sep 2022",
+      "location": "Tiruchirappalli, India",
+      "bullets": [
+        "Trained and cross-validated classification/regression models (Logistic Regression, Random Forest) in Python/scikit-learn on structured datasets",
+        "Performed EDA, data cleaning, and feature engineering (Pandas/NumPy)",
+        "communicated findings to non-technical stakeholders with clear visualizations"
       ],
       "techStack": [
         "Python",
         "Pandas",
-        "scikit-learn"
+        "NumPy",
+        "scikit-learn",
+        "EDA",
+        "Cross-Validation"
       ],
-      "order": 2
+      "order": 3
+    },
+    {
+      "company": "Youth India Foundation",
+      "role": "Sponsorship Intern",
+      "dates": "Jan 2022 – Mar 2022",
+      "location": "Chennai, India",
+      "bullets": [
+        "Built and maintained a structured database of potential sponsors",
+        "supported outreach and follow-ups",
+        "Assisted in planning and executing a coding event, strengthening stakeholder communication and delivery under deadlines"
+      ],
+      "techStack": [
+        "Stakeholder Management",
+        "Outreach",
+        "Event Coordination"
+      ],
+      "order": 4
+    },
+    {
+      "company": "TREC-STEP",
+      "role": "Incubation & Proposals Intern",
+      "dates": "Apr 2021 – Jun 2021",
+      "location": "Tiruchirappalli, India",
+      "bullets": [
+        "Supported senior leadership on international funding proposals, including an EU Horizon 2020 submission on Responsible AI (RAI)",
+        "Coordinated incubation activities — site visits, documentation, and ecosystem-building program execution"
+      ],
+      "techStack": [
+        "Proposal Research",
+        "Responsible AI",
+        "Documentation",
+        "Program Support"
+      ],
+      "order": 5
     }
   ],
   "certificates": [
     {
-      "title": "AWS ML Engineer Nanodegree",
-      "issuer": "Udacity",
-      "date": "2025-12",
+      "title": "Advanced Data Science & AI Program",
+      "issuer": "Logicmojo Academy",
+      "date": "2026-01",
       "skillsTags": [
-        "AWS",
-        "ML",
-        "MLOps"
+        "Data Science",
+        "Machine Learning",
+        "Deep Learning",
+        "AI"
       ],
       "order": 1
+    },
+    {
+      "title": "AWS Machine Learning Engineer Nanodegree",
+      "issuer": "Udacity",
+      "date": "2025-12",
+      "credentialUrl": "https://www.udacity.com/certificate/e/9218082e-938a-11f0-b490-73f195638f0b",
+      "skillsTags": [
+        "AWS",
+        "SageMaker",
+        "MLOps",
+        "Deep Learning"
+      ],
+      "order": 2
+    },
+    {
+      "title": "OCI 2025 Certified Data Science Professional",
+      "issuer": "Oracle",
+      "date": "2025-10",
+      "skillsTags": [
+        "Oracle Cloud",
+        "Data Science",
+        "Cloud ML",
+        "Model Deployment"
+      ],
+      "order": 3
+    },
+    {
+      "title": "IBM Data Science (Tools · Python · Databases & SQL)",
+      "issuer": "IBM – Coursera",
+      "date": "2025-09",
+      "skillsTags": [
+        "Python",
+        "SQL",
+        "Databases",
+        "Data Science Tools"
+      ],
+      "order": 4
+    },
+    {
+      "title": "Version Control with Git",
+      "issuer": "Atlassian – Coursera",
+      "date": "2025-11",
+      "credentialUrl": "https://www.coursera.org/account/accomplishments/verify/T3JASRVCRKKJ",
+      "skillsTags": [
+        "Git",
+        "Version Control",
+        "Collaboration"
+      ],
+      "order": 5
+    },
+    {
+      "title": "CCNA v7: Introduction to Networks",
+      "issuer": "Cisco Networking Academy",
+      "date": "2023-06",
+      "skillsTags": [
+        "Networking",
+        "TCP/IP",
+        "OSI Model"
+      ],
+      "order": 6
     }
   ],
   "contact": {
     "email": "brejesh.bala@gmail.com",
-    "location": "India",
-    "availability": "Open to Data Science / ML roles (2026) - Available from April 2026",
+    "location": "Bengaluru, India",
+    "availability": "Open to Machine Learning / GenAI roles — available immediately",
     "socials": [
       {
         "name": "Email",
@@ -583,66 +1159,72 @@
         "order": 3
       },
       {
+        "name": "Hugging Face",
+        "url": "https://huggingface.co/BrejBala",
+        "icon": "external",
+        "order": 4
+      },
+      {
         "name": "Streamlit",
         "url": "https://share.streamlit.io/user/brej-29",
         "icon": "external",
-        "order": 4
+        "order": 5
       }
     ]
   },
   "experienceStats": [
     {
-      "label": "User Stories Delivered",
-      "value": "150+",
-      "description": "Delivered user stories/defects across multiple Agile sprints",
+      "label": "Story Points Delivered",
+      "value": "200+",
+      "description": "Agile delivery on a financial-services platform at Accenture",
       "order": 1
     },
     {
-      "label": "API Performance Improvement",
+      "label": "High-Latency Responses Cut",
       "value": "80% → <20%",
-      "description": "Reduced high-latency API responses (>5s) through profiling & optimizations",
+      "description": "AWS REST APIs fixed via profiling, SQL tuning, and caching",
       "order": 2
     },
     {
-      "label": "Test Coverage",
+      "label": "Automated Test Coverage",
       "value": "90%+",
-      "description": "Maintained strong automated test coverage to prevent regressions",
+      "description": "Unit, contract, and BDD tests tracked via SonarQube",
       "order": 3
     },
     {
-      "label": "Defects Resolved",
-      "value": "Critical & Major",
-      "description": "Owned triage, RCA, and fixes with quick turnaround",
+      "label": "Tests Across Shipped ML Systems",
+      "value": "740+",
+      "description": "343 in the RAG backend + ~399 in the churn MLOps stack",
       "order": 4
     },
     {
-      "label": "Code Quality Discipline",
-      "value": "SonarLint + Reviews",
-      "description": "Enforced clean coding practices and reduced code smells",
+      "label": "Docker Image Reduction",
+      "value": "57%",
+      "description": "11.4 GB → 4.9 GB via CPU-only torch and a split slim UI image",
       "order": 5
     },
     {
-      "label": "Client Communication",
-      "value": "Regular Demos",
-      "description": "Demoed sprint deliverables and changes to stakeholders",
+      "label": "Macro-F1 Gain (SageMaker HPO)",
+      "value": "22%",
+      "description": "Bayesian tuning with 2-instance distributed spot training",
       "order": 6
     },
     {
-      "label": "Team Collaboration",
-      "value": "Cross-Team Delivery",
-      "description": "Designed new endpoints and coordinated with dependent teams",
+      "label": "Churn Model Lift (Optuna)",
+      "value": "PR-AUC 0.62 → 0.67",
+      "description": "With isotonic calibration and a cost-based decision threshold",
       "order": 7
     },
     {
-      "label": "Mentoring",
-      "value": "Supported New Joiners",
-      "description": "Guided onboarding and helped teammates unblock tasks",
+      "label": "LLM Faithfulness Improvement",
+      "value": "0.72 → 0.90",
+      "description": "Two-tier grounding eval caught and fixed a real bug (n=50, seeded)",
       "order": 8
     },
     {
-      "label": "Agile Ownership",
-      "value": "End-to-End Participation",
-      "description": "DSU, sprint planning, retrospectives, and delivery rituals",
+      "label": "Retrieval Eval Discipline",
+      "value": "recall@k · MRR · nDCG",
+      "description": "Deterministic harness over a hand-labeled golden set — decisions on data, not vibes",
       "order": 9
     }
   ],
@@ -679,31 +1261,36 @@
     }
   ],
   "seo": {
-    "siteTitle": "Brejesh Balakrishnan | Data Scientist / ML Engineer Portfolio",
-    "siteDescription": "Data Scientist / ML Engineer in Bengaluru with a production engineering background. End-to-end ML projects (Python, SQL, MLflow) with AWS deployment patterns (SageMaker/S3/Lambda), NLP (BERT), dashboards, and deployable data apps.",
+    "siteTitle": "Brejesh Balakrishnan — Machine Learning & GenAI Engineer",
+    "siteDescription": "Machine Learning / GenAI Engineer in Bengaluru with a production engineering background at Accenture. Ships LLM & RAG applications (LangGraph, Pinecone, retrieval + faithfulness evaluation), calibrated predictive models with SHAP explainability, and full MLOps — MLflow registries, drift monitoring, CI quality gates, Docker — deployed live on AWS SageMaker and Hugging Face Spaces.",
     "keywords": [
-      "Data Scientist",
       "Machine Learning Engineer",
+      "GenAI Engineer",
+      "LLM Engineer",
+      "RAG",
+      "LangGraph",
+      "LangChain",
+      "Pinecone",
+      "FAISS",
       "MLOps",
+      "MLflow",
+      "DVC",
+      "Evidently",
+      "SHAP",
+      "Optuna",
+      "XGBoost",
+      "PyTorch",
       "Python",
       "SQL",
-      "Statistics",
-      "scikit-learn",
-      "XGBoost",
-      "MLflow",
-      "AWS",
-      "SageMaker",
-      "S3",
-      "Lambda",
-      "Docker",
+      "AWS SageMaker",
+      "AWS Lambda",
       "FastAPI",
+      "Docker",
+      "CI/CD",
+      "Hugging Face",
       "NLP",
-      "BERT",
-      "Transformers",
-      "Streamlit",
-      "Power BI",
-      "Data Analytics",
-      "Portfolio",
+      "Computer Vision",
+      "Data Scientist",
       "Bengaluru"
     ],
     "ogImage": "/og.png"

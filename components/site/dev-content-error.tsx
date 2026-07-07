@@ -1,72 +1,42 @@
-import { Section } from "@/components/site/section"
-import { GlassCard } from "@/components/site/glass-card"
 import { AlertTriangle } from "lucide-react"
 
 interface DevContentErrorProps {
   message: string
 }
 
+/** Dev-only screen shown when content.xlsx fails schema validation. */
 export function DevContentError({ message }: DevContentErrorProps) {
   return (
-    <Section className="flex items-center justify-center min-h-[60vh] pt-32 pb-24">
-      <div className="max-w-3xl w-full">
-        <GlassCard className="p-6 md:p-8 border-[var(--neon-purple)]/40 bg-card/80 backdrop-blur-xl" hover>
-          <div className="flex items-start gap-4">
-            <div className="mt-1 rounded-full bg-[var(--neon-purple)]/20 p-2 border border-[var(--neon-purple)]/60">
-              <AlertTriangle className="h-5 w-5 text-[var(--neon-cyan)]" />
+    <div className="container-page flex min-h-[70vh] items-center pt-32 pb-24">
+      <div className="w-full max-w-3xl rounded-lg border border-destructive/40 p-6 md:p-8">
+        <div className="flex items-start gap-4">
+          <AlertTriangle className="mt-1 h-5 w-5 shrink-0 text-destructive" />
+          <div className="space-y-4">
+            <div>
+              <p className="mono-label mb-2 text-destructive">Content configuration error</p>
+              <h1 className="text-2xl font-semibold tracking-tight md:text-3xl">
+                content.xlsx needs attention before this portfolio can load.
+              </h1>
             </div>
-            <div className="space-y-4">
-              <div>
-                <p className="text-xs font-mono tracking-[0.25em] text-[var(--neon-cyan)] mb-2 uppercase">
-                  Content configuration error
-                </p>
-                <h1 className="text-2xl md:text-3xl font-semibold">
-                  content.xlsx needs attention before this portfolio can load.
-                </h1>
-              </div>
 
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                The generated file{" "}
-                <code className="font-mono text-xs bg-muted/60 px-1.5 py-0.5 rounded">
-                  content/generated/content.json
-                </code>{" "}
-                does not match the expected schema. This usually means{" "}
-                <code className="font-mono text-xs bg-muted/60 px-1.5 py-0.5 rounded">
-                  content/content.xlsx
-                </code>{" "}
-                is missing a sheet or column, or has an invalid cell value.
-              </p>
+            <p className="text-sm leading-relaxed text-muted-foreground">
+              The generated file <code className="font-mono text-xs">content/generated/content.json</code>{" "}
+              does not match the expected schema — usually a missing sheet or column, or an invalid
+              cell value in <code className="font-mono text-xs">content/content.xlsx</code>.
+            </p>
 
-              <div className="rounded-md bg-muted/70 p-3 text-xs text-muted-foreground max-h-48 overflow-auto">
-                <pre className="whitespace-pre-wrap break-words">{message}</pre>
-              </div>
+            <pre className="max-h-48 overflow-auto whitespace-pre-wrap break-words rounded-md border border-border p-3 font-mono text-xs text-muted-foreground">
+              {message}
+            </pre>
 
-              <div className="space-y-1 text-xs text-muted-foreground">
-                <p className="font-semibold text-foreground">How to fix it:</p>
-                <ol className="list-decimal list-inside space-y-1">
-                  <li>
-                    Open{" "}
-                    <code className="font-mono bg-muted/60 px-1.5 py-0.5 rounded">
-                      content/content.xlsx
-                    </code>
-                    .
-                  </li>
-                  <li>Check that all required sheets and columns exist (see README schema).</li>
-                  <li>Fix the cells mentioned in the error message above.</li>
-                  <li>
-                    Run{" "}
-                    <code className="font-mono bg-muted/60 px-1.5 py-0.5 rounded">
-                      npm run content:check
-                    </code>{" "}
-                    to regenerate content.
-                  </li>
-                  <li>Restart the dev server with `npm run dev`.</li>
-                </ol>
-              </div>
-            </div>
+            <ol className="list-inside list-decimal space-y-1 text-xs text-muted-foreground">
+              <li>Open content/content.xlsx and fix the cells mentioned above.</li>
+              <li>Run `npm run content:check` to regenerate content.</li>
+              <li>Restart the dev server with `npm run dev`.</li>
+            </ol>
           </div>
-        </GlassCard>
+        </div>
       </div>
-    </Section>
+    </div>
   )
 }

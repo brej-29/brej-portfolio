@@ -4,14 +4,15 @@ const isGithubActions = process.env.GITHUB_ACTIONS === "true"
 const repoName = process.env.GITHUB_REPOSITORY ? process.env.GITHUB_REPOSITORY.split("/")[1] : ""
 const explicitBasePath = process.env.NEXT_PUBLIC_BASE_PATH || ""
 
-const computedBasePath = explicitBasePath || (isGithubActions && repoName ? `/${repoName}` : "")
+// User/organization sites (repos named <owner>.github.io) are served from the
+// domain root and must not get a basePath; project pages keep /<repo>.
+const isRootSite = repoName.endsWith(".github.io")
+const computedBasePath =
+  explicitBasePath || (isGithubActions && repoName && !isRootSite ? `/${repoName}` : "")
 
 const nextConfig = {
   output: "export",
   trailingSlash: true,
-  typescript: {
-    ignoreBuildErrors: true,
-  },
   images: {
     unoptimized: true,
   },
