@@ -418,12 +418,53 @@
       "name": "pytest",
       "category": "Tools",
       "order": 64
+    },
+    {
+      "name": "Fine-Tuning (QLoRA · PEFT)",
+      "category": "GenAI/NLP",
+      "order": 65
+    },
+    {
+      "name": "Unsloth",
+      "category": "GenAI/NLP",
+      "order": 66
+    },
+    {
+      "name": "Text-to-SQL",
+      "category": "GenAI/NLP",
+      "order": 67
+    },
+    {
+      "name": "YOLOv8",
+      "category": "Deep Learning",
+      "order": 68
+    },
+    {
+      "name": "DistilBERT",
+      "category": "Deep Learning",
+      "order": 69
+    },
+    {
+      "name": "Redis Streams",
+      "category": "Data Engineering",
+      "order": 70
+    },
+    {
+      "name": "Grafana",
+      "category": "DevOps",
+      "order": 71
+    },
+    {
+      "name": "PostgreSQL",
+      "category": "Data",
+      "order": 72
     }
   ],
   "techStack": [
     "Machine Learning",
     "GenAI / LLMs",
     "RAG",
+    "LLM Fine-Tuning",
     "LangGraph",
     "Python",
     "SQL",
@@ -433,9 +474,8 @@
     "Docker",
     "AWS SageMaker",
     "FastAPI",
-    "Pinecone",
-    "SHAP",
-    "Streamlit"
+    "Event-Driven Systems",
+    "SHAP"
   ],
   "featuredProjects": [
     {
@@ -512,6 +552,93 @@
   ],
   "projects": [
     {
+      "id": "proj-safetyops-copilot",
+      "title": "SafetyOps Copilot",
+      "oneLine": "Event-driven safety-incident platform: Redis Streams pipeline, DistilBERT severity scoring on 273k real MSHA narratives, YOLOv8 PPE detection, and a LangGraph triage copilot.",
+      "description": "An event-driven incident monitoring platform for industrial EHS teams, built as three independently deployable services (FastAPI API, Streamlit UI, background worker) connected by a Redis Streams message bus over shared Postgres. Free-text reports are scored for severity by a DistilBERT model fine-tuned on 273,000 real MSHA accident narratives (labels derived from regulatory outcome codes, not synthetic data), site photos are scored for PPE compliance by YOLOv8n, and a 5-node LangGraph state machine generates structured triage briefs — deterministic and fully testable without any LLM, with the LLM as an optional enhancement layer that fails silently back to the deterministic draft.",
+      "tags": [
+        "MLOps",
+        "Event-Driven Architecture",
+        "Computer Vision",
+        "NLP",
+        "LangGraph",
+        "Production ML"
+      ],
+      "stack": [
+        "Python",
+        "FastAPI",
+        "Redis Streams",
+        "PostgreSQL",
+        "SQLAlchemy",
+        "LangGraph",
+        "DistilBERT",
+        "YOLOv8",
+        "Docker",
+        "Prometheus",
+        "Grafana",
+        "Evidently",
+        "MLflow",
+        "DVC",
+        "Streamlit"
+      ],
+      "links": {
+        "github": "https://github.com/brej-29/safetyops-copilot",
+        "demo": "https://safetyops-copilot.streamlit.app/"
+      },
+      "highlights": [
+        "DistilBERT severity classifier trained on 273k real MSHA narratives — 0.78 macro-F1 vs 0.34 rule-based baseline (95% relative lift) and 0.88 high-severity recall (5.5x the baseline)",
+        "YOLOv8n PPE compliance detection (mAP@0.5 ≈ 0.81) behind a wrapper normalizing three different label-scheme conventions into one score",
+        "Redis Streams consumer groups with 3x exponential-backoff retry, dead-letter queue with replay, and idempotent processing keyed on stream message ID — safe under worker crash-restarts",
+        "Graceful ML degradation: both models sit behind lazy imports so the full pipeline, tests, and CI run with zero ML dependencies installed — 36 tests pass without torch",
+        "Evidently drift reports, Prometheus metrics on API and worker, and an 8-panel Grafana dashboard",
+        "~5,100 LOC across 124 files"
+      ],
+      "date": "2026-07",
+      "order": 1
+    },
+    {
+      "id": "proj-analytics-copilot",
+      "title": "Analytics Copilot (Text-to-SQL)",
+      "oneLine": "Mistral-7B fine-tuned with QLoRA to turn natural language into schema-conditioned SQL, with a from-scratch evaluation harness and dual-provider inference failover.",
+      "description": "A full fine-tuning pipeline — dataset curation, QLoRA training, custom dual-benchmark evaluation, Hub publishing — wrapped in a production-shaped serving layer. Mistral-7B-Instruct is fine-tuned with 4-bit NF4 quantization and LoRA adapters (r=16) across all seven attention and MLP projections, then served through a Hugging Face Inference Endpoint with adapter routing and an OpenAI fallback. The Streamlit front end carries zero GPU or ML runtime dependencies: training and serving are fully decoupled.",
+      "tags": [
+        "GenAI",
+        "LLM Fine-Tuning",
+        "QLoRA",
+        "Text-to-SQL",
+        "NLP",
+        "Model Evaluation"
+      ],
+      "stack": [
+        "Python",
+        "Mistral-7B",
+        "QLoRA",
+        "PEFT",
+        "Unsloth",
+        "TRL",
+        "bitsandbytes",
+        "Transformers",
+        "sqlglot",
+        "Hugging Face Endpoints",
+        "Streamlit",
+        "GitHub Actions"
+      ],
+      "links": {
+        "github": "https://github.com/brej-29/analytics-copilot-text2sql",
+        "demo": "https://analytics-copilot-text2sql.streamlit.app/"
+      },
+      "highlights": [
+        "Fine-tuned a 7B model with under 1% trainable parameters via 4-bit NF4 quantization and LoRA r=16 adapters across seven projection matrices",
+        "Built a from-scratch evaluation harness — Exact Match, literal-masked structural EM, sqlglot parse-validity, and AST-based schema-adherence checking that catches hallucinated tables and columns string similarity would miss",
+        "Dual-benchmark evaluation quantifying the generalization gap: 35.0% exact match / 100% parse success / 97.5% schema adherence in-domain, vs 76% schema adherence zero-shot on Spider",
+        "Multi-tier inference failover (HF Inference Endpoint with adapter routing → OpenAI) plus a proactive endpoint wake-up ping, deliberately separated so warm-ups never trigger the failure path",
+        "Root-caused a 271-violation CI lint break as upstream linter drift rather than new code, fixing it with a 9-line config pin instead of a repo-wide reformat",
+        "~6,419 LOC, 36 tests across 14 files"
+      ],
+      "date": "2026-06",
+      "order": 2
+    },
+    {
       "id": "proj-rag-workbench",
       "title": "RAG Agent Workbench",
       "oneLine": "Agentic RAG backend: 8-node LangGraph pipeline with corrective retrieval, faithfulness verification, and SSE streaming.",
@@ -549,7 +676,7 @@
         "deployed on Docker / Hugging Face Spaces + Streamlit Cloud"
       ],
       "date": "2026-05",
-      "order": 1
+      "order": 3
     },
     {
       "id": "proj-dogbreed-classification",
@@ -574,7 +701,7 @@
         "Production-ready preprocessing pipeline"
       ],
       "date": "2025-11",
-      "order": 2
+      "order": 4
     },
     {
       "id": "proj-heart-disease",
@@ -600,7 +727,7 @@
         "Medical data preprocessing"
       ],
       "date": "2025-10",
-      "order": 3
+      "order": 5
     },
     {
       "id": "proj-bulldozer-price",
@@ -627,7 +754,7 @@
         "Real-world dataset handling"
       ],
       "date": "2025-09",
-      "order": 4
+      "order": 6
     },
     {
       "id": "proj-otaku-oracle",
@@ -651,7 +778,7 @@
         "Cold-start problem handling"
       ],
       "date": "2025-08",
-      "order": 5
+      "order": 7
     },
     {
       "id": "proj-meal-planner",
@@ -675,7 +802,7 @@
         "Production Streamlit deployment"
       ],
       "date": "2025-07",
-      "order": 6
+      "order": 8
     },
     {
       "id": "proj-workout-planner",
@@ -699,7 +826,7 @@
         "Equipment constraint handling"
       ],
       "date": "2025-06",
-      "order": 7
+      "order": 9
     },
     {
       "id": "proj-aurora-chat",
@@ -725,7 +852,7 @@
         "Real-time streaming responses"
       ],
       "date": "2025-05",
-      "order": 8
+      "order": 10
     },
     {
       "id": "proj-hr-analytics",
@@ -750,7 +877,7 @@
         "Drill-down analytics"
       ],
       "date": "2025-04",
-      "order": 9
+      "order": 11
     },
     {
       "id": "proj-essay-writer",
@@ -775,7 +902,7 @@
         "Iterative refinement capability"
       ],
       "date": "2025-03",
-      "order": 10
+      "order": 12
     },
     {
       "id": "proj-disaster-nlp",
@@ -803,7 +930,7 @@
         "Clear evidence that pre-trained encoders beat from-scratch models on small text datasets"
       ],
       "date": "2025-02",
-      "order": 11
+      "order": 13
     },
     {
       "id": "proj-inventory-classifier",
@@ -834,7 +961,7 @@
         "Full resource cleanup — no orphaned endpoints or storage"
       ],
       "date": "2025-01",
-      "order": 12
+      "order": 14
     },
     {
       "id": "proj-aws-ml-nanodegree",
@@ -860,7 +987,7 @@
         "Automated pipelines"
       ],
       "date": "2024-12",
-      "order": 13
+      "order": 15
     },
     {
       "id": "proj-customer-churn",
@@ -906,7 +1033,7 @@
         "deployed live to Hugging Face Spaces (FastAPI + Streamlit), ~399 tests"
       ],
       "date": "2024-11",
-      "order": 14
+      "order": 16
     },
     {
       "id": "proj-stock-terminal",
@@ -932,7 +1059,7 @@
         "Technical indicators dashboard"
       ],
       "date": "2025-12",
-      "order": 15
+      "order": 17
     },
     {
       "id": "proj-data-insights-portal",
@@ -959,7 +1086,7 @@
         "Role-based workflows"
       ],
       "date": "2025-11",
-      "order": 16
+      "order": 18
     }
   ],
   "experience": [
@@ -1193,8 +1320,8 @@
     },
     {
       "label": "Tests Across Shipped ML Systems",
-      "value": "740+",
-      "description": "343 in the RAG backend + ~399 in the churn MLOps stack",
+      "value": "810+",
+      "description": "Across four shipped ML systems — RAG backend, churn MLOps, Text-to-SQL, and SafetyOps",
       "order": 4
     },
     {
